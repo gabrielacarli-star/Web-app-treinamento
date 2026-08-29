@@ -1,162 +1,178 @@
 # Prompts de imagem e vídeo — DogFlow
 
 Cada espaço reservado no app tem um **id**, escrito dentro do próprio
-placeholder. Aqui está o prompt de cada id. Gere, me mande, eu encaixo.
+placeholder. Aqui está o prompt de cada id.
 
-## Como usar (importante)
+Os prompts estão **em espanhol** de propósito: o funil é para LATAM, e se o
+gerador inventar qualquer texto na imagem, ele sai em espanhol e não em
+português.
 
-**Gere tudo numa conversa só.** Aprove a primeira imagem e depois peça as
-seguintes com *"mesma arte, mesmo estilo, agora: [cena]"*. É isso que faz o
-conjunto parecer da mesma marca. Prompt solto em conversa nova sai diferente
-toda vez, por melhor que seja o prompt.
+Cada bloco é um prompt **completo**. Copie o bloco inteiro e cole. Não precisa
+juntar pedaço nenhum.
 
-**Escolha uma trilha e não misture.** Foto ou ilustração — as duas funcionam,
-mas juntas o funil fica remendado.
+## Como usar
 
-- **Foto** sai bonita quase sempre e costuma converter mais em tráfego frio.
-  É a que eu recomendo para começar a testar.
-- **Ilustração** é o que a oferta de referência usa. Fica mais "app", mas dá
-  mais trabalho para sair consistente.
+**Gere tudo numa conversa só.** Aprove a primeira imagem e peça as seguintes
+com *"misma ilustración, mismo estilo, ahora: [próxima cena]"*. É isso que faz
+o conjunto parecer da mesma marca.
 
-**Se uma imagem sair ruim,** não reescreva o prompt inteiro. Peça o ajuste em
-uma frase: *"o cachorro está grande demais, afasta a câmera"*. Corrigir é mais
-eficaz do que recomeçar.
+**Escolha uma trilha e não misture.** Foto (mais confiável, costuma converter
+melhor em tráfego frio) ou ilustração (é o que a oferta de referência usa).
+As duas cobrem as mesmas cenas.
+
+**Se aparecer texto na imagem mesmo assim,** responda: *"quita todo el texto y
+los logotipos de la imagen"*. Não reescreva o prompt.
+
+**Se a imagem sair torta,** corrija em uma frase: *"aleja la cámara"*, *"el
+perro se ve demasiado serio"*. Ajustar funciona melhor que recomeçar.
 
 ---
 
-# Trilha A — Foto (recomendada)
+# TRILHA A — FOTO
 
-Todas em formato quadrado.
-
-## Landing (uma por ângulo de anúncio)
+## Landing (uma imagem por ângulo de anúncio)
 
 ### `hero-leash` — passeio sem puxar
-> Foto de um cachorro de porte médio puxando forte a guia durante um passeio na
-> calçada, corpo inclinado para frente, boca aberta de empolgação. A mão do
-> tutor aparece esticada no canto do quadro segurando a guia. Luz natural de
-> fim de tarde, fundo desfocado. Enquadramento quadrado, cachorro à direita.
+```
+Fotografía cuadrada de un perro de tamaño mediano tirando con fuerza de la correa durante un paseo por la acera. El cuerpo del perro está inclinado hacia adelante y tiene la boca abierta de entusiasmo. La mano de su dueño aparece estirada en el borde del encuadre sujetando la correa tensa. Luz natural de atardecer, fondo urbano desenfocado. El perro está a la derecha del encuadre, con espacio libre alrededor. Sin texto, letreros ni logotipos.
+```
 
 ### `hero-potty` — xixi no lugar certo
-> Foto de um filhote sentado em um piso de madeira clara em uma sala arejada,
-> orelhas baixas e olhar culpado voltado para cima, para a câmera. Um tapete
-> higiênico claro aparece desfocado ao fundo. Luz suave de janela, clima
-> doméstico e limpo. Enquadramento quadrado.
+```
+Fotografía cuadrada de un cachorro sentado sobre un piso de madera clara en una sala luminosa y ordenada. Tiene las orejas bajas y mira hacia arriba, directo a la cámara, con expresión de culpa. Al fondo, desenfocado, se ve un empapador claro sobre el piso. Luz suave de ventana, ambiente doméstico y limpio. El cachorro está centrado, con espacio libre a su alrededor. Sin texto, letreros ni logotipos.
+```
 
 ### `hero-biting` — fim das mordidas
-> Foto de um filhote brincando de morder de leve a mão de uma pessoa, em cima
-> de um tapete claro. Enquadrar só a mão e o antebraço, sem mostrar o rosto. O
-> filhote está claramente brincando, com o corpo relaxado. Luz natural suave,
-> enquadramento quadrado.
+```
+Fotografía cuadrada de un cachorro mordisqueando suavemente la mano de una persona mientras juegan sobre una alfombra clara. Solo se ven la mano y el antebrazo de la persona, nunca su cara. El cachorro tiene el cuerpo relajado y claramente está jugando, no atacando. Luz natural suave de interior. Composición centrada con espacio libre alrededor. Sin texto, letreros ni logotipos.
+```
 
 ### `hero-behaviour` — comportamento indesejado
-> Foto de uma sala de estar com uma almofada rasgada e enchimento espalhado
-> pelo chão, e um cachorro sentado no meio da bagunça olhando direto para a
-> câmera com ar de inocência. Luz de dia, ambiente comum de casa.
-> Enquadramento quadrado, cachorro centralizado.
+```
+Fotografía cuadrada de una sala de estar con un cojín roto y relleno blanco esparcido por el piso. En medio del desorden hay un perro sentado, mirando directo a la cámara con expresión de inocencia. Luz de día, ambiente de casa común y corriente. El perro está centrado, con espacio libre alrededor. Sin texto, letreros ni logotipos.
+```
 
 ### `hero-alone` — filhote sozinho em casa
-> Foto de um filhote sentado sozinho no chão atrás de uma porta fechada,
-> olhando para cima com expressão de espera. Faixa de luz vindo por baixo da
-> porta. Ambiente silencioso e vazio, poucos objetos. Enquadramento quadrado.
+```
+Fotografía cuadrada de un cachorro sentado solo en el piso, detrás de una puerta cerrada, mirando hacia arriba con expresión de espera. Una franja de luz entra por debajo de la puerta. Ambiente silencioso y vacío, con pocos objetos. El cachorro está centrado, con espacio libre alrededor. Sin texto, letreros ni logotipos.
+```
 
 ## Dentro do quiz
 
 ### `quiz-proof_breed` — prova social por raça
-> Foto de três cachorros de raças diferentes sentados lado a lado em um parque,
-> todos atentos e olhando na mesma direção, bem comportados. Luz natural de
-> manhã, grama desfocada ao fundo. Enquadramento quadrado, os três centralizados.
+```
+Fotografía cuadrada de tres perros de razas distintas sentados uno al lado del otro sobre el pasto de un parque, todos atentos y mirando en la misma dirección, bien comportados. Luz natural de la mañana, vegetación desenfocada al fondo. Los tres perros están centrados en el encuadre, con espacio libre alrededor. Sin texto, letreros ni logotipos.
+```
 
 ### `quiz-heard_you` — acolhimento
-> Foto de uma pessoa agachada abraçando o próprio cachorro em um parque, os
-> dois de perfil, momento calmo e afetuoso. Enquadrar do peito para baixo, sem
-> mostrar o rosto da pessoa. Luz dourada de fim de tarde. Enquadramento quadrado.
+```
+Fotografía cuadrada de una persona en cuclillas abrazando a su perro en un parque, ambos de perfil, en un momento tranquilo y cariñoso. El encuadre va del pecho hacia abajo y nunca muestra la cara de la persona. Luz dorada de atardecer, fondo desenfocado. Composición centrada con espacio libre alrededor. Sin texto, letreros ni logotipos.
+```
 
 ## Plano pronto
 
 ### `plan-ready` — o plano ficou pronto
-> Foto de um cachorro sentado ereto e atento em uma sala clara, olhando direto
-> para a câmera com as orelhas levantadas, expressão de quem está pronto. Luz
-> natural, fundo simples e desfocado. Enquadramento quadrado, bastante espaço
-> vazio acima do cachorro.
+```
+Fotografía cuadrada de un perro sentado erguido y atento en una sala luminosa, mirando directo a la cámara con las orejas levantadas y expresión de estar listo. Luz natural, fondo simple y desenfocado. El perro está en la mitad inferior del encuadre, con bastante espacio vacío arriba. Sin texto, letreros ni logotipos.
+```
+
+## Checkout
+
+### `checkout-product` — miniatura do produto
+```
+Fotografía cuadrada de un teléfono celular apoyado sobre una mesa clara, junto a un perro simpático sentado que mira hacia la pantalla. Luz natural suave, fondo claro y desenfocado. El teléfono y el perro están centrados, con márgenes amplios a los lados. Sin texto, letreros ni logotipos.
+```
 
 ---
 
-# Trilha B — Ilustração
+# TRILHA B — ILUSTRAÇÃO
 
-Mesmo enquadramento e mesmas cenas da trilha A. Troque só a primeira frase.
+Mesmas cenas, prompts completos. Não misture com a trilha A.
 
-**Frase de estilo** (usar no lugar de "Foto de..."):
+### `hero-leash` — passeio sem puxar
+```
+Ilustración vectorial plana y cuadrada de un perro de tamaño mediano tirando con fuerza de la correa durante un paseo. El cuerpo del perro está inclinado hacia adelante y tiene la boca abierta de entusiasmo. La mano de su dueño aparece estirada en el borde del encuadre sujetando la correa tensa. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. El perro centrado, con márgenes amplios. Sin texto, letreros ni logotipos.
+```
 
-> Ilustração vetorial plana de [cena], formas arredondadas e simpáticas,
-> contorno grosso, paleta em lavanda e creme com um toque de coral, fundo creme
-> liso, estilo de tela de boas-vindas de aplicativo. Enquadramento quadrado,
-> margens generosas.
+### `hero-potty` — xixi no lugar certo
+```
+Ilustración vectorial plana y cuadrada de un cachorro sentado sobre un piso de madera clara, con las orejas bajas y mirando hacia arriba con expresión de culpa. A su lado hay un empapador claro sobre el piso. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. El cachorro centrado, con márgenes amplios. Sin texto, letreros ni logotipos.
+```
 
-Exemplo montado, para o `hero-leash`:
+### `hero-biting` — fim das mordidas
+```
+Ilustración vectorial plana y cuadrada de un cachorro mordisqueando suavemente la mano de una persona mientras juegan. Solo se ven la mano y el antebrazo, nunca la cara de la persona. El cachorro está claramente jugando, con el cuerpo relajado. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. Composición centrada con márgenes amplios. Sin texto, letreros ni logotipos.
+```
 
-> Ilustração vetorial plana de um cachorro puxando forte a guia durante um
-> passeio, corpo inclinado para frente e boca aberta de empolgação, com a mão
-> do tutor esticada no canto do quadro. Formas arredondadas e simpáticas,
-> contorno grosso, paleta em lavanda e creme com um toque de coral, fundo creme
-> liso, estilo de tela de boas-vindas de aplicativo. Enquadramento quadrado,
-> margens generosas.
+### `hero-behaviour` — comportamento indesejado
+```
+Ilustración vectorial plana y cuadrada de una sala de estar con un cojín roto y relleno esparcido por el piso, y un perro sentado en medio del desorden mirando al frente con expresión de inocencia. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. El perro centrado, con márgenes amplios. Sin texto, letreros ni logotipos.
+```
 
-Se sair com aparência de clipart antigo, acrescente ao final: *"ilustração
-editorial moderna, proporções elegantes"*.
+### `hero-alone` — filhote sozinho em casa
+```
+Ilustración vectorial plana y cuadrada de un cachorro sentado solo detrás de una puerta cerrada, mirando hacia arriba con expresión de espera, con una franja de luz entrando por debajo de la puerta. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. El cachorro centrado, con márgenes amplios. Sin texto, letreros ni logotipos.
+```
+
+### `quiz-proof_breed` — prova social por raça
+```
+Ilustración vectorial plana y cuadrada de tres perros de razas distintas sentados uno al lado del otro, todos atentos y mirando al frente, bien comportados. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. Los tres perros centrados, con márgenes amplios. Sin texto, letreros ni logotipos.
+```
+
+### `quiz-heard_you` — acolhimento
+```
+Ilustración vectorial plana y cuadrada de una persona en cuclillas abrazando a su perro, ambos de perfil, en un momento tranquilo y cariñoso. La persona se representa de forma simple y estilizada, sin rasgos faciales detallados. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. Composición centrada con márgenes amplios. Sin texto, letreros ni logotipos.
+```
+
+### `plan-ready` — o plano ficou pronto
+```
+Ilustración vectorial plana y cuadrada de un perro sentado erguido y atento, mirando al frente con las orejas levantadas y expresión de estar listo. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. El perro en la mitad inferior del encuadre, con bastante espacio vacío arriba. Sin texto, letreros ni logotipos.
+```
+
+### `checkout-product` — miniatura do produto
+```
+Ilustración vectorial plana y cuadrada de un teléfono celular visto de frente, ligeramente inclinado, junto a un perro simpático sentado que mira hacia la pantalla. Formas redondeadas y simpáticas, contorno grueso, paleta de lavanda y crema con un toque de coral, fondo crema liso. Estilo de pantalla de bienvenida de una aplicación móvil moderna. El teléfono y el perro centrados, con márgenes amplios. Sin texto, letreros ni logotipos.
+```
 
 ---
 
-# Vídeos das aulas
+# VÍDEOS DAS AULAS
 
-Ids `lesson-<curso>-<aula>`. Curso 1 é "Filhote — curso básico". São clipes de
+Ids `lesson-<curso>-<aula>`. Curso 1 é "Filhote — curso básico". Clipes de
 **5 a 10 segundos**, sem áudio, para rodar em loop.
 
 Regra que vale mais que o prompt: **uma ação só por clipe**. Pedir três
 momentos em seis segundos é o que produz aquele vídeo derretido.
 
 ### `lesson-1-1` — parar de morder na brincadeira
-> Um filhote morde de leve a mão de uma pessoa e a mão se afasta devagar.
-> Câmera parada, luz natural de sala. 6 segundos.
+```
+Un cachorro mordisquea suavemente la mano de una persona y la mano se aleja despacio. Cámara fija, luz natural de interior, fondo simple. 6 segundos, sin audio. Sin texto ni logotipos.
+```
 
 ### `lesson-1-2` — xixi no lugar certo
-> Um filhote caminha até um tapete higiênico claro e senta em cima dele.
-> Câmera parada, sala clara. 6 segundos.
+```
+Un cachorro camina hasta un empapador claro y se sienta encima. Cámara fija, sala luminosa, fondo simple. 6 segundos, sin audio. Sin texto ni logotipos.
+```
 
 ### `lesson-1-4` — jogo do "pega e solta"
-> Um filhote solta um brinquedo de corda da boca quando uma mão se aproxima
-> com um petisco. Câmera parada. 6 segundos.
+```
+Un cachorro suelta un juguete de cuerda de la boca cuando una mano se acerca con un premio. Cámara fija, luz natural, fondo simple. 6 segundos, sin audio. Sin texto ni logotipos.
+```
 
 ### `lesson-1-7` — ensinando o nome
-> Um filhote distraído de costas vira a cabeça de repente para a câmera,
-> orelhas levantando. Câmera parada. 5 segundos.
+```
+Un cachorro distraído de espaldas gira la cabeza de golpe hacia la cámara, levantando las orejas. Cámara fija, luz natural, fondo simple. 5 segundos, sin audio. Sin texto ni logotipos.
+```
 
-### Molde para as demais
-> [uma única ação, em uma frase]. Câmera parada, luz natural. 6 segundos.
-
----
-
-# Imagem do produto no checkout
-
-Miniatura ao lado do preço na Hotmart ou Kiwify. Uma serve para os três planos.
-
-**1080×1080, abaixo de 2 MB.** No checkout ela aparece com uns 120 px de lado,
-então nada de detalhe fino.
-
-### `checkout-product`
-> Foto de um celular apoiado em uma mesa clara, ao lado de um cachorro
-> simpático sentado e olhando para a tela. Luz natural suave, fundo claro e
-> desfocado. Enquadramento quadrado, os dois centralizados com margem larga.
-
-Na trilha de ilustração, troque a primeira frase pela frase de estilo da
-trilha B.
-
-Se quiser diferenciar os três planos, gere três vezes e peça no fim:
-*"agora com um selo redondo coral no canto superior direito com o número 7"*
-(depois 4, depois 12).
+### Molde para as demais aulas
+Troque só a primeira frase por **uma única ação**:
+```
+<una sola acción, en una frase>. Cámara fija, luz natural, fondo simple. 6 segundos, sin audio. Sin texto ni logotipos.
+```
 
 ---
 
-# Nome e descrição dos produtos (espanhol)
+# NOME E DESCRIÇÃO DOS PRODUTOS (checkout)
 
 Copie e cole nos campos da Hotmart ou Kiwify.
 
@@ -189,3 +205,13 @@ concreto en el comportamiento de tu perro, te devolvemos el dinero.`
 
 > A garantia de 30 dias está escrita no paywall. Configure o mesmo prazo no
 > checkout — se divergir, a plataforma pode barrar o produto na revisão.
+
+---
+
+# ESPECIFICAÇÕES TÉCNICAS
+
+| Uso | Formato | Tamanho |
+|---|---|---|
+| `hero-*`, `quiz-*`, `plan-ready` | PNG ou JPG, quadrado 1:1 | 1080×1080 |
+| `checkout-product` | PNG ou JPG, quadrado 1:1 | 1080×1080, abaixo de 2 MB |
+| `lesson-*` | MP4, 4:3, sem áudio | 1200×900, 5 a 10 s em loop |
