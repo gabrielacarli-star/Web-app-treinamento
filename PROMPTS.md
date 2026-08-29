@@ -43,43 +43,56 @@ Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 ━━━ 1. FORMATO DE SALIDA ━━━
 • Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
 • Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+• Se va a ver muy pequeña, del tamaño de una miniatura: todo tiene que leerse de un vistazo.
 
 ━━━ 2. SUJETO PRINCIPAL ━━━
-• Un perro adulto joven de raza Golden Retriever, de pelaje dorado claro, limpio y brillante
-• Está sentado y erguido, con las patas delanteras rectas y apoyadas en la mesa
-• Orejas caídas de forma natural, boca ligeramente abierta, lengua apenas visible
-• Expresión atenta y amistosa, con la cabeza girada hacia el teléfono que tiene al lado
-• Ocupa cerca del 45% del ancho de la imagen y está en el lado derecho
+• Un perro adulto joven de raza Golden Retriever, de pelaje dorado claro, limpio y brillante.
+• Está sentado y erguido, de frente a la cámara, con las patas delanteras rectas.
+• Orejas caídas de forma natural, boca ligeramente abierta, lengua apenas visible.
+• Expresión atenta, alegre y amistosa, mirando directo a la cámara.
+• Es el elemento más grande de la imagen: ocupa cerca del 55% del ancho y está en el lado derecho.
+• Se ve de la cabeza hasta las patas delanteras. No lo cortes por el cuello.
 
-━━━ 3. OBJETOS EN LA ESCENA ━━━
-• Un teléfono celular moderno, negro, de pantalla completa y bordes redondeados
-• Está de pie sobre la mesa, apoyado y ligeramente inclinado hacia atrás, visto casi de frente
-• La pantalla está encendida y muestra una interfaz limpia y clara, con bloques de color suaves; el texto de la interfaz aparece borroso y no se puede leer
-• Ocupa cerca del 25% del ancho y está en el lado izquierdo, más cerca del centro que del borde
+━━━ 3. OBJETO SECUNDARIO ━━━
+• Un teléfono celular moderno, negro, de pantalla completa y bordes redondeados.
+• Está de pie, apoyado y ligeramente inclinado, visto casi de frente, junto al perro.
+• La pantalla está encendida y muestra una interfaz clara y ordenada, con bloques de color suaves y una barra de progreso lavanda; el texto de la interfaz se ve borroso y no se puede leer.
+• Ocupa cerca del 30% del alto de la imagen y está en el lado izquierdo, tocando el centro.
+• El teléfono es más bajo que el perro: la cabeza del perro queda por encima de la pantalla.
 
 ━━━ 4. ESCENARIO ━━━
-• Una mesa de madera clara, lisa y sin objetos alrededor
-• Al fondo, una pared de interior en tono crema, completamente desenfocada
+• Una superficie de madera muy clara, lisa y completamente vacía.
+• Al fondo, una pared interior en tono crema, lisa y totalmente desenfocada.
+• Nada más en la escena: ningún mueble, planta, juguete, plato ni objeto suelto.
 
 ━━━ 5. LUZ ━━━
-• Luz natural suave y difusa, entrando desde la izquierda. Sombras muy tenues, sin contraste duro. Sensación de mañana en casa.
+• Luz natural suave y difusa, entrando desde la izquierda.
+• Sombras muy tenues bajo el perro y el teléfono, sin contraste duro.
+• Imagen luminosa y pareja, sensación de mañana dentro de casa.
 
 ━━━ 6. CÁMARA ━━━
-• Cámara a la altura de la mesa, de frente, a un metro de distancia. Objetivo de 50 mm. Fondo desenfocado con poca profundidad de campo.
+• Cámara de frente, a la altura del pecho del perro, a poco más de un metro.
+• Objetivo de 50 mm. Fondo desenfocado con poca profundidad de campo.
+• El perro y el teléfono, los dos completamente enfocados y nítidos.
 
 ━━━ 7. COLORES ━━━
-• Dominan el crema, el beige y el dorado del pelaje. Un solo acento suave en lavanda dentro de la pantalla del teléfono.
+• Dominan el crema y el beige del fondo, y el dorado del pelaje.
+• Un único acento lavanda suave, dentro de la pantalla del teléfono.
+• Sin colores saturados ni fuertes en ninguna parte.
 
 ━━━ 8. AMBIENTE ━━━
-• Limpio, cálido y ordenado. Aspecto de foto de producto, no de foto casual.
+• Limpio, cálido, ordenado y profesional.
+• Aspecto de foto de producto para una tienda, no de foto casual de celular.
 
 ━━━ 9. COMPOSICIÓN ━━━
-• El perro a la derecha y el teléfono a la izquierda, ambos apoyados sobre la línea inferior. Deja el tercio superior de la imagen vacío.
+• El perro a la derecha y el teléfono a la izquierda, los dos apoyados sobre la misma superficie.
+• Juntos ocupan cerca del 80% del cuadro: llena la imagen, deja solo un margen parejo y estrecho alrededor.
+• Composición equilibrada y centrada, sin grandes zonas vacías.
 
 ━━━ 10. NO INCLUYAS ━━━
 • Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
-• Ninguna cara humana.
-• Ningún borde, marco ni collage. Una sola imagen.
+• Ninguna persona ni ninguna cara humana.
+• Ningún borde, marco, collage ni imagen dividida. Una sola imagen.
 
 Genera la imagen ahora.
 ```
@@ -1045,9 +1058,21 @@ Genera el video ahora.
 
 # CHECKOUT
 
-Já existe uma imagem pronta em `assets/checkout-product.png` (1080×1080),
-montada a partir da tela real do app. Se preferir uma foto no lugar dela, use
-o bloco `checkout-product` da trilha A.
+## Imagem do produto na Hotmart
+
+Uma imagem serve para os três planos.
+
+Duas opções, as duas prontas:
+
+1. **`assets/checkout-product.png`** no repositório — montada a partir da tela
+   real do app, em espanhol. Mostra o que a pessoa está comprando.
+2. **Gerar uma foto** com o bloco `checkout-product` da trilha A. Esse bloco é
+   afinado para miniatura: o cachorro e o celular preenchem cerca de 80% do
+   quadro, porque na Hotmart a imagem aparece pequena e espaço vazio ali só
+   atrapalha.
+
+Suba quadrada. 1080×1080 é seguro — a plataforma reduz sozinha — e mantenha
+o arquivo abaixo de 2 MB.
 
 ### Plano 1 — 7 dias · cobrar USD 1,99
 - **Nome:** `DogFlow — Plan de 7 días`
