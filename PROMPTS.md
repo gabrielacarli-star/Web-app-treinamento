@@ -1,142 +1,442 @@
 # Prompts de imagem e vídeo — DogFlow
 
-Cada espaço reservado no app tem um **id**, escrito dentro do próprio
-placeholder. Aqui está o prompt de cada id.
+Um bloco por espaço reservado do app. **Copie o bloco inteiro** — da linha
+`Genera UNA sola imagen` até `Genera la imagen ahora.` — e cole. Não corte,
+não resuma, não junte dois.
 
-Os prompts estão **em espanhol** porque o funil é para LATAM: se o gerador
-escorregar e escrever algo, sai em espanhol.
-
-Cada bloco é uma **instrução numerada e completa**. Copie o bloco inteiro,
-do "Genera UNA sola imagen" até o final, e cole. Não junte pedaços.
+Estão em espanhol porque o funil é para LATAM.
 
 ## Como usar
 
-1. Abra uma conversa nova no ChatGPT.
+1. Conversa nova no ChatGPT.
 2. Cole **um** bloco inteiro. Espere a imagem.
-3. Para a próxima, na **mesma conversa**, cole o próximo bloco inteiro.
-4. Só isso. Não peça duas imagens de uma vez — sai pior.
+3. Próxima imagem: **mesma conversa**, cole o próximo bloco inteiro.
 
-**Se aparecer texto na imagem:** responda `Quita todo el texto, las letras y
-los logotipos de la imagen. Vuelve a generarla.`
+Não peça duas imagens numa mensagem só.
 
-**Se a imagem sair torta:** corrija em uma frase — `Aleja la cámara.` ou
-`El perro se ve demasiado serio.` Não recomece do zero.
+## Se sair errado
 
-**Escolha uma trilha e não misture.** Foto (mais fácil de gerar, costuma
-converter melhor em tráfego frio) ou ilustração (o que a referência usa).
+| Problema | Responda exatamente isso |
+|---|---|
+| Apareceu texto ou logo | `Quita todo el texto, las letras y los logotipos. Vuelve a generarla.` |
+| Apareceu rosto de pessoa | `No muestres la cara de ninguna persona. Vuelve a generarla.` |
+| Enquadramento errado | `Aleja la cámara y deja más espacio vacío alrededor.` |
+| Ficou com cara de desenho | `Tiene que ser una fotografía realista, no una ilustración.` |
+| Cor errada | `Usa un fondo crema claro y quita los colores saturados.` |
+
+Corrigir em uma frase funciona melhor que recomeçar.
+
+## Trilhas
+
+**Foto** é a recomendada: sai bem com muito mais frequência e costuma
+converter melhor em tráfego frio. **Ilustração** é o que a oferta de
+referência usa. Escolha uma e não misture.
 
 ---
 
-## Já está pronta: a imagem do checkout
+# TRILHA A — FOTO (recomendada)
 
-`assets/checkout-product.png` no repositório — 1080×1080, mostra o app de
-verdade em espanhol. Não precisa gerar nada, é só subir na Hotmart ou Kiwify.
+### `checkout-product` — miniatura do produto no checkout
+```
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
----
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
 
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un perro adulto joven de raza Golden Retriever, de pelaje dorado claro, limpio y brillante
+• Está sentado y erguido, con las patas delanteras rectas y apoyadas en la mesa
+• Orejas caídas de forma natural, boca ligeramente abierta, lengua apenas visible
+• Expresión atenta y amistosa, con la cabeza girada hacia el teléfono que tiene al lado
+• Ocupa cerca del 45% del ancho de la imagen y está en el lado derecho
 
-# TRILHA A — FOTO
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• Un teléfono celular moderno, negro, de pantalla completa y bordes redondeados
+• Está de pie sobre la mesa, apoyado y ligeramente inclinado hacia atrás, visto casi de frente
+• La pantalla está encendida y muestra una interfaz limpia y clara, con bloques de color suaves; el texto de la interfaz aparece borroso y no se puede leer
+• Ocupa cerca del 25% del ancho y está en el lado izquierdo, más cerca del centro que del borde
+
+━━━ 4. ESCENARIO ━━━
+• Una mesa de madera clara, lisa y sin objetos alrededor
+• Al fondo, una pared de interior en tono crema, completamente desenfocada
+
+━━━ 5. LUZ ━━━
+• Luz natural suave y difusa, entrando desde la izquierda. Sombras muy tenues, sin contraste duro. Sensación de mañana en casa.
+
+━━━ 6. CÁMARA ━━━
+• Cámara a la altura de la mesa, de frente, a un metro de distancia. Objetivo de 50 mm. Fondo desenfocado con poca profundidad de campo.
+
+━━━ 7. COLORES ━━━
+• Dominan el crema, el beige y el dorado del pelaje. Un solo acento suave en lavanda dentro de la pantalla del teléfono.
+
+━━━ 8. AMBIENTE ━━━
+• Limpio, cálido y ordenado. Aspecto de foto de producto, no de foto casual.
+
+━━━ 9. COMPOSICIÓN ━━━
+• El perro a la derecha y el teléfono a la izquierda, ambos apoyados sobre la línea inferior. Deja el tercio superior de la imagen vacío.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
+
+Genera la imagen ahora.
+```
 
 ### `hero-leash` — passeio sem puxar
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Un perro de tamaño mediano tirando con fuerza de la correa durante un paseo por la acera. El cuerpo del perro está inclinado hacia adelante y tiene la boca abierta de entusiasmo. La mano de su dueño aparece estirada en el borde del encuadre, sujetando la correa tensa; no se ve la cara del dueño.
-3. ENCUADRE: El perro ocupa el lado derecho del encuadre. Deja espacio vacío alrededor del perro.
-4. LUZ Y FONDO: Luz natural de atardecer. Fondo de calle desenfocado.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Labrador de pelaje color chocolate
+• Está tirando con fuerza de la correa: el cuerpo inclinado hacia adelante, el pecho bajo y las patas traseras estiradas hacia atrás
+• Boca abierta y lengua fuera, con expresión de entusiasmo, mirando hacia adelante y fuera del encuadre
+• Ocupa cerca del 55% del ancho de la imagen y está en el lado derecho
+
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• Una correa de nailon azul, completamente tensa y recta, que cruza la imagen en diagonal
+• La mano y el antebrazo de una persona adulta entran desde el borde izquierdo sujetando la correa; no se ve nada más de esa persona, ni su cara ni su cuerpo
+
+━━━ 4. ESCENARIO ━━━
+• Una acera de ciudad tranquila, de baldosas grises
+• Al fondo, árboles y edificios bajos completamente desenfocados
+
+━━━ 5. LUZ ━━━
+• Luz natural de atardecer, cálida y baja, viniendo desde atrás del perro. Sin sombras duras.
+
+━━━ 6. CÁMARA ━━━
+• Cámara a la altura del pecho del perro, casi a ras del suelo. Objetivo de 50 mm. Fondo muy desenfocado.
+
+━━━ 7. COLORES ━━━
+• Tonos cálidos de atardecer: dorado, marrón y gris claro. Un acento azul en la correa.
+
+━━━ 8. AMBIENTE ━━━
+• Enérgico y cotidiano. Un paseo real, no una sesión de estudio.
+
+━━━ 9. COMPOSICIÓN ━━━
+• El perro a la derecha, la correa cruzando hacia la esquina superior izquierda. Deja espacio vacío delante del perro.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-potty` — xixi no lugar certo
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Un cachorro sentado sobre un piso de madera clara, en una sala luminosa y ordenada. Tiene las orejas bajas y mira hacia arriba, directo a la cámara, con expresión de culpa. Detrás de él, desenfocado, hay un empapador claro sobre el piso.
-3. ENCUADRE: El cachorro va centrado. Deja espacio vacío a los lados.
-4. LUZ Y FONDO: Luz suave que entra por una ventana. Ambiente doméstico y limpio.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un cachorro de unos tres meses, raza Beagle, de pelaje tricolor
+• Está sentado, con las patas delanteras juntas y el cuerpo un poco encogido
+• Orejas caídas y bajas, cabeza ligeramente inclinada hacia abajo, ojos grandes mirando hacia arriba directo a la cámara
+• Expresión de culpa y ternura, no de miedo
+• Ocupa cerca del 40% del alto de la imagen y está centrado
+
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• Un empapador blanco de entrenamiento, limpio y vacío, apoyado en el piso detrás del cachorro y hacia la derecha, desenfocado
+
+━━━ 4. ESCENARIO ━━━
+• El piso de madera clara de una sala de estar luminosa y ordenada
+• Al fondo, la pata de un sofá claro y una pared blanca, completamente desenfocados
+
+━━━ 5. LUZ ━━━
+• Luz suave de ventana entrando desde la derecha, difusa. Ambiente claro y limpio.
+
+━━━ 6. CÁMARA ━━━
+• Cámara al nivel del piso, a la altura de los ojos del cachorro. Objetivo de 50 mm. Fondo desenfocado.
+
+━━━ 7. COLORES ━━━
+• Blancos, maderas claras y el marrón y negro del pelaje.
+
+━━━ 8. AMBIENTE ━━━
+• Tierno y doméstico. Da ganas de perdonarlo.
+
+━━━ 9. COMPOSICIÓN ━━━
+• El cachorro centrado, en la mitad inferior. Deja el tercio superior vacío.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-biting` — fim das mordidas
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Un cachorro mordisqueando suavemente la mano de una persona mientras juegan sobre una alfombra clara. Solo se ven la mano y el antebrazo de la persona; nunca su cara. El cachorro tiene el cuerpo relajado y está jugando, no atacando.
-3. ENCUADRE: La escena va centrada. Deja espacio vacío alrededor.
-4. LUZ Y FONDO: Luz natural suave de interior. Fondo simple.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un cachorro de unos cuatro meses, raza Border Collie, de pelaje blanco y negro
+• Está mordisqueando con suavidad la mano de una persona, con la boca apenas cerrada sobre los dedos
+• El cuerpo está relajado y en postura de juego, con las patas delanteras estiradas hacia adelante
+• La actitud es claramente de juego: nada de gruñido, orejas ni pelo erizados
+• Ocupa cerca del 50% del ancho y está en el lado derecho
+
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• La mano y el antebrazo de una persona adulta entran desde el borde izquierdo de la imagen
+• No se ve nada más de esa persona: ni cara, ni torso, ni hombro
+
+━━━ 4. ESCENARIO ━━━
+• Una alfombra clara de pelo corto, en el piso de una sala
+• Al fondo, la base de un sofá claro completamente desenfocada
+
+━━━ 5. LUZ ━━━
+• Luz natural de interior, suave y pareja, sin sombras marcadas.
+
+━━━ 6. CÁMARA ━━━
+• Cámara al nivel del piso, muy cerca del cachorro. Objetivo de 50 mm. Poca profundidad de campo.
+
+━━━ 7. COLORES ━━━
+• Blanco, gris claro y negro, sobre fondo crema.
+
+━━━ 8. AMBIENTE ━━━
+• Juguetón y liviano. Un problema simpático, no una escena agresiva.
+
+━━━ 9. COMPOSICIÓN ━━━
+• El cachorro a la derecha y la mano entrando por la izquierda. Deja espacio vacío arriba.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-behaviour` — comportamento indesejado
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Una sala de estar con un cojín roto y relleno blanco esparcido por el piso. En medio del desorden hay un perro sentado, mirando directo a la cámara con cara de inocencia.
-3. ENCUADRE: El perro va centrado. Deja espacio vacío arriba.
-4. LUZ Y FONDO: Luz de día. Ambiente de casa común y corriente.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Labrador de pelaje amarillo claro
+• Está sentado en medio del desorden, erguido y quieto
+• Mira directo a la cámara con expresión de inocencia total, la cabeza levemente ladeada
+• Tiene un par de plumas blancas pegadas en el hocico
+• Ocupa cerca del 45% del alto y está centrado
+
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• Un cojín de sofá roto en el piso, delante del perro, con la costura abierta
+• Relleno blanco esparcido por el piso alrededor del perro, algunos trozos sueltos
+
+━━━ 4. ESCENARIO ━━━
+• El piso de una sala de estar común, de madera clara
+• Al fondo, un sofá gris claro, desenfocado
+
+━━━ 5. LUZ ━━━
+• Luz de día entrando por una ventana lateral, clara y natural.
+
+━━━ 6. CÁMARA ━━━
+• Cámara a la altura de la cabeza del perro. Objetivo de 35 mm, para que entre algo del desorden alrededor. Fondo desenfocado.
+
+━━━ 7. COLORES ━━━
+• Blancos, grises y el amarillo claro del pelaje.
+
+━━━ 8. AMBIENTE ━━━
+• Cómico y culpable. Debe dar gracia, no enojo.
+
+━━━ 9. COMPOSICIÓN ━━━
+• El perro centrado, con el desorden abriéndose hacia los lados y hacia el frente. Deja el tercio superior vacío.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-alone` — filhote sozinho em casa
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Un cachorro sentado solo en el piso, detrás de una puerta cerrada, mirando hacia arriba con expresión de espera. Una franja de luz entra por debajo de la puerta.
-3. ENCUADRE: El cachorro va centrado. Deja espacio vacío alrededor.
-4. LUZ Y FONDO: Ambiente silencioso y vacío, con pocos objetos. Luz tenue.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un cachorro de unos cuatro meses, raza Cocker Spaniel, de pelaje dorado
+• Está sentado solo en el piso, quieto, de frente a una puerta cerrada
+• Se lo ve de perfil de tres cuartos, con la cabeza levantada mirando hacia la manija de la puerta
+• Expresión de espera paciente y algo de tristeza, sin dramatismo
+• Ocupa cerca del 30% del alto y está en el lado izquierdo
+
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• Una puerta interior de madera clara, cerrada, que ocupa el fondo de la imagen
+• Una franja de luz cálida entrando por debajo de la puerta y extendiéndose sobre el piso
+
+━━━ 4. ESCENARIO ━━━
+• Un pasillo interior vacío, de piso de madera, sin muebles ni objetos
+
+━━━ 5. LUZ ━━━
+• Ambiente en penumbra suave. La única luz fuerte es la franja que entra por debajo de la puerta.
+
+━━━ 6. CÁMARA ━━━
+• Cámara al nivel del piso, a dos metros del cachorro. Objetivo de 35 mm. Fondo enfocado.
+
+━━━ 7. COLORES ━━━
+• Marrones apagados y crema, con la franja de luz cálida como único punto brillante.
+
+━━━ 8. AMBIENTE ━━━
+• Silencioso y de espera. Melancólico, nunca angustiante.
+
+━━━ 9. COMPOSICIÓN ━━━
+• El cachorro a la izquierda y la puerta ocupando el resto. Deja espacio vacío a la derecha.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `quiz-proof_breed` — prova social por raça
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Tres perros de razas distintas sentados uno al lado del otro sobre el pasto de un parque. Los tres están atentos, mirando en la misma dirección, y se ven bien comportados.
-3. ENCUADRE: Los tres perros van centrados y alineados. Deja espacio vacío arriba y abajo.
-4. LUZ Y FONDO: Luz natural de la mañana. Vegetación desenfocada al fondo.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Tres perros adultos de razas distintas, sentados uno al lado del otro en fila
+• De izquierda a derecha: un Golden Retriever dorado, un Border Collie blanco y negro, y un Beagle tricolor
+• Los tres están sentados y erguidos, en la misma postura, mirando en la misma dirección hacia la cámara
+• Se ven atentos y bien entrenados, ninguno distraído
+• En conjunto ocupan cerca del 70% del ancho de la imagen
+
+━━━ 3. ESCENARIO ━━━
+• El pasto corto y verde de un parque
+• Al fondo, árboles completamente desenfocados
+
+━━━ 4. LUZ ━━━
+• Luz natural de la mañana, suave y pareja, sin sombras duras.
+
+━━━ 5. CÁMARA ━━━
+• Cámara a la altura de la cabeza de los perros, de frente. Objetivo de 50 mm. Fondo muy desenfocado.
+
+━━━ 6. COLORES ━━━
+• Verdes suaves de fondo, con los pelajes dorado, blanco, negro y marrón.
+
+━━━ 7. AMBIENTE ━━━
+• Ordenado y confiable. Tres perros que claramente aprendieron algo.
+
+━━━ 8. COMPOSICIÓN ━━━
+• Los tres centrados y alineados sobre la misma línea. Deja espacio vacío arriba y abajo.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `quiz-heard_you` — acolhimento
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Una persona en cuclillas abrazando a su perro en un parque, los dos de perfil, en un momento tranquilo y cariñoso. El encuadre va del pecho hacia abajo y nunca muestra la cara de la persona.
-3. ENCUADRE: La escena va centrada. Deja espacio vacío alrededor.
-4. LUZ Y FONDO: Luz dorada de atardecer. Fondo desenfocado.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Golden Retriever de pelaje dorado
+• Está de pie, apoyado contra una persona que lo abraza, con la cabeza apoyada en el hombro de ella
+• Se lo ve de perfil, con los ojos entrecerrados y expresión de calma
+• Ocupa cerca del 40% del ancho, en el lado derecho
+
+━━━ 3. OBJETOS EN LA ESCENA ━━━
+• Una persona adulta en cuclillas, abrazando al perro con los dos brazos
+• El encuadre corta a la persona a la altura del cuello: nunca se ve su cara
+• Viste ropa sencilla en tonos neutros
+
+━━━ 4. ESCENARIO ━━━
+• El pasto de un parque al final de la tarde
+• Al fondo, árboles y luz filtrándose entre las hojas, completamente desenfocados
+
+━━━ 5. LUZ ━━━
+• Luz dorada de atardecer viniendo desde atrás, con un halo suave alrededor de las siluetas.
+
+━━━ 6. CÁMARA ━━━
+• Cámara a la altura de las dos figuras, de perfil. Objetivo de 85 mm. Fondo muy desenfocado.
+
+━━━ 7. COLORES ━━━
+• Dorados cálidos y verdes suaves.
+
+━━━ 8. AMBIENTE ━━━
+• Íntimo y tranquilo. El momento de vínculo que el funil promete.
+
+━━━ 9. COMPOSICIÓN ━━━
+• Las dos figuras juntas y centradas, ligeramente a la derecha. Deja espacio vacío a la izquierda.
+
+━━━ 10. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `plan-ready` — o plano ficou pronto
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: fotografía cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESCENA: Un perro sentado erguido y atento en una sala luminosa, mirando directo a la cámara con las orejas levantadas y expresión de estar listo.
-3. ENCUADRE: El perro va en la mitad inferior del encuadre. Deja bastante espacio vacío arriba.
-4. LUZ Y FONDO: Luz natural. Fondo simple y desenfocado.
-5. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Fotografía realista. No es ilustración, no es render 3D, no es dibujo.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Border Collie de pelaje blanco y negro
+• Está sentado, erguido y perfectamente quieto, con las patas delanteras rectas
+• Orejas levantadas y atentas, cabeza en alto, mirando directo a la cámara
+• Expresión despierta y lista, como esperando una orden
+• Ocupa cerca del 45% del alto y está centrado
+
+━━━ 3. ESCENARIO ━━━
+• El piso de madera clara de una sala luminosa y vacía
+• Al fondo, una pared blanca lisa, completamente desenfocada
+
+━━━ 4. LUZ ━━━
+• Luz natural clara y difusa, entrando desde la izquierda. Ambiente muy luminoso.
+
+━━━ 5. CÁMARA ━━━
+• Cámara a la altura de los ojos del perro. Objetivo de 85 mm. Fondo desenfocado.
+
+━━━ 6. COLORES ━━━
+• Blancos y maderas claras, con el blanco y negro del pelaje.
+
+━━━ 7. AMBIENTE ━━━
+• Optimista y ordenado. Un perro listo para empezar.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El perro centrado, en la mitad inferior de la imagen. Deja bastante espacio vacío arriba.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ninguna cara humana.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
@@ -145,116 +445,445 @@ Genera la imagen ahora.
 
 # TRILHA B — ILUSTRAÇÃO
 
-Mesmas cenas. Não misture com a trilha A.
+Mesmas cenas. Escolha uma trilha e não misture.
+
+### `checkout-product` — miniatura do produto no checkout
+```
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
+
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un perro adulto joven de raza Golden Retriever, de pelaje dorado claro, limpio y brillante
+• Está sentado y erguido, con las patas delanteras rectas y apoyadas en la mesa
+• Orejas caídas de forma natural, boca ligeramente abierta, lengua apenas visible
+• Expresión atenta y amistosa, con la cabeza girada hacia el teléfono que tiene al lado
+• Ocupa cerca del 45% del ancho de la imagen y está en el lado derecho
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• Un teléfono celular moderno, negro, de pantalla completa y bordes redondeados
+• Está de pie sobre la mesa, apoyado y ligeramente inclinado hacia atrás, visto casi de frente
+• La pantalla está encendida y muestra una interfaz limpia y clara, con bloques de color suaves; el texto de la interfaz aparece borroso y no se puede leer
+• Ocupa cerca del 25% del ancho y está en el lado izquierdo, más cerca del centro que del borde
+
+━━━ 5. ESCENARIO ━━━
+• Una mesa de madera clara, lisa y sin objetos alrededor
+• Al fondo, una pared de interior en tono crema, completamente desenfocada
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Limpio, cálido y ordenado. Aspecto de foto de producto, no de foto casual.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El perro a la derecha y el teléfono a la izquierda, ambos apoyados sobre la línea inferior. Deja el tercio superior de la imagen vacío.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
+
+Genera la imagen ahora.
+```
 
 ### `hero-leash` — passeio sem puxar
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Un perro de tamaño mediano tirando con fuerza de la correa durante un paseo por la acera. El cuerpo del perro está inclinado hacia adelante y tiene la boca abierta de entusiasmo. La mano de su dueño aparece estirada en el borde del encuadre, sujetando la correa tensa; no se ve la cara del dueño.
-5. ENCUADRE: El perro ocupa el lado derecho del encuadre. Deja espacio vacío alrededor del perro.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Labrador de pelaje color chocolate
+• Está tirando con fuerza de la correa: el cuerpo inclinado hacia adelante, el pecho bajo y las patas traseras estiradas hacia atrás
+• Boca abierta y lengua fuera, con expresión de entusiasmo, mirando hacia adelante y fuera del encuadre
+• Ocupa cerca del 55% del ancho de la imagen y está en el lado derecho
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• Una correa de nailon azul, completamente tensa y recta, que cruza la imagen en diagonal
+• La mano y el antebrazo de una persona adulta entran desde el borde izquierdo sujetando la correa; no se ve nada más de esa persona, ni su cara ni su cuerpo
+
+━━━ 5. ESCENARIO ━━━
+• Una acera de ciudad tranquila, de baldosas grises
+• Al fondo, árboles y edificios bajos completamente desenfocados
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Enérgico y cotidiano. Un paseo real, no una sesión de estudio.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El perro a la derecha, la correa cruzando hacia la esquina superior izquierda. Deja espacio vacío delante del perro.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-potty` — xixi no lugar certo
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Un cachorro sentado sobre un piso de madera clara, en una sala luminosa y ordenada. Tiene las orejas bajas y mira hacia arriba, directo a la cámara, con expresión de culpa. Detrás de él, desenfocado, hay un empapador claro sobre el piso.
-5. ENCUADRE: El cachorro va centrado. Deja espacio vacío a los lados.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un cachorro de unos tres meses, raza Beagle, de pelaje tricolor
+• Está sentado, con las patas delanteras juntas y el cuerpo un poco encogido
+• Orejas caídas y bajas, cabeza ligeramente inclinada hacia abajo, ojos grandes mirando hacia arriba directo a la cámara
+• Expresión de culpa y ternura, no de miedo
+• Ocupa cerca del 40% del alto de la imagen y está centrado
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• Un empapador blanco de entrenamiento, limpio y vacío, apoyado en el piso detrás del cachorro y hacia la derecha, desenfocado
+
+━━━ 5. ESCENARIO ━━━
+• El piso de madera clara de una sala de estar luminosa y ordenada
+• Al fondo, la pata de un sofá claro y una pared blanca, completamente desenfocados
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Tierno y doméstico. Da ganas de perdonarlo.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El cachorro centrado, en la mitad inferior. Deja el tercio superior vacío.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-biting` — fim das mordidas
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Un cachorro mordisqueando suavemente la mano de una persona mientras juegan sobre una alfombra clara. Solo se ven la mano y el antebrazo de la persona; nunca su cara. El cachorro tiene el cuerpo relajado y está jugando, no atacando.
-5. ENCUADRE: La escena va centrada. Deja espacio vacío alrededor.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un cachorro de unos cuatro meses, raza Border Collie, de pelaje blanco y negro
+• Está mordisqueando con suavidad la mano de una persona, con la boca apenas cerrada sobre los dedos
+• El cuerpo está relajado y en postura de juego, con las patas delanteras estiradas hacia adelante
+• La actitud es claramente de juego: nada de gruñido, orejas ni pelo erizados
+• Ocupa cerca del 50% del ancho y está en el lado derecho
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• La mano y el antebrazo de una persona adulta entran desde el borde izquierdo de la imagen
+• No se ve nada más de esa persona: ni cara, ni torso, ni hombro
+
+━━━ 5. ESCENARIO ━━━
+• Una alfombra clara de pelo corto, en el piso de una sala
+• Al fondo, la base de un sofá claro completamente desenfocada
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Juguetón y liviano. Un problema simpático, no una escena agresiva.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El cachorro a la derecha y la mano entrando por la izquierda. Deja espacio vacío arriba.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-behaviour` — comportamento indesejado
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Una sala de estar con un cojín roto y relleno blanco esparcido por el piso. En medio del desorden hay un perro sentado, mirando directo a la cámara con cara de inocencia.
-5. ENCUADRE: El perro va centrado. Deja espacio vacío arriba.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Labrador de pelaje amarillo claro
+• Está sentado en medio del desorden, erguido y quieto
+• Mira directo a la cámara con expresión de inocencia total, la cabeza levemente ladeada
+• Tiene un par de plumas blancas pegadas en el hocico
+• Ocupa cerca del 45% del alto y está centrado
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• Un cojín de sofá roto en el piso, delante del perro, con la costura abierta
+• Relleno blanco esparcido por el piso alrededor del perro, algunos trozos sueltos
+
+━━━ 5. ESCENARIO ━━━
+• El piso de una sala de estar común, de madera clara
+• Al fondo, un sofá gris claro, desenfocado
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Cómico y culpable. Debe dar gracia, no enojo.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El perro centrado, con el desorden abriéndose hacia los lados y hacia el frente. Deja el tercio superior vacío.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `hero-alone` — filhote sozinho em casa
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Un cachorro sentado solo en el piso, detrás de una puerta cerrada, mirando hacia arriba con expresión de espera. Una franja de luz entra por debajo de la puerta.
-5. ENCUADRE: El cachorro va centrado. Deja espacio vacío alrededor.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un cachorro de unos cuatro meses, raza Cocker Spaniel, de pelaje dorado
+• Está sentado solo en el piso, quieto, de frente a una puerta cerrada
+• Se lo ve de perfil de tres cuartos, con la cabeza levantada mirando hacia la manija de la puerta
+• Expresión de espera paciente y algo de tristeza, sin dramatismo
+• Ocupa cerca del 30% del alto y está en el lado izquierdo
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• Una puerta interior de madera clara, cerrada, que ocupa el fondo de la imagen
+• Una franja de luz cálida entrando por debajo de la puerta y extendiéndose sobre el piso
+
+━━━ 5. ESCENARIO ━━━
+• Un pasillo interior vacío, de piso de madera, sin muebles ni objetos
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Silencioso y de espera. Melancólico, nunca angustiante.
+
+━━━ 8. COMPOSICIÓN ━━━
+• El cachorro a la izquierda y la puerta ocupando el resto. Deja espacio vacío a la derecha.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `quiz-proof_breed` — prova social por raça
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Tres perros de razas distintas sentados uno al lado del otro sobre el pasto de un parque. Los tres están atentos, mirando en la misma dirección, y se ven bien comportados.
-5. ENCUADRE: Los tres perros van centrados y alineados. Deja espacio vacío arriba y abajo.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Tres perros adultos de razas distintas, sentados uno al lado del otro en fila
+• De izquierda a derecha: un Golden Retriever dorado, un Border Collie blanco y negro, y un Beagle tricolor
+• Los tres están sentados y erguidos, en la misma postura, mirando en la misma dirección hacia la cámara
+• Se ven atentos y bien entrenados, ninguno distraído
+• En conjunto ocupan cerca del 70% del ancho de la imagen
+
+━━━ 4. ESCENARIO ━━━
+• El pasto corto y verde de un parque
+• Al fondo, árboles completamente desenfocados
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 5. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 6. AMBIENTE ━━━
+• Ordenado y confiable. Tres perros que claramente aprendieron algo.
+
+━━━ 7. COMPOSICIÓN ━━━
+• Los tres centrados y alineados sobre la misma línea. Deja espacio vacío arriba y abajo.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 8. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `quiz-heard_you` — acolhimento
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Una persona en cuclillas abrazando a su perro en un parque, los dos de perfil, en un momento tranquilo y cariñoso. El encuadre va del pecho hacia abajo y nunca muestra la cara de la persona.
-5. ENCUADRE: La escena va centrada. Deja espacio vacío alrededor.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Golden Retriever de pelaje dorado
+• Está de pie, apoyado contra una persona que lo abraza, con la cabeza apoyada en el hombro de ella
+• Se lo ve de perfil, con los ojos entrecerrados y expresión de calma
+• Ocupa cerca del 40% del ancho, en el lado derecho
+
+━━━ 4. OBJETOS EN LA ESCENA ━━━
+• Una persona adulta en cuclillas, abrazando al perro con los dos brazos
+• El encuadre corta a la persona a la altura del cuello: nunca se ve su cara
+• Viste ropa sencilla en tonos neutros
+
+━━━ 5. ESCENARIO ━━━
+• El pasto de un parque al final de la tarde
+• Al fondo, árboles y luz filtrándose entre las hojas, completamente desenfocados
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 6. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 7. AMBIENTE ━━━
+• Íntimo y tranquilo. El momento de vínculo que el funil promete.
+
+━━━ 8. COMPOSICIÓN ━━━
+• Las dos figuras juntas y centradas, ligeramente a la derecha. Deja espacio vacío a la izquierda.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 9. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
 
 ### `plan-ready` — o plano ficou pronto
 ```
-Genera UNA sola imagen siguiendo estas instrucciones al pie de la letra.
+Genera UNA sola imagen. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: ilustración cuadrada, proporción 1:1, 1080 x 1080 píxeles.
-2. ESTILO: ilustración vectorial plana, formas redondeadas y simpáticas, contorno grueso, sin sombras realistas. Estilo de pantalla de bienvenida de una aplicación móvil moderna.
-3. COLORES: fondo crema liso. El resto en lavanda y crema, con un solo acento coral.
-4. ESCENA: Un perro sentado erguido y atento en una sala luminosa, mirando directo a la cámara con las orejas levantadas y expresión de estar listo.
-5. ENCUADRE: El perro va en la mitad inferior del encuadre. Deja bastante espacio vacío arriba.
-6. NO INCLUYAS: ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+━━━ 1. FORMATO DE SALIDA ━━━
+• Ilustración vectorial plana. No es fotografía, no es render 3D.
+• Imagen cuadrada, proporción exacta 1:1, 1080 x 1080 píxeles.
+
+━━━ 2. ESTILO ━━━
+• Formas simples y redondeadas, con contorno grueso y parejo.
+• Colores planos, sin degradados ni sombras realistas.
+• Proporciones tiernas: cabeza grande y cuerpo compacto.
+• Aspecto de pantalla de bienvenida de una aplicación móvil moderna.
+
+━━━ 3. SUJETO PRINCIPAL ━━━
+• Un perro adulto de tamaño mediano, raza Border Collie de pelaje blanco y negro
+• Está sentado, erguido y perfectamente quieto, con las patas delanteras rectas
+• Orejas levantadas y atentas, cabeza en alto, mirando directo a la cámara
+• Expresión despierta y lista, como esperando una orden
+• Ocupa cerca del 45% del alto y está centrado
+
+━━━ 4. ESCENARIO ━━━
+• El piso de madera clara de una sala luminosa y vacía
+• Al fondo, una pared blanca lisa, completamente desenfocada
+• Todo el escenario simplificado a pocas formas planas.
+
+━━━ 5. COLORES ━━━
+• Fondo crema liso y parejo.
+• El resto en tonos lavanda y crema.
+• Un solo acento coral en el punto más importante de la escena.
+
+━━━ 6. AMBIENTE ━━━
+• Optimista y ordenado. Un perro listo para empezar.
+
+━━━ 7. COMPOSICIÓN ━━━
+• El perro centrado, en la mitad inferior de la imagen. Deja bastante espacio vacío arriba.
+• Márgenes amplios: nada toca el borde de la imagen.
+
+━━━ 8. NO INCLUYAS ━━━
+• Ninguna palabra, letra, número, cartel, logotipo ni marca de agua.
+• Ningún rasgo facial humano detallado.
+• Ningún borde, marco ni collage. Una sola imagen.
 
 Genera la imagen ahora.
 ```
@@ -264,80 +893,161 @@ Genera la imagen ahora.
 
 Ids `lesson-<curso>-<aula>`. Curso 1 é "Filhote — curso básico".
 
-Regra que vale mais que o prompt: **uma ação só por clipe**. Pedir três
-momentos em seis segundos é o que produz aquele vídeo derretido.
+Regra que vale mais que qualquer detalhe: **uma ação só por clipe**. Pedir
+três momentos em seis segundos é o que produz aquele vídeo derretido.
 
 ### `lesson-1-1` — parar de morder na brincadeira
 ```
-Genera UN video corto siguiendo estas instrucciones al pie de la letra.
+Genera UN video corto. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: video de 6 segundos, proporción 4:3, sin audio, pensado para repetirse en bucle.
-2. ACCIÓN, UNA SOLA: un cachorro mordisquea suavemente la mano de una persona y la mano se aleja despacio.
-3. CÁMARA: fija. Sin zoom y sin movimiento de cámara.
-4. LUZ Y FONDO: luz natural de interior, fondo simple y sin distracciones.
-5. NO INCLUYAS: ningún texto, letra, número, logotipo ni marca de agua.
+━━━ 1. FORMATO ━━━
+• Video realista de 6 segundos, proporción 4:3, sin audio.
+• Pensado para repetirse en bucle: el último cuadro debe parecerse al primero.
+
+━━━ 2. ACCIÓN, UNA SOLA ━━━
+• Un cachorro de unos cuatro meses mordisquea con suavidad la mano de una persona.
+• La mano se aleja despacio y el cachorro se queda quieto, mirándola.
+• No pasa nada más en todo el clip.
+
+━━━ 3. ESCENARIO ━━━
+• Una alfombra clara en el piso de una sala. Al fondo, un sofá claro desenfocado.
+
+━━━ 4. CÁMARA ━━━
+• Fija, al nivel del piso. Sin zoom, sin paneo, sin ningún movimiento de cámara.
+
+━━━ 5. LUZ ━━━
+• Luz natural de interior, suave y pareja, sin sombras marcadas.
+
+━━━ 6. NO INCLUYAS ━━━
+• Ningún texto, letra, número, logotipo ni marca de agua.
+• Ninguna cara humana: solo la mano y el antebrazo.
 
 Genera el video ahora.
 ```
 
 ### `lesson-1-2` — xixi no lugar certo
 ```
-Genera UN video corto siguiendo estas instrucciones al pie de la letra.
+Genera UN video corto. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: video de 6 segundos, proporción 4:3, sin audio, pensado para repetirse en bucle.
-2. ACCIÓN, UNA SOLA: un cachorro camina hasta un empapador claro y se sienta encima.
-3. CÁMARA: fija. Sin zoom y sin movimiento de cámara.
-4. LUZ Y FONDO: sala luminosa, fondo simple y sin distracciones.
-5. NO INCLUYAS: ningún texto, letra, número, logotipo ni marca de agua.
+━━━ 1. FORMATO ━━━
+• Video realista de 6 segundos, proporción 4:3, sin audio.
+• Pensado para repetirse en bucle: el último cuadro debe parecerse al primero.
+
+━━━ 2. ACCIÓN, UNA SOLA ━━━
+• Un cachorro camina hasta un empapador blanco apoyado en el piso y se sienta encima.
+• Después levanta la cabeza y mira hacia arriba.
+• No pasa nada más en todo el clip.
+
+━━━ 3. ESCENARIO ━━━
+• El piso de madera clara de una sala luminosa y ordenada, sin objetos alrededor.
+
+━━━ 4. CÁMARA ━━━
+• Fija, al nivel del piso. Sin zoom, sin paneo, sin ningún movimiento de cámara.
+
+━━━ 5. LUZ ━━━
+• Luz de ventana, clara y difusa.
+
+━━━ 6. NO INCLUYAS ━━━
+• Ningún texto, letra, número, logotipo ni marca de agua.
+• Ninguna persona en el encuadre.
 
 Genera el video ahora.
 ```
 
 ### `lesson-1-4` — jogo do "pega e solta"
 ```
-Genera UN video corto siguiendo estas instrucciones al pie de la letra.
+Genera UN video corto. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: video de 6 segundos, proporción 4:3, sin audio, pensado para repetirse en bucle.
-2. ACCIÓN, UNA SOLA: un cachorro suelta un juguete de cuerda de la boca cuando una mano se acerca con un premio.
-3. CÁMARA: fija. Sin zoom y sin movimiento de cámara.
-4. LUZ Y FONDO: luz natural, fondo simple y sin distracciones.
-5. NO INCLUYAS: ningún texto, letra, número, logotipo ni marca de agua.
+━━━ 1. FORMATO ━━━
+• Video realista de 6 segundos, proporción 4:3, sin audio.
+• Pensado para repetirse en bucle: el último cuadro debe parecerse al primero.
+
+━━━ 2. ACCIÓN, UNA SOLA ━━━
+• Un cachorro sostiene un juguete de cuerda en la boca.
+• Una mano se acerca desde el borde con un premio y el cachorro suelta la cuerda.
+• No pasa nada más en todo el clip.
+
+━━━ 3. ESCENARIO ━━━
+• Una alfombra clara en el piso de una sala, fondo desenfocado.
+
+━━━ 4. CÁMARA ━━━
+• Fija, al nivel del piso. Sin zoom, sin paneo, sin ningún movimiento de cámara.
+
+━━━ 5. LUZ ━━━
+• Luz natural de interior, suave y pareja.
+
+━━━ 6. NO INCLUYAS ━━━
+• Ningún texto, letra, número, logotipo ni marca de agua.
+• Ninguna cara humana: solo la mano y el antebrazo.
 
 Genera el video ahora.
 ```
 
 ### `lesson-1-7` — ensinando o nome
 ```
-Genera UN video corto siguiendo estas instrucciones al pie de la letra.
+Genera UN video corto. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: video de 5 segundos, proporción 4:3, sin audio, pensado para repetirse en bucle.
-2. ACCIÓN, UNA SOLA: un cachorro distraído de espaldas gira la cabeza de golpe hacia la cámara, levantando las orejas.
-3. CÁMARA: fija. Sin zoom y sin movimiento de cámara.
-4. LUZ Y FONDO: luz natural, fondo simple y sin distracciones.
-5. NO INCLUYAS: ningún texto, letra, número, logotipo ni marca de agua.
+━━━ 1. FORMATO ━━━
+• Video realista de 5 segundos, proporción 4:3, sin audio.
+• Pensado para repetirse en bucle: el último cuadro debe parecerse al primero.
+
+━━━ 2. ACCIÓN, UNA SOLA ━━━
+• Un cachorro está de espaldas a la cámara, distraído, mirando hacia otro lado.
+• De golpe gira la cabeza hacia la cámara y levanta las orejas.
+• No pasa nada más en todo el clip.
+
+━━━ 3. ESCENARIO ━━━
+• El piso de madera clara de una sala luminosa, fondo desenfocado.
+
+━━━ 4. CÁMARA ━━━
+• Fija, al nivel del piso. Sin zoom, sin paneo, sin ningún movimiento de cámara.
+
+━━━ 5. LUZ ━━━
+• Luz natural de interior, clara y difusa.
+
+━━━ 6. NO INCLUYAS ━━━
+• Ningún texto, letra, número, logotipo ni marca de agua.
+• Ninguna persona en el encuadre.
 
 Genera el video ahora.
 ```
 
 ### Molde para as demais aulas
-Troque só a linha 2 por **uma única ação**:
+Troque só o bloco 2 por **uma única ação**:
 ```
-Genera UN video corto siguiendo estas instrucciones al pie de la letra.
+Genera UN video corto. Sigue cada punto al pie de la letra y no omitas ninguno.
 
-1. FORMATO: video de 6 segundos, proporción 4:3, sin audio, pensado para repetirse en bucle.
-2. ACCIÓN, UNA SOLA: <escribe aquí una sola acción, en una frase>
-3. CÁMARA: fija. Sin zoom y sin movimiento de cámara.
-4. LUZ Y FONDO: luz natural, fondo simple y sin distracciones.
-5. NO INCLUYAS: ningún texto, letra, número, logotipo ni marca de agua.
+━━━ 1. FORMATO ━━━
+• Video realista de 6 segundos, proporción 4:3, sin audio.
+• Pensado para repetirse en bucle: el último cuadro debe parecerse al primero.
+
+━━━ 2. ACCIÓN, UNA SOLA ━━━
+• <escribe aquí una sola acción, en una frase>
+• No pasa nada más en todo el clip.
+
+━━━ 3. ESCENARIO ━━━
+• El piso de una sala luminosa y ordenada, fondo desenfocado.
+
+━━━ 4. CÁMARA ━━━
+• Fija, al nivel del piso. Sin zoom, sin paneo, sin ningún movimiento de cámara.
+
+━━━ 5. LUZ ━━━
+• Luz natural de interior, suave y pareja.
+
+━━━ 6. NO INCLUYAS ━━━
+• Ningún texto, letra, número, logotipo ni marca de agua.
+• Ninguna cara humana.
 
 Genera el video ahora.
 ```
 
 ---
 
-# NOME E DESCRIÇÃO DOS PRODUTOS (checkout)
+# CHECKOUT
 
-Copie e cole nos campos da Hotmart ou Kiwify.
+Já existe uma imagem pronta em `assets/checkout-product.png` (1080×1080),
+montada a partir da tela real do app. Se preferir uma foto no lugar dela, use
+o bloco `checkout-product` da trilha A.
 
 ### Plano 1 — 7 dias · cobrar USD 1,99
 - **Nome:** `DogFlow — Plan de 7 días`
@@ -368,9 +1078,6 @@ concreto en el comportamiento de tu perro, te devolvemos el dinero.`
 
 > A garantia de 30 dias está escrita no paywall. Configure o mesmo prazo no
 > checkout — se divergir, a plataforma pode barrar o produto na revisão.
-
-### Imagem do produto
-`assets/checkout-product.png` — 1080×1080, 156 KB. Serve para os três planos.
 
 ---
 
