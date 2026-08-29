@@ -76,6 +76,7 @@ export type Dict = {
     perDay: string;
     weekly: string;
     total: string;
+    billed: string;
     cta: string;
     stat: string;
     whyHeadline: string;

@@ -291,6 +291,7 @@ export const pt: Dict = {
     perDay: "por dia",
     weekly: "por semana",
     total: "no total",
+    billed: "Você paga {amount} hoje",
     cta: "Quero o meu plano",
     stat: "98% dos nossos usuários percebem mudanças positivas no comportamento do cão já na primeira semana de treino.",
     whyHeadline: "Por que o DogFlow funciona",

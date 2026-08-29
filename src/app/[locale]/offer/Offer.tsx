@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { Cta } from "@/components/Cta";
 import { TimerBar, useCountdown } from "@/components/Countdown";
-import { type Dict } from "@/content";
+import { fill, type Dict } from "@/content";
 import {
   BRAND,
   CURRENCY,
@@ -147,6 +147,14 @@ export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
                       {CURRENCY} {money(price.perWeek)}
                     </span>{" "}
                     {plan.weeks > 1 ? dict.offer.weekly : dict.offer.total}
+                  </span>
+                  {/* The checkout charges the whole term, so say so here
+                      rather than letting the buyer discover it on the
+                      payment page. */}
+                  <span className="mt-0.5 block text-[11px] text-ink-faint">
+                    {fill(dict.offer.billed, {
+                      amount: `${CURRENCY} ${money(price.total)}`,
+                    })}
                   </span>
                 </span>
 

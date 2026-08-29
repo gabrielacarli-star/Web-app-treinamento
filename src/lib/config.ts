@@ -1,7 +1,7 @@
 import type { Locale } from "./types";
 
-export const LOCALES: Locale[] = ["pt", "es", "en"];
-export const DEFAULT_LOCALE: Locale = "pt";
+export const LOCALES: Locale[] = ["es", "pt", "en"];
+export const DEFAULT_LOCALE: Locale = "es";
 
 export const isLocale = (value: string): value is Locale =>
   (LOCALES as string[]).includes(value);

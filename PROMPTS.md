@@ -148,3 +148,66 @@ vídeo de **5 segundos**, 1:1, sem áudio:
 
 O importante é que o primeiro quadro do vídeo seja praticamente idêntico à
 imagem estática — assim dá para trocar imagem por vídeo sem refazer o teste.
+
+---
+
+## Imagem do produto no checkout (Hotmart / Kiwify)
+
+É a miniatura que aparece ao lado do preço na página de pagamento. Uma imagem
+serve para os três planos — o que muda é só o nome do produto.
+
+**Especificação técnica:** 1080×1080 px (1:1), PNG ou JPG, abaixo de 2 MB.
+Sem texto pequeno: no checkout ela aparece com uns 120 px de lado e qualquer
+texto miúdo vira borrão.
+
+### `checkout-product`
+> Ilustração vetorial plana (flat vector), traço arredondado e amigável, sem
+> sombras realistas. Paleta: fundo creme #F8F5F0, roxo lavanda #A48BF0, coral
+> #F2724F, verde-água #4FBFAE, contornos em azul-marinho escuro #2C2A44.
+> Composição: um celular visto de frente, levemente inclinado, com a tela
+> mostrando uma interface simples de app de treino (barra de progresso roxa e
+> três linhas de lista com marcas de check verde-água — sem texto legível). Ao
+> lado do celular, um cachorro simpático sentado e atento, olhando para a tela.
+> Composição centralizada, com margem generosa nas bordas. Sem texto, sem
+> letras, sem logo, sem marca d'água. Formato quadrado 1:1.
+
+Se quiser diferenciar visualmente os três planos, gere a mesma imagem três
+vezes trocando só a frase final por: "um pequeno selo circular coral no canto
+superior direito com o número 7" / "com o número 4" / "com o número 12".
+
+---
+
+## Nome e descrição dos produtos no checkout (espanhol)
+
+Copie e cole nos campos da Hotmart ou Kiwify.
+
+### Plano 1 — 7 dias
+- **Nome:** `DogFlow — Plan de 7 días`
+- **Descrição:** `Plan de entrenamiento personalizado para tu perro, según su
+  raza, su edad y sus problemas de comportamiento. Acceso completo por 7 días:
+  más de 70 clases cortas, más de 80 juegos y trucos, y guías de higiene,
+  salud y alimentación. 15 minutos al día bastan para ver progreso.`
+
+### Plano 2 — 4 semanas (o mais vendido)
+- **Nome:** `DogFlow — Plan de 4 semanas`
+- **Descrição:** `Plan de entrenamiento personalizado para tu perro, según su
+  raza, su edad y sus problemas de comportamiento. Acceso completo por 4
+  semanas: más de 70 clases cortas, más de 80 juegos y trucos, y guías de
+  higiene, salud y alimentación. El 98% de nuestros usuarios nota cambios
+  positivos ya en la primera semana.`
+
+### Plano 3 — 12 semanas
+- **Nome:** `DogFlow — Plan de 12 semanas`
+- **Descrição:** `Plan de entrenamiento personalizado para tu perro, según su
+  raza, su edad y sus problemas de comportamiento. Acceso completo por 12
+  semanas: más de 70 clases cortas, más de 80 juegos y trucos, y guías de
+  higiene, salud y alimentación. El plan completo para dejar atrás los
+  comportamientos no deseados y sostener el resultado.`
+
+### Garantia (mesma para os três)
+`Garantía de reembolso de 30 días. Si sigues el plan y no notas un cambio
+concreto en el comportamiento de tu perro, te devolvemos el dinero.`
+
+> A garantia de 30 dias está escrita no paywall. Configure o mesmo prazo no
+> checkout — se o checkout disser 7 dias e a página disser 30, a plataforma
+> pode barrar o produto na revisão.
