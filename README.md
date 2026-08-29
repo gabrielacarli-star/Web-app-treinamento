@@ -38,6 +38,14 @@ Import the repository and deploy. No build settings to change: Vercel detects
 Next.js on its own. Then set the environment variables below under
 **Settings → Environment Variables** and redeploy.
 
+**Set the project name to `dogflow` on the import screen.** The free domain is
+derived from the Vercel project name, not from the GitHub repository name, and
+Vercel pre-fills it from the repo. Left as-is it yields
+`web-app-treinamento.vercel.app`; changed to `dogflow` it yields
+`dogflow.vercel.app`, which is what the buyer-facing access guide points at. It
+can also be changed later under **Settings → General → Project Name**, but the
+domain changes with it, so any link already handed out breaks.
+
 ## Environment variables
 
 Copy `.env.example` to `.env.local` for local runs. All of them are optional —
@@ -98,6 +106,18 @@ Every placeholder carries a `data-slot` id, shown on the placeholder itself:
 - `lesson-<course>-<lesson>` — member-area lesson videos
 
 `PROMPTS.md` holds a ready-to-paste generation prompt for each one.
+
+## Buyer-facing files
+
+`assets/DogFlow-Guia-de-Acceso.pdf` is the Spanish access guide delivered as
+the product content on the checkout platform. It points at the URL in
+`ACCESS_URL` inside `assets/build-access-guide.py` — update that constant and
+re-run the script after the production domain is settled.
+
+Note that the member area has no authentication: `/[locale]/app` is reachable
+by anyone holding the link. That is fine while the offer is being validated,
+but it is not access control, and the guide should not be described to buyers
+as a private login until it is.
 
 To fill a slot, replace the `<ImageSlot>` or `<VideoSlot>` element with the real
 asset. The slots keep a fixed aspect ratio, so nothing below them shifts.
