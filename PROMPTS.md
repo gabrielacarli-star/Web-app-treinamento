@@ -1,183 +1,162 @@
 # Prompts de imagem e vídeo — DogFlow
 
-Cada espaço reservado no app tem um **id** (aparece escrito dentro do próprio
-placeholder). Aqui está o prompt pronto para gerar o arquivo de cada id.
+Cada espaço reservado no app tem um **id**, escrito dentro do próprio
+placeholder. Aqui está o prompt de cada id. Gere, me mande, eu encaixo.
 
-Gere as imagens no ChatGPT (ou outro gerador) e me mande de volta — eu troco os
-placeholders pelos arquivos reais.
+## Como usar (importante)
 
----
+**Gere tudo numa conversa só.** Aprove a primeira imagem e depois peça as
+seguintes com *"mesma arte, mesmo estilo, agora: [cena]"*. É isso que faz o
+conjunto parecer da mesma marca. Prompt solto em conversa nova sai diferente
+toda vez, por melhor que seja o prompt.
 
-## Antes de tudo: o estilo da marca
+**Escolha uma trilha e não misture.** Foto ou ilustração — as duas funcionam,
+mas juntas o funil fica remendado.
 
-Cole este bloco **no começo de cada prompt de imagem**. É ele que faz todas as
-imagens parecerem da mesma marca em vez de um mosaico de estilos diferentes.
+- **Foto** sai bonita quase sempre e costuma converter mais em tráfego frio.
+  É a que eu recomendo para começar a testar.
+- **Ilustração** é o que a oferta de referência usa. Fica mais "app", mas dá
+  mais trabalho para sair consistente.
 
-> Ilustração vetorial plana (flat vector), traço arredondado e amigável, sem
-> sombras realistas, sem gradiente pesado. Paleta: fundo creme #F8F5F0, roxo
-> lavanda #A48BF0, coral #F2724F, verde-água #4FBFAE, amarelo #F5EC3D,
-> contornos em azul-marinho escuro #2C2A44. Cachorro com expressão simpática e
-> levemente cômica, proporções fofas, cabeça grande. Composição centralizada e
-> limpa, com bastante espaço vazio ao redor. Sem texto, sem letras, sem logo,
-> sem marca d'água. Formato quadrado 1:1.
-
-**Especificação técnica:** 1080×1080 px, PNG, fundo creme sólido (não
-transparente).
+**Se uma imagem sair ruim,** não reescreva o prompt inteiro. Peça o ajuste em
+uma frase: *"o cachorro está grande demais, afasta a câmera"*. Corrigir é mais
+eficaz do que recomeçar.
 
 ---
 
-## Imagens da landing page (uma por ângulo de anúncio)
+# Trilha A — Foto (recomendada)
 
-São as 5 variantes que rodam em `?v=`. Cada anúncio deve cair na landing com a
-imagem do mesmo problema que o criativo prometeu resolver.
+Todas em formato quadrado.
+
+## Landing (uma por ângulo de anúncio)
 
 ### `hero-leash` — passeio sem puxar
-> [estilo] Um cachorro de porte médio puxando com força uma guia esticada na
-> diagonal, patas dianteiras no ar, língua para fora, expressão de empolgação
-> travessa. A guia sai do quadro para a esquerda. Um pequeno ícone circular
-> coral com um "X" branco flutua sobre a guia esticada, indicando que esse é o
-> comportamento a corrigir.
+> Foto de um cachorro de porte médio puxando forte a guia durante um passeio na
+> calçada, corpo inclinado para frente, boca aberta de empolgação. A mão do
+> tutor aparece esticada no canto do quadro segurando a guia. Luz natural de
+> fim de tarde, fundo desfocado. Enquadramento quadrado, cachorro à direita.
 
 ### `hero-potty` — xixi no lugar certo
-> [estilo] Um filhote sentado com ar de culpado ao lado de uma pequena poça no
-> chão de madeira clara, orelhas baixas, olhos grandes olhando para cima. Ao
-> lado, um tapete higiênico azul-claro limpo e vazio. Ícone circular coral com
-> "X" branco sobre a poça.
+> Foto de um filhote sentado em um piso de madeira clara em uma sala arejada,
+> orelhas baixas e olhar culpado voltado para cima, para a câmera. Um tapete
+> higiênico claro aparece desfocado ao fundo. Luz suave de janela, clima
+> doméstico e limpo. Enquadramento quadrado.
 
 ### `hero-biting` — fim das mordidas
-> [estilo] Um filhote pequeno mordendo de brincadeira a mão de uma pessoa
-> (mostrar só a mão e o punho, sem rosto, pele em tom neutro), com estrelinhas
-> de "ai!" em coral saindo do ponto da mordida. Expressão do filhote é
-> divertida, não agressiva.
+> Foto de um filhote brincando de morder de leve a mão de uma pessoa, em cima
+> de um tapete claro. Enquadrar só a mão e o antebraço, sem mostrar o rosto. O
+> filhote está claramente brincando, com o corpo relaxado. Luz natural suave,
+> enquadramento quadrado.
 
 ### `hero-behaviour` — comportamento indesejado
-> [estilo] Uma sala de estar bagunçada vista de frente: almofada rasgada com
-> penas no ar, um chinelo mordido no chão, e um cachorro no centro sentado com
-> a cara de "não fui eu", orelhas para trás e uma pena grudada no focinho.
+> Foto de uma sala de estar com uma almofada rasgada e enchimento espalhado
+> pelo chão, e um cachorro sentado no meio da bagunça olhando direto para a
+> câmera com ar de inocência. Luz de dia, ambiente comum de casa.
+> Enquadramento quadrado, cachorro centralizado.
 
 ### `hero-alone` — filhote sozinho em casa
-> [estilo] Um filhote sozinho sentado atrás de uma porta fechada, visto de
-> frente, com uma expressão triste e esperançosa. Luz suave vindo de baixo da
-> porta. Ambiente simples, poucos elementos.
+> Foto de um filhote sentado sozinho no chão atrás de uma porta fechada,
+> olhando para cima com expressão de espera. Faixa de luz vindo por baixo da
+> porta. Ambiente silencioso e vazio, poucos objetos. Enquadramento quadrado.
 
----
-
-## Imagens dentro do quiz
+## Dentro do quiz
 
 ### `quiz-proof_breed` — prova social por raça
-Aparece logo depois da pergunta de raça, com o texto "mais de 150 mil cães da
-raça X já treinaram com a gente".
+> Foto de três cachorros de raças diferentes sentados lado a lado em um parque,
+> todos atentos e olhando na mesma direção, bem comportados. Luz natural de
+> manhã, grama desfocada ao fundo. Enquadramento quadrado, os três centralizados.
 
-> [estilo] Três cachorros de raças diferentes sentados lado a lado, alinhados e
-> obedientes, todos olhando para a frente com expressão orgulhosa. Acima deles,
-> três pequenas marcas de "check" em verde-água #4FBFAE. Composição horizontal
-> equilibrada dentro do quadrado.
+### `quiz-heard_you` — acolhimento
+> Foto de uma pessoa agachada abraçando o próprio cachorro em um parque, os
+> dois de perfil, momento calmo e afetuoso. Enquadrar do peito para baixo, sem
+> mostrar o rosto da pessoa. Luz dourada de fim de tarde. Enquadramento quadrado.
 
-### `quiz-heard_you` — "entendemos o seu caso"
-Tela de acolhimento no meio do quiz, depois das perguntas de problema.
-
-> [estilo] Uma pessoa agachada de lado abraçando um cachorro, ambos de perfil,
-> em um momento calmo e afetuoso. Mostrar a pessoa de forma genérica e
-> estilizada, sem rosto detalhado. Ao redor, um contorno suave em formato de
-> coração em roxo lavanda #A48BF0, bem discreto.
-
----
-
-## Imagem da tela de plano pronto
+## Plano pronto
 
 ### `plan-ready` — o plano ficou pronto
-> [estilo] Um cachorro sentado ereto e atento, com uma prancheta ou tablet
-> flutuando ao lado mostrando uma lista com três marcas de check em verde-água.
-> Pequenos confetes em roxo lavanda e amarelo ao fundo, poucos e discretos.
-> Clima de conquista, não de festa exagerada.
+> Foto de um cachorro sentado ereto e atento em uma sala clara, olhando direto
+> para a câmera com as orelhas levantadas, expressão de quem está pronto. Luz
+> natural, fundo simples e desfocado. Enquadramento quadrado, bastante espaço
+> vazio acima do cachorro.
 
 ---
 
-## Vídeos das aulas (área de membros)
+# Trilha B — Ilustração
 
-Os ids são `lesson-<curso>-<aula>`. Curso 1 é "Filhote — curso básico".
-São vídeos curtos, de **5 a 10 segundos**, em loop, sem áudio e sem texto.
+Mesmo enquadramento e mesmas cenas da trilha A. Troque só a primeira frase.
 
-### Estilo base dos vídeos
-Cole no começo de cada prompt de vídeo:
+**Frase de estilo** (usar no lugar de "Foto de..."):
 
-> Animação 2D vetorial plana, mesma paleta da marca (creme #F8F5F0, roxo
-> lavanda #A48BF0, coral #F2724F, verde-água #4FBFAE, contorno azul-marinho
-> #2C2A44), fundo amarelo #F5EC3D sólido. Câmera fixa, sem zoom e sem
-> movimento de câmera. Movimento suave e em loop perfeito. Sem texto, sem
-> legenda, sem logo. 6 segundos, proporção 4:3.
+> Ilustração vetorial plana de [cena], formas arredondadas e simpáticas,
+> contorno grosso, paleta em lavanda e creme com um toque de coral, fundo creme
+> liso, estilo de tela de boas-vindas de aplicativo. Enquadramento quadrado,
+> margens generosas.
 
-**Especificação técnica:** MP4, 4:3, 1200×900 px, sem áudio, 6 s em loop.
+Exemplo montado, para o `hero-leash`:
+
+> Ilustração vetorial plana de um cachorro puxando forte a guia durante um
+> passeio, corpo inclinado para frente e boca aberta de empolgação, com a mão
+> do tutor esticada no canto do quadro. Formas arredondadas e simpáticas,
+> contorno grosso, paleta em lavanda e creme com um toque de coral, fundo creme
+> liso, estilo de tela de boas-vindas de aplicativo. Enquadramento quadrado,
+> margens generosas.
+
+Se sair com aparência de clipart antigo, acrescente ao final: *"ilustração
+editorial moderna, proporções elegantes"*.
+
+---
+
+# Vídeos das aulas
+
+Ids `lesson-<curso>-<aula>`. Curso 1 é "Filhote — curso básico". São clipes de
+**5 a 10 segundos**, sem áudio, para rodar em loop.
+
+Regra que vale mais que o prompt: **uma ação só por clipe**. Pedir três
+momentos em seis segundos é o que produz aquele vídeo derretido.
 
 ### `lesson-1-1` — parar de morder na brincadeira
-> [estilo vídeo] Um filhote morde de leve a mão de uma pessoa; a mão se afasta
-> e para de brincar; o filhote inclina a cabeça, confuso; a mão volta e faz um
-> carinho. Ciclo de quatro momentos, bem devagar.
+> Um filhote morde de leve a mão de uma pessoa e a mão se afasta devagar.
+> Câmera parada, luz natural de sala. 6 segundos.
 
-### `lesson-1-2` — treino de xixi no lugar certo
-> [estilo vídeo] Um filhote caminha até um tapete higiênico, senta em cima dele
-> e olha para cima esperando aprovação; uma marca de check verde-água aparece e
-> some suavemente acima dele.
+### `lesson-1-2` — xixi no lugar certo
+> Um filhote caminha até um tapete higiênico claro e senta em cima dele.
+> Câmera parada, sala clara. 6 segundos.
 
 ### `lesson-1-4` — jogo do "pega e solta"
-> [estilo vídeo] Um filhote segura um brinquedo de corda na boca; uma mão se
-> aproxima com um petisco; o filhote solta a corda; a mão entrega o petisco.
+> Um filhote solta um brinquedo de corda da boca quando uma mão se aproxima
+> com um petisco. Câmera parada. 6 segundos.
 
 ### `lesson-1-7` — ensinando o nome
-> [estilo vídeo] Um filhote de costas, distraído; ele vira a cabeça de repente
-> na direção da câmera com as orelhas levantando; pequenas ondas sonoras em
-> roxo lavanda aparecem do lado esquerdo do quadro.
+> Um filhote distraído de costas vira a cabeça de repente para a câmera,
+> orelhas levantando. Câmera parada. 5 segundos.
 
-### Modelo para as demais aulas
-Para qualquer outra aula, use este molde trocando só a ação:
-
-> [estilo vídeo] Um cachorro executando **<a ação da aula, em uma frase curta e
-> concreta>**, em três momentos claros: antes, durante e o resultado. Uma marca
-> de check verde-água aparece no final.
+### Molde para as demais
+> [uma única ação, em uma frase]. Câmera parada, luz natural. 6 segundos.
 
 ---
 
-## Se quiser vídeo na landing depois
+# Imagem do produto no checkout
 
-Quando for testar landing com vídeo em vez de imagem, o slot `hero-*` vira
-vídeo de **5 segundos**, 1:1, sem áudio:
+Miniatura ao lado do preço na Hotmart ou Kiwify. Uma serve para os três planos.
 
-> [estilo vídeo] O mesmo cachorro e a mesma cena descrita no prompt de imagem
-> `hero-<variante>`, com um único movimento em loop: <o comportamento problema
-> acontecendo uma vez>. Proporção 1:1, 5 segundos, sem áudio, loop perfeito.
-
-O importante é que o primeiro quadro do vídeo seja praticamente idêntico à
-imagem estática — assim dá para trocar imagem por vídeo sem refazer o teste.
-
----
-
-## Imagem do produto no checkout (Hotmart / Kiwify)
-
-É a miniatura que aparece ao lado do preço na página de pagamento. Uma imagem
-serve para os três planos — o que muda é só o nome do produto.
-
-**Especificação técnica:** 1080×1080 px (1:1), PNG ou JPG, abaixo de 2 MB.
-Sem texto pequeno: no checkout ela aparece com uns 120 px de lado e qualquer
-texto miúdo vira borrão.
+**1080×1080, abaixo de 2 MB.** No checkout ela aparece com uns 120 px de lado,
+então nada de detalhe fino.
 
 ### `checkout-product`
-> Ilustração vetorial plana (flat vector), traço arredondado e amigável, sem
-> sombras realistas. Paleta: fundo creme #F8F5F0, roxo lavanda #A48BF0, coral
-> #F2724F, verde-água #4FBFAE, contornos em azul-marinho escuro #2C2A44.
-> Composição: um celular visto de frente, levemente inclinado, com a tela
-> mostrando uma interface simples de app de treino (barra de progresso roxa e
-> três linhas de lista com marcas de check verde-água — sem texto legível). Ao
-> lado do celular, um cachorro simpático sentado e atento, olhando para a tela.
-> Composição centralizada, com margem generosa nas bordas. Sem texto, sem
-> letras, sem logo, sem marca d'água. Formato quadrado 1:1.
+> Foto de um celular apoiado em uma mesa clara, ao lado de um cachorro
+> simpático sentado e olhando para a tela. Luz natural suave, fundo claro e
+> desfocado. Enquadramento quadrado, os dois centralizados com margem larga.
 
-Se quiser diferenciar visualmente os três planos, gere a mesma imagem três
-vezes trocando só a frase final por: "um pequeno selo circular coral no canto
-superior direito com o número 7" / "com o número 4" / "com o número 12".
+Na trilha de ilustração, troque a primeira frase pela frase de estilo da
+trilha B.
+
+Se quiser diferenciar os três planos, gere três vezes e peça no fim:
+*"agora com um selo redondo coral no canto superior direito com o número 7"*
+(depois 4, depois 12).
 
 ---
 
-## Nome e descrição dos produtos no checkout (espanhol)
+# Nome e descrição dos produtos (espanhol)
 
 Copie e cole nos campos da Hotmart ou Kiwify.
 
@@ -209,5 +188,4 @@ Copie e cole nos campos da Hotmart ou Kiwify.
 concreto en el comportamiento de tu perro, te devolvemos el dinero.`
 
 > A garantia de 30 dias está escrita no paywall. Configure o mesmo prazo no
-> checkout — se o checkout disser 7 dias e a página disser 30, a plataforma
-> pode barrar o produto na revisão.
+> checkout — se divergir, a plataforma pode barrar o produto na revisão.
