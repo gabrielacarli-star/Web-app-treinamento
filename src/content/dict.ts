@@ -1,0 +1,112 @@
+import type { Locale, StepCopy } from "@/lib/types";
+
+export type LandingVariant = { id: string; pre: string; highlight: string };
+
+export type Faq = { q: string; a: string };
+export type Testimonial = { handle: string; title: string; body: string };
+export type Lesson = { title: string; body?: string };
+export type Course = { title: string; subtitle: string; lessons: Lesson[] };
+
+export type Dict = {
+  code: Locale;
+  htmlLang: string;
+  name: string;
+  meta: { title: string; description: string };
+  common: {
+    continue: string;
+    back: string;
+    skip: string;
+    none: string;
+    selectAll: string;
+    of: string;
+    yourDog: string;
+  };
+  sections: { dog: string; behaviour: string; training: string };
+  landing: {
+    variants: LandingVariant[];
+    consent: string;
+    privacy: string;
+    terms: string;
+    cta: string;
+  };
+  steps: Record<string, StepCopy>;
+  breeds: { search: string; common: string; unknown: string; list: string[] };
+  prediction: {
+    eyebrow: string;
+    headlinePre: string;
+    headlineHighlight: string;
+    headlinePost: string;
+    now: string;
+    nowItems: string[];
+    goal: string;
+    goalItems: string[];
+  };
+  building: { headline: string; tasks: string[]; testimonial: Testimonial };
+  planReady: {
+    headline: string;
+    profile: string;
+    cta: string;
+    labels: { name: string; breed: string; age: string };
+  };
+  email: {
+    headline: string;
+    subhead: string;
+    label: string;
+    placeholder: string;
+    cta: string;
+    privacy: string;
+    invalid: string;
+  };
+  optin: { headline: string; yes: string; no: string };
+  discount: {
+    headline: string;
+    subhead: string;
+    cta: string;
+    off: string;
+    wonHeadline: string;
+    wonSubhead: string;
+    wonCta: string;
+  };
+  offer: {
+    timer: string;
+    promoTitle: string;
+    promoBadge: string;
+    planNames: Record<string, string>;
+    popular: string;
+    perDay: string;
+    weekly: string;
+    total: string;
+    cta: string;
+    stat: string;
+    whyHeadline: string;
+    why: string[];
+    guaranteeEyebrow: string;
+    guaranteeTitle: string;
+    guaranteeBody: string;
+    faqHeadline: string;
+    faq: Faq[];
+    testimonialsHeadline: string;
+    testimonials: Testimonial[];
+    contact: string;
+    expired: string;
+    restart: string;
+  };
+  success: {
+    headline: string;
+    body: string;
+    cta: string;
+    placeholderNote: string;
+  };
+  member: {
+    tabs: { course: string; training: string; clicker: string };
+    coursesHeadline: string;
+    inProgress: string;
+    courses: Course[];
+    lessonLabel: string;
+    stepLabel: string;
+    backToCourse: string;
+    previewNote: string;
+  };
+  videoPlaceholder: { label: string; hint: string };
+  imagePlaceholder: string;
+};

@@ -1,0 +1,23 @@
+import { BRAND } from "@/lib/config";
+
+export function Logo({ compact = false }: { compact?: boolean }) {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden="true">
+        <rect width="32" height="32" rx="10" fill="#A48BF0" />
+        <g fill="#FFFFFF">
+          <ellipse cx="11.4" cy="12.2" rx="2.5" ry="3.2" />
+          <ellipse cx="20.6" cy="12.2" rx="2.5" ry="3.2" />
+          <ellipse cx="7" cy="18.4" rx="2.2" ry="2.8" />
+          <ellipse cx="25" cy="18.4" rx="2.2" ry="2.8" />
+          <path d="M16 16.6c3.6 0 6.4 2.9 6.4 5.7 0 2.3-1.9 3.5-4.2 3.5-1 0-1.6-.4-2.2-.4s-1.2.4-2.2.4c-2.3 0-4.2-1.2-4.2-3.5 0-2.8 2.8-5.7 6.4-5.7Z" />
+        </g>
+      </svg>
+      {!compact && (
+        <span className="text-[17px] font-bold tracking-[-0.01em] text-ink">
+          {BRAND.name}
+        </span>
+      )}
+    </span>
+  );
+}
