@@ -4,13 +4,23 @@ import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { VideoSlot } from "@/components/Slots";
 import type { Dict } from "@/content";
+import type { Locale } from "@/lib/types";
+import { SignOutButton } from "./SignOutButton";
 
 type View =
   | { name: "courses" }
   | { name: "lessons"; course: number }
   | { name: "lesson"; course: number; lesson: number };
 
-export function MemberArea({ dict }: { dict: Dict }) {
+type Props = {
+  dict: Dict;
+  /** Shown before auth is configured: the area is open and says so. */
+  preview?: boolean;
+  account?: { email: string; signOut: string };
+  locale?: Locale;
+};
+
+export function MemberArea({ dict, preview, account, locale }: Props) {
   const [view, setView] = useState<View>({ name: "courses" });
   const { courses } = dict.member;
 
@@ -38,9 +48,11 @@ export function MemberArea({ dict }: { dict: Dict }) {
       </header>
 
       <main className="flex-1 px-5 pb-24 pt-4">
-        <p className="mb-4 rounded-xl2 bg-violet-50 px-3 py-2 text-center text-[12px] text-violet-700">
-          {dict.member.previewNote}
-        </p>
+        {preview && (
+          <p className="mb-4 rounded-xl2 bg-violet-50 px-3 py-2 text-center text-[12px] text-violet-700">
+            {dict.member.previewNote}
+          </p>
+        )}
 
         {view.name === "courses" && (
           <>
@@ -125,7 +137,7 @@ export function MemberArea({ dict }: { dict: Dict }) {
               {dict.member.stepLabel} 1.
             </p>
             <p className="mt-1 text-[15px] leading-relaxed text-ink-soft">
-              {dict.member.previewNote}
+              {dict.member.stepPlaceholder}
             </p>
 
             <div className="mt-5">
@@ -139,6 +151,13 @@ export function MemberArea({ dict }: { dict: Dict }) {
           </article>
         )}
       </main>
+
+      {account && locale && (
+        <div className="border-t border-line bg-cream px-5 py-3 text-center">
+          <p className="text-[12px] text-ink-faint">{account.email}</p>
+          <SignOutButton label={account.signOut} locale={locale} />
+        </div>
+      )}
 
       <nav className="sticky bottom-0 z-30 flex border-t border-line bg-surface">
         {[dict.member.tabs.course, dict.member.tabs.training, dict.member.tabs.clicker].map(

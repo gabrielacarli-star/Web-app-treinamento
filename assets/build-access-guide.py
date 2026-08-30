@@ -9,7 +9,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 
 ACCESS_URL = "https://dogflow.vercel.app/es"
-SUPPORT_EMAIL = "oi@dogflow.app"
+SUPPORT_EMAIL = "eduardosnl1997@gmail.com"
 OUT = "assets/DogFlow-Guia-de-Acceso.pdf"
 
 CREAM = HexColor("#F8F5F0")
@@ -124,9 +124,9 @@ y = para("Tu acceso ya está activo. Son tres pasos y toma menos de un minuto.",
 steps = [
     ("1", "Abre el enlace de la aplicación",
      "Entra desde el navegador de tu celular o computadora:"),
-    ("2", "Agrégala a tu pantalla de inicio",
-     "En el menú del navegador elige «Agregar a pantalla de inicio». "
-     "Así la abres como cualquier otra aplicación, sin buscar el enlace de nuevo."),
+    ("2", "Escribe el correo de tu compra",
+     "Usa el mismo correo con el que pagaste. Te enviamos un enlace de acceso "
+     "y entras con un toque, sin contraseña. El enlace vale por una hora."),
     ("3", "Empieza por el primer curso",
      "Entra en «Cachorro — curso básico» o «Perro adulto — curso básico», "
      "según la edad de tu perro, y sigue las clases en orden."),
@@ -154,9 +154,9 @@ c.setFillColor(HexColor("#FFFFFF"))
 c.roundRect(M, y - 78, W - 2 * M, 72, 12, fill=1, stroke=0)
 c.setFillColor(TEAL)
 c.setFont("Helvetica-Bold", 11)
-c.drawString(M + 18, y - 26, "Un consejo antes de empezar")
-para("Con 15 minutos al día alcanza. Es mejor entrenar poco y todos los días "
-     "que una hora un solo día de la semana.",
+c.drawString(M + 18, y - 26, "¿No llega el correo?")
+para("Revisa la carpeta de spam y confirma que escribiste el mismo correo de "
+     "la compra. Si aun así no llega, escríbenos y lo resolvemos.",
      M + 18, y - 44, W - 2 * M - 36, size=10.5, lead=14)
 footer(2)
 c.showPage()

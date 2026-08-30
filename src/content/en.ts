@@ -345,6 +345,23 @@ export const en: Dict = {
     expired: "Your offer has expired.",
     restart: "Reopen my offer",
   },
+  login: {
+    headline: "Sign in to DogFlow",
+    subhead: "Enter the e-mail you used at checkout. We'll send an access link — no password.",
+    label: "E-mail",
+    placeholder: "you@example.com",
+    cta: "Send access link",
+    sending: "Sending...",
+    sentHeadline: "Link sent",
+    sentBody: "Open your e-mail and tap the link to sign in. It's valid for one hour.",
+    invalid: "Please enter a valid e-mail.",
+    noAccessHeadline: "We couldn't find your purchase",
+    noAccessBody: "This e-mail has no active plan. If you bought with a different e-mail, sign in with that one. If you think this is a mistake, get in touch.",
+    noAccessCta: "See the plans",
+    signedInAs: "Signed in as",
+    signOut: "Sign out",
+    failed: "We couldn't send the link. Please try again in a moment.",
+  },
   success: {
     headline: "You're all set!",
     body: "We've e-mailed you the next steps. In the meantime, take a look at what's inside DogFlow.",
@@ -428,6 +445,8 @@ export const en: Dict = {
     backToCourse: "Back",
     previewNote:
       "Preview of the member area. Videos go into the reserved slots below.",
+    stepPlaceholder:
+      "The step-by-step for this lesson goes here, alongside the video below.",
   },
   videoPlaceholder: {
     label: "Reserved video slot",

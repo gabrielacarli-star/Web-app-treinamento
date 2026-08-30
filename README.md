@@ -114,10 +114,53 @@ the product content on the checkout platform. It points at the URL in
 `ACCESS_URL` inside `assets/build-access-guide.py` — update that constant and
 re-run the script after the production domain is settled.
 
-Note that the member area has no authentication: `/[locale]/app` is reachable
-by anyone holding the link. That is fine while the offer is being validated,
-but it is not access control, and the guide should not be described to buyers
-as a private login until it is.
+## Access control
+
+The member area is gated as soon as `NEXT_PUBLIC_SUPABASE_URL` is set. Without
+it the app runs exactly as before, open at `/[locale]/app`, so the funnel stays
+walkable before Supabase is configured.
+
+The flow:
+
+1. The buyer pays on the checkout platform.
+2. The platform posts to `/api/webhooks/hotmart`, which verifies the `hottok`,
+   records the raw delivery, and writes a row in `purchases` keyed by the
+   buyer's e-mail.
+3. The buyer opens `/[locale]/login`, enters that same e-mail and receives a
+   magic link. No password exists to be forgotten or leaked.
+4. `/[locale]/app` requires both a session and a purchase that is `active` and
+   not past `expires_at`. Anything else redirects to the login or shows the
+   "no purchase found" screen.
+
+Refunds, chargebacks and cancellations arrive as webhook events too and flip
+the row's status, which revokes access on the buyer's next request.
+
+E-mail is the join key because it is the only stable identifier the checkout
+platform and the login have in common. A buyer who pays with one address and
+signs in with another will not be recognised — the login screen says so, and
+the guide tells them to use the purchase e-mail.
+
+### Schema
+
+`supabase/migrations/` holds the SQL as applied. Two tables:
+
+- `purchases` — RLS on. A signed-in user can read only rows whose `email`
+  matches their own JWT claim. There is no insert, update or delete policy at
+  all, so writes are possible only with the service-role key.
+- `webhook_events` — every delivery stored verbatim before it is interpreted.
+  RLS on with no policies, so it is service-role only. This is what makes a
+  mis-parsed payload recoverable.
+
+Verified by simulating each caller in Postgres: anonymous sees zero rows, a
+signed-in user with a different e-mail sees zero, and the buyer sees their own.
+
+### Webhook payload shape
+
+The checkout platform's payload varies by version and event, and its developer
+docs were unreachable from the build environment, so the handler reads the
+e-mail, transaction, product and offer from several candidate paths rather than
+one hardcoded shape. **Check `webhook_events` after the first real sale** and
+tighten the paths to match what actually arrives.
 
 To fill a slot, replace the `<ImageSlot>` or `<VideoSlot>` element with the real
 asset. The slots keep a fixed aspect ratio, so nothing below them shifts.

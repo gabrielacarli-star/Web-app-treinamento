@@ -92,6 +92,23 @@ export type Dict = {
     expired: string;
     restart: string;
   };
+  login: {
+    headline: string;
+    subhead: string;
+    label: string;
+    placeholder: string;
+    cta: string;
+    sending: string;
+    sentHeadline: string;
+    sentBody: string;
+    invalid: string;
+    noAccessHeadline: string;
+    noAccessBody: string;
+    noAccessCta: string;
+    signedInAs: string;
+    signOut: string;
+    failed: string;
+  };
   success: {
     headline: string;
     body: string;
@@ -107,6 +124,7 @@ export type Dict = {
     stepLabel: string;
     backToCourse: string;
     previewNote: string;
+    stepPlaceholder: string;
   };
   videoPlaceholder: { label: string; hint: string };
   imagePlaceholder: string;
