@@ -38,19 +38,35 @@ body {
            active:scale-[0.99] hover:border-violet-300 hover:bg-violet-50;
   }
 
+  /* The hover variants on .option-card carry a pseudo-class, so they outrank
+     a plain background here. The selected state has to restate them or a
+     hovered selection reads as unselected — white label on a pale ground. */
   .option-card-selected {
-    @apply animate-pop border-violet-500 bg-violet-100 text-violet-700
-           shadow-[0_4px_16px_rgba(116,64,232,0.20)] ring-2 ring-violet-500;
+    @apply animate-pop border-violet-600 bg-violet-500 text-white
+           shadow-[0_6px_20px_rgba(124,45,255,0.42)] ring-2 ring-violet-600
+           hover:border-violet-600 hover:bg-violet-600;
   }
 
   .cta {
-    @apply flex w-full items-center justify-center rounded-pill px-6 py-4
-           text-[17px] font-semibold text-white transition
-           bg-gradient-to-r from-violet-500 to-violet-600
-           animate-cta-glow
-           hover:from-violet-600 hover:to-violet-700 active:scale-[0.99]
+    @apply relative flex w-full items-center justify-center overflow-hidden
+           rounded-pill px-6 py-4 text-[17px] font-bold tracking-[0.01em]
+           text-white transition
+           bg-gradient-to-r from-violet-500 via-violet-400 to-violet-600
+           animate-cta-blink
+           hover:from-violet-600 hover:to-violet-700 active:scale-[0.98]
            disabled:animate-none disabled:cursor-not-allowed disabled:bg-none
            disabled:bg-violet-100 disabled:text-violet-300 disabled:shadow-none;
+  }
+
+  /* Light sweep across the button. Sits above the fill, below the label. */
+  .cta:not(:disabled)::after {
+    content: "";
+    @apply pointer-events-none absolute inset-y-0 w-1/3 animate-shimmer
+           bg-gradient-to-r from-transparent via-white/45 to-transparent;
+  }
+
+  .cta > * {
+    @apply relative z-10;
   }
 
   .cta-ghost {

@@ -118,9 +118,10 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
 
           <div className="mt-5 space-y-2.5">
             {step.type === "single" &&
-              step.options?.map((optionId) => (
+              step.options?.map((optionId, index) => (
                 <OptionCard
                   key={optionId}
+                  tone={index}
                   emoji={emojiFor(step.id, optionId)}
                   label={fill(copy.options?.[optionId] ?? optionId, vars)}
                   selected={selected === optionId}
@@ -130,9 +131,10 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
 
             {step.type === "multi" && (
               <>
-                {step.options?.map((optionId) => (
+                {step.options?.map((optionId, index) => (
                   <OptionCard
                     key={optionId}
+                    tone={index}
                     multi
                     emoji={emojiFor(step.id, optionId)}
                     label={fill(copy.options?.[optionId] ?? optionId, vars)}
@@ -200,10 +202,10 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
                       type="button"
                       onClick={() => setAnswer(step.id, String(value))}
                       aria-label={String(value)}
-                      className={`h-12 flex-1 rounded-xl2 border text-[15px] font-semibold transition ${
+                      className={`h-14 flex-1 rounded-xl2 border-2 text-[16px] font-bold transition ${
                         selected === String(value)
-                          ? "border-violet-400 bg-violet-400 text-white"
-                          : "border-line bg-surface text-ink-soft hover:border-violet-300"
+                          ? "animate-pop border-violet-600 bg-violet-500 text-white shadow-[0_6px_20px_rgba(124,45,255,0.42)]"
+                          : "border-line bg-surface text-ink-soft hover:border-violet-300 hover:bg-violet-50"
                       }`}
                     >
                       {value}
