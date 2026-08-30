@@ -1,14 +1,25 @@
 # -*- coding: utf-8 -*-
 """Builds the Spanish access guide handed to the buyer after checkout.
 
-The app URL is read from ACCESS_URL below — update it after deploying and
-re-run this script to refresh the PDF.
+Usage:
+    python3 assets/build-access-guide.py https://real-domain.vercel.app/es
+
+The URL is REQUIRED as a command-line argument on purpose. This file is
+what a real buyer downloads after paying, so there is no fallback domain
+to silently reuse if you forget to pass one — a wrong or placeholder URL
+here sends a paying customer to the wrong site or a dead link.
 """
+import sys
+
 from reportlab.lib.colors import HexColor
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 
-ACCESS_URL = "https://dogflow.vercel.app/es"
+if len(sys.argv) != 2 or not sys.argv[1].startswith("http"):
+    print(__doc__)
+    sys.exit(1)
+
+ACCESS_URL = sys.argv[1].rstrip("/")
 SUPPORT_EMAIL = "eduardosnl1997@gmail.com"
 OUT = "assets/DogFlow-Guia-de-Acceso.pdf"
 

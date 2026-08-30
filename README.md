@@ -118,9 +118,22 @@ illustration you want to A/B against.
 ## Buyer-facing files
 
 `assets/DogFlow-Guia-de-Acceso.pdf` is the Spanish access guide delivered as
-the product content on the checkout platform. It points at the URL in
-`ACCESS_URL` inside `assets/build-access-guide.py` — update that constant and
-re-run the script after the production domain is settled.
+the product content on the checkout platform. Regenerate it with:
+
+```
+python3 assets/build-access-guide.py https://<real-domain>.vercel.app/es
+```
+
+The URL is a required argument, not a stored constant: this file is what a
+real buyer downloads after paying, so the script refuses to run without one
+rather than risk quietly reusing a stale or wrong domain.
+
+**Before pointing any live traffic at this offer**, confirm the production
+domain in three places: this PDF, the thank-you-page URL set on each of the
+three Hotmart offers, and any ad pointing at the funnel. A `.vercel.app`
+subdomain is global across all Vercel accounts, not reserved per project —
+a short name like `dogflow` can already belong to someone else, so verify the
+actual assigned domain in the Vercel dashboard rather than assuming it.
 
 ## Access control
 
