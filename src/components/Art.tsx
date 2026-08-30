@@ -16,7 +16,7 @@ export function Art({
   return (
     <div className="relative aspect-square w-full overflow-hidden rounded-xl2">
       <Image
-        src={`/art/${id}.png`}
+        src={`/art/${id}.jpg`}
         alt={alt}
         fill
         sizes="(max-width: 432px) 100vw, 432px"
