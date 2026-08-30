@@ -186,5 +186,35 @@ e-mail, transaction, product and offer from several candidate paths rather than
 one hardcoded shape. **Check `webhook_events` after the first real sale** and
 tighten the paths to match what actually arrives.
 
+## Abandoned-lead recovery emails
+
+`src/app/api/cron/recover-leads/route.ts` fires on a schedule (`vercel.json`
+sets it hourly) and emails anyone who left their address in the quiz
+(`quiz_leads.email` set) but has no `purchases` row with `status = 'active'`
+one hour later. Each lead is only ever emailed once —
+`quiz_leads.recovery_email_sent_at` is stamped on send and the query skips
+rows where it is already set.
+
+Required environment variables:
+
+- `RESEND_API_KEY` — from a [Resend](https://resend.com) account. The free
+  tier covers this comfortably.
+- `RESEND_FROM_EMAIL` — e.g. `DogFlow <hello@yourdomain.com>`. Sending from a
+  domain you have not verified in Resend either fails or lands in spam;
+  verifying one requires DNS access to a domain you own (a `.vercel.app`
+  subdomain will not work for this). Until a domain is verified, Resend's
+  shared `onboarding@resend.dev` sender works for low-volume testing only.
+- `CRON_SECRET` — any random string. When set, the route only accepts
+  requests carrying `Authorization: Bearer <CRON_SECRET>`. Vercel Cron adds
+  this header automatically whenever a variable named exactly `CRON_SECRET`
+  exists in the project's environment — no extra wiring needed.
+
+**Vercel's Hobby (free) plan limits cron jobs to once per day**, not hourly —
+if that is the current plan, either upgrade to Pro for the hourly schedule in
+`vercel.json` to actually run hourly, or point an external scheduler (e.g.
+[cron-job.org](https://cron-job.org), free) at
+`POST https://<your-domain>/api/cron/recover-leads` with an
+`Authorization: Bearer <CRON_SECRET>` header instead.
+
 To fill a slot, replace the `<ImageSlot>` or `<VideoSlot>` element with the real
 asset. The slots keep a fixed aspect ratio, so nothing below them shifts.
