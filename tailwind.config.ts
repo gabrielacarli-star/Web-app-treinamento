@@ -25,6 +25,8 @@ const config: Config = {
         coral: { 100: "#FFE3D6", 300: "#FF9264", 500: "#FF4E17", 600: "#EA3C05" },
         teal: { 100: "#C8FBEE", 500: "#00D9A6", 600: "#00B98C" },
         gold: { 300: "#FFE47A", 500: "#FFC419", 600: "#EBAA00" },
+        pink: { 100: "#FFD9EC", 500: "#FF2D87" },
+        sky: { 100: "#D2ECFF", 500: "#0FA3FF" },
         sun: "#FFE81F",
         line: "#E9E4DB",
       },

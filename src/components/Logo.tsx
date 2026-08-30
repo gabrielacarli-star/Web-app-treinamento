@@ -4,7 +4,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
   return (
     <span className="inline-flex items-center gap-2">
       <svg viewBox="0 0 32 32" className="h-7 w-7" aria-hidden="true">
-        <rect width="32" height="32" rx="10" fill="#A48BF0" />
+        <rect width="32" height="32" rx="10" fill="#7C2DFF" />
         <g fill="#FFFFFF">
           <ellipse cx="11.4" cy="12.2" rx="2.5" ry="3.2" />
           <ellipse cx="20.6" cy="12.2" rx="2.5" ry="3.2" />

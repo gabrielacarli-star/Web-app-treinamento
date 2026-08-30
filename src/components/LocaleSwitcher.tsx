@@ -23,7 +23,7 @@ export function LocaleSwitcher({ current }: { current: Locale }) {
           onClick={() => switchTo(locale)}
           className={`rounded-pill px-3 py-1 text-[12px] font-medium transition ${
             locale === current
-              ? "bg-violet-100 text-violet-700"
+              ? "bg-violet-600 text-white"
               : "text-ink-faint hover:text-ink-soft"
           }`}
         >

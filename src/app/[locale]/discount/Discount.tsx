@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Shell } from "@/components/Shell";
 import { Cta, CtaDock } from "@/components/Cta";
-import { ScratchCards } from "@/components/ScratchCards";
+import { ScratchCard } from "@/components/ScratchCard";
 import { fill, type Dict } from "@/content";
 import { DISCOUNT } from "@/lib/config";
 import { useFunnel } from "@/lib/store";
@@ -52,17 +52,18 @@ export function Discount({ locale, dict }: { locale: Locale; dict: Dict }) {
       <h2 className="headline mt-4 text-center text-[22px]">
         {dict.discount.headline}
       </h2>
-
-      <div className="my-8">
-        <ScratchCards
-          offLabel={dict.discount.off}
-          onReveal={() => setWon(true)}
-        />
-      </div>
-
-      <p className="text-center text-[15px] leading-relaxed text-ink-soft">
+      <p className="mt-3 text-center text-[15px] leading-relaxed text-ink-soft">
         {fill(dict.discount.subhead, { dog })}
       </p>
+
+      <div className="my-8">
+        <ScratchCard
+          percent={Math.round(DISCOUNT * 100)}
+          offLabel={dict.discount.off}
+          hint={dict.discount.scratchHint}
+          onRevealed={() => window.setTimeout(() => setWon(true), 900)}
+        />
+      </div>
 
       <CtaDock>
         <Cta disabled>{dict.discount.cta}</Cta>

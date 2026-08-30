@@ -1,11 +1,14 @@
 "use client";
 
+/* Full-strength accents. Pastel tiles were what made the list read washed
+   out, however saturated the button itself was. */
 const TONES = [
-  "bg-violet-100",
-  "bg-coral-100",
-  "bg-teal-100",
-  "bg-sun/40",
-  "bg-gold-300/45",
+  "bg-violet-500",
+  "bg-coral-500",
+  "bg-teal-500",
+  "bg-pink-500",
+  "bg-gold-500",
+  "bg-sky-500",
 ];
 
 type Props = {
@@ -58,7 +61,7 @@ export function OptionCard({
         <span
           aria-hidden="true"
           className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[20px] leading-none transition ${
-            selected ? "bg-white/25" : TONES[tone % TONES.length]
+            selected ? "bg-white/30" : TONES[tone % TONES.length]
           }`}
         >
           {emoji}

@@ -268,9 +268,10 @@ export const es: Dict = {
   },
   discount: {
     headline: "Ahorra en tu plan personalizado",
-    subhead: "Elige un descuento de bienvenida para el plan de {dog}",
+    subhead: "Un descuento de bienvenida para el plan de {dog}",
     cta: "Quiero mi descuento",
     off: "off",
+    scratchHint: "Raspa la tarjeta con el dedo",
     wonHeadline: "Ganaste un 60% de descuento",
     wonSubhead: "¡El premio mayor es tuyo!",
     wonCta: "Continuar",

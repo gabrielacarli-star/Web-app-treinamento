@@ -268,9 +268,10 @@ export const en: Dict = {
   },
   discount: {
     headline: "Save on your personalised plan",
-    subhead: "Pick a welcome discount for {dog}'s training plan",
+    subhead: "A welcome discount for {dog}'s training plan",
     cta: "Get my discount",
     off: "off",
+    scratchHint: "Scratch the card with your finger",
     wonHeadline: "You got 60% off",
     wonSubhead: "The top prize is yours!",
     wonCta: "Continue",

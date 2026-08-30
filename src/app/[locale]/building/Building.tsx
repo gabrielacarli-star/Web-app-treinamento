@@ -1,8 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Shell } from "@/components/Shell";
+import { Cta, CtaDock } from "@/components/Cta";
 import { fill, type Dict } from "@/content";
 import { useFunnel } from "@/lib/store";
 import type { Locale } from "@/lib/types";
@@ -15,20 +16,35 @@ export function Building({ locale, dict }: { locale: Locale; dict: Dict }) {
   const router = useRouter();
   const { answers } = useFunnel();
   const [elapsed, setElapsed] = useState(0);
+  const [stalled, setStalled] = useState(false);
+  const navigated = useRef(false);
 
   const tasks = dict.building.tasks;
   const totalMs = tasks.length * TASK_MS;
 
   useEffect(() => {
-    const timer = window.setInterval(
-      () => setElapsed((value) => value + TICK_MS),
-      TICK_MS,
-    );
+    // The interval has to stop at the end. Left running, it kept ticking past
+    // completion and re-fired the navigation below every frame, each push
+    // cancelling the last one, and the visitor sat on four full bars forever.
+    const timer = window.setInterval(() => {
+      setElapsed((value) => {
+        const next = value + TICK_MS;
+        if (next >= totalMs) window.clearInterval(timer);
+        return Math.min(next, totalMs);
+      });
+    }, TICK_MS);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [totalMs]);
 
   useEffect(() => {
-    if (elapsed >= totalMs) router.push(`/${locale}/plan`);
+    if (elapsed < totalMs || navigated.current) return;
+    navigated.current = true;
+    router.push(`/${locale}/plan`);
+
+    // Last resort: if the route has not taken over shortly after, offer a
+    // manual way on. Nobody should be trapped one step from the offer.
+    const escape = window.setTimeout(() => setStalled(true), 2500);
+    return () => window.clearTimeout(escape);
   }, [elapsed, totalMs, router, locale]);
 
   const vars = {
@@ -70,6 +86,14 @@ export function Building({ locale, dict }: { locale: Locale; dict: Dict }) {
           );
         })}
       </ul>
+
+      {stalled && (
+        <CtaDock>
+          <Cta onClick={() => router.push(`/${locale}/plan`)}>
+            {dict.common.continue}
+          </Cta>
+        </CtaDock>
+      )}
 
       <figure className="mt-10 rounded-xl2 bg-cream p-4">
         <figcaption className="text-[13px] font-semibold text-violet-600">

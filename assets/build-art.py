@@ -4,12 +4,12 @@ reads as the same brand rather than eight separate drawings."""
 import pathlib
 
 CREAM   = "#F8F5F0"
-LAV_L   = "#EFE9FD"
-LAV     = "#A48BF0"
-CORAL   = "#F2724F"
-TEAL    = "#4FBFAE"
+LAV_L   = "#D6C2FF"
+LAV     = "#7C2DFF"
+CORAL   = "#FF4E17"
+TEAL    = "#00D9A6"
 NAVY    = "#2C2A44"
-SUN     = "#F5EC3D"
+SUN     = "#FFE81F"
 LINE    = "#E9E4DB"
 
 COATS = {

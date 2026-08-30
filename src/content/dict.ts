@@ -63,6 +63,7 @@ export type Dict = {
     subhead: string;
     cta: string;
     off: string;
+    scratchHint: string;
     wonHeadline: string;
     wonSubhead: string;
     wonCta: string;

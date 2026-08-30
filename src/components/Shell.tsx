@@ -50,14 +50,14 @@ export function Shell({
           <div className="px-5 pb-3">
             {eyebrow && (
               <p className="mb-2 text-center">
-                <span className="inline-block rounded-pill bg-violet-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-violet-700">
+                <span className="inline-block rounded-pill bg-violet-600 px-3.5 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_3px_10px_rgba(124,45,255,0.35)]">
                   {eyebrow}
                 </span>
               </p>
             )}
-            <div className="h-2 w-full overflow-hidden rounded-pill bg-violet-100">
+            <div className="h-2.5 w-full overflow-hidden rounded-pill bg-line">
               <div
-                className="h-full rounded-pill bg-gradient-to-r from-violet-500 via-violet-400 to-coral-500 transition-[width] duration-500 ease-out"
+                className="h-full rounded-pill bg-gradient-to-r from-violet-600 via-pink-500 to-coral-500 shadow-[0_0_12px_rgba(255,45,135,0.45)] transition-[width] duration-500 ease-out"
                 style={{ width: `${Math.min(100, Math.max(5, progress * 100))}%` }}
               />
             </div>

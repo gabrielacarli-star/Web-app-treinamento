@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
-<circle cx="540" cy="520" r="340" fill="#EFE9FD"/>
+<circle cx="540" cy="520" r="340" fill="#D6C2FF"/>
 
 <g transform="translate(250,560) scale(0.62) rotate(0)">
 <path d="M150 200 q90 -30 70 -120 q-8 -40 -46 -34 q-30 6 -22 40 q10 44 -30 62 z" fill="#D5B184"/>
@@ -64,9 +64,9 @@
 <circle cx="60" cy="-80" r="19" fill="#2C2A44"/>
 <circle cx="67" cy="-87" r="7" fill="#FFFFFF"/>
 </g>
-<circle cx="250" cy="336" r="36" fill="#4FBFAE"/><path d="M233 337 l12 13 l22 -25" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="540" cy="292" r="36" fill="#4FBFAE"/><path d="M523 293 l12 13 l22 -25" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="830" cy="336" r="36" fill="#4FBFAE"/><path d="M813 337 l12 13 l22 -25" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="250" cy="336" r="36" fill="#00D9A6"/><path d="M233 337 l12 13 l22 -25" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="540" cy="292" r="36" fill="#00D9A6"/><path d="M523 293 l12 13 l22 -25" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="830" cy="336" r="36" fill="#00D9A6"/><path d="M813 337 l12 13 l22 -25" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 <ellipse cx="540" cy="866" rx="400" ry="26" fill="#E9E4DB"/>
 
 </svg>
