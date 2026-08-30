@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { OFFER_TO_PLAN } from "@/lib/config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -19,18 +20,6 @@ const REVOKES: Record<string, string> = {
 
 /** How long each plan grants access for. */
 const TERM_DAYS: Record<string, number> = { p7: 7, p4: 28, p12: 84 };
-
-const OFFER_TO_PLAN: Record<string, string> = Object.fromEntries(
-  (
-    [
-      ["p7", process.env.HOTMART_OFFER_P7],
-      ["p4", process.env.HOTMART_OFFER_P4],
-      ["p12", process.env.HOTMART_OFFER_P12],
-    ] as const
-  )
-    .filter(([, code]) => Boolean(code))
-    .map(([plan, code]) => [code as string, plan]),
-);
 
 const safeEqual = (a: string, b: string) => {
   const left = Buffer.from(a);

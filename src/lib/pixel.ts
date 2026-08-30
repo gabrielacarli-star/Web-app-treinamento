@@ -3,7 +3,11 @@
  * or has not loaded yet, so tracking can never break the funnel.
  */
 
-export const PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID ?? "";
+/* Public by nature: the id is visible in the page source of any site running
+   a pixel. Defaulted so tracking does not silently sit dark waiting on a
+   variable; an environment variable still overrides it. */
+export const PIXEL_ID =
+  process.env.NEXT_PUBLIC_META_PIXEL_ID || "2290940038399261";
 
 type Fbq = (...args: unknown[]) => void;
 

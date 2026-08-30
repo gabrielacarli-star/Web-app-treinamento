@@ -49,14 +49,38 @@ export const priceOf = (plan: Plan, discount = DISCOUNT) => {
 export const money = (value: number) => value.toFixed(2);
 
 /**
- * External checkout (Hotmart / Kiwify). Set one URL per plan in Vercel;
- * anything unset falls back to the success page so the funnel stays walkable
- * while the offer is still being validated.
+ * External checkout, one URL per plan.
+ *
+ * These are the live links, kept in the code rather than only in environment
+ * variables: they are public URLs, not secrets, and leaving them to config
+ * meant a missing variable silently dropped every buyer on the success page
+ * instead of the payment page. An environment variable still wins, so they
+ * can be repointed without a code change.
  */
 const CHECKOUT_URLS: Record<Plan["id"], string | undefined> = {
-  p7: process.env.NEXT_PUBLIC_CHECKOUT_P7,
-  p4: process.env.NEXT_PUBLIC_CHECKOUT_P4,
-  p12: process.env.NEXT_PUBLIC_CHECKOUT_P12,
+  p7:
+    process.env.NEXT_PUBLIC_CHECKOUT_P7 ||
+    "https://pay.hotmart.com/E107384687R?off=oclgtyj3",
+  p4:
+    process.env.NEXT_PUBLIC_CHECKOUT_P4 ||
+    "https://pay.hotmart.com/E107384687R?off=18ebtmsk",
+  p12:
+    process.env.NEXT_PUBLIC_CHECKOUT_P12 ||
+    "https://pay.hotmart.com/E107384687R?off=6l1op398",
+};
+
+/** True when a buy button leads to a real payment page. */
+export const CHECKOUT_CONFIGURED = Object.values(CHECKOUT_URLS).some(Boolean);
+
+/**
+ * Maps a checkout offer code back to a plan id, so the webhook knows which
+ * term to grant. Same reasoning as the URLs above: public, and useless as a
+ * secret.
+ */
+export const OFFER_TO_PLAN: Record<string, Plan["id"]> = {
+  [process.env.HOTMART_OFFER_P7 || "oclgtyj3"]: "p7",
+  [process.env.HOTMART_OFFER_P4 || "18ebtmsk"]: "p4",
+  [process.env.HOTMART_OFFER_P12 || "6l1op398"]: "p12",
 };
 
 export const checkoutUrl = (

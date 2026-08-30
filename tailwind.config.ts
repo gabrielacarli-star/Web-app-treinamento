@@ -25,6 +25,7 @@ const config: Config = {
         coral: { 100: "#FFE3D6", 300: "#FF9264", 500: "#FF4E17", 600: "#EA3C05" },
         teal: { 100: "#C8FBEE", 500: "#00D9A6", 600: "#00B98C" },
         gold: { 300: "#FFE47A", 500: "#FFC419", 600: "#EBAA00" },
+        action: { 400: "#FF8A1F", 500: "#FF6B00", 600: "#F24E00", 700: "#D63E00" },
         pink: { 100: "#FFD9EC", 500: "#FF2D87" },
         sky: { 100: "#D2ECFF", 500: "#0FA3FF" },
         sun: "#FFE81F",
@@ -54,11 +55,11 @@ const config: Config = {
            tap target under the user's thumb across a 19-step quiz. */
         "cta-blink": {
           "0%, 100%": {
-            boxShadow: "0 8px 22px rgba(124, 45, 255, 0.32)",
+            boxShadow: "0 8px 22px rgba(255, 107, 0, 0.38)",
             filter: "brightness(1) saturate(1)",
           },
           "50%": {
-            boxShadow: "0 12px 40px rgba(124, 45, 255, 0.68)",
+            boxShadow: "0 12px 42px rgba(255, 107, 0, 0.72)",
             filter: "brightness(1.16) saturate(1.15)",
           },
         },

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDict } from "@/content";
-import { isLocale } from "@/lib/config";
+import { CHECKOUT_CONFIGURED, isLocale } from "@/lib/config";
 import { authConfigured } from "@/lib/access";
 import { Logo } from "@/components/Logo";
 import { PurchaseTracker } from "./PurchaseTracker";
@@ -15,11 +15,7 @@ import { PurchaseTracker } from "./PurchaseTracker";
  * Us, walking the funnel before any checkout URL is configured: the buy
  * button falls back here, and the page says so.
  */
-const checkoutLive = Boolean(
-  process.env.NEXT_PUBLIC_CHECKOUT_P7 ||
-    process.env.NEXT_PUBLIC_CHECKOUT_P4 ||
-    process.env.NEXT_PUBLIC_CHECKOUT_P12,
-);
+const checkoutLive = CHECKOUT_CONFIGURED;
 
 export default async function SuccessPage({
   params,
