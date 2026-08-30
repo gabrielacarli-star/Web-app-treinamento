@@ -12,15 +12,28 @@ export type Access = {
  * that is still active. RLS limits the query to the signed-in user's own rows,
  * so this cannot read anyone else's purchases even if it tried.
  */
+export const authConfigured = Boolean(
+  process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+);
+
+const SIGNED_OUT: Access = {
+  email: null,
+  signedIn: false,
+  active: false,
+  plan: null,
+};
+
 export async function getAccess(): Promise<Access> {
+  // Before Supabase is configured there is no session to read, and building a
+  // client would throw on the undefined URL.
+  if (!authConfigured) return SIGNED_OUT;
+
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user?.email) {
-    return { email: null, signedIn: false, active: false, plan: null };
-  }
+  if (!user?.email) return SIGNED_OUT;
 
   const { data } = await supabase
     .from("purchases")

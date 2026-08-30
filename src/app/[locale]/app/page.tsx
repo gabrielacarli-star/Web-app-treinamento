@@ -2,13 +2,10 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getDict } from "@/content";
 import { isLocale } from "@/lib/config";
-import { getAccess } from "@/lib/access";
+import { authConfigured, getAccess } from "@/lib/access";
 import { Logo } from "@/components/Logo";
 import { MemberArea } from "./MemberArea";
 import { SignOutButton } from "./SignOutButton";
-
-/** Auth is enforced as soon as Supabase is configured. */
-const authConfigured = Boolean(process.env.NEXT_PUBLIC_SUPABASE_URL);
 
 export default async function MemberPage({
   params,
