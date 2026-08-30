@@ -121,12 +121,15 @@ illustration you want to A/B against.
 the product content on the checkout platform. Regenerate it with:
 
 ```
-python3 assets/build-access-guide.py https://<real-domain>.vercel.app/es
+python3 assets/build-access-guide.py https://<real-domain>.vercel.app/es/app
 ```
 
 The URL is a required argument, not a stored constant: this file is what a
 real buyer downloads after paying, so the script refuses to run without one
-rather than risk quietly reusing a stale or wrong domain.
+rather than risk quietly reusing a stale or wrong domain. It must point at
+`/es/app` (the member area — the login screen if the buyer isn't signed in
+yet), not the bare locale root, which is the quiz landing page and would
+send a paying customer back through the quiz instead of into their course.
 
 **Before pointing any live traffic at this offer**, confirm the production
 domain in three places: this PDF, the thank-you-page URL set on each of the
