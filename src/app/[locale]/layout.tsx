@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getDict } from "@/content";
 import { LOCALES, isLocale } from "@/lib/config";
 import { FunnelProvider } from "@/lib/store";
+import { MetaPixel } from "@/components/MetaPixel";
 
 export const generateStaticParams = () =>
   LOCALES.map((locale) => ({ locale }));
@@ -31,6 +32,7 @@ export default async function LocaleLayout({
   return (
     <html lang={getDict(locale).htmlLang}>
       <body>
+        <MetaPixel />
         <FunnelProvider>{children}</FunnelProvider>
       </body>
     </html>

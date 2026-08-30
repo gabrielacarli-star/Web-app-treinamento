@@ -4,6 +4,7 @@ import { getDict } from "@/content";
 import { isLocale } from "@/lib/config";
 import { authConfigured } from "@/lib/access";
 import { Logo } from "@/components/Logo";
+import { PurchaseTracker } from "./PurchaseTracker";
 
 /**
  * Two audiences reach this page.
@@ -38,6 +39,9 @@ export default async function SuccessPage({
 
   return (
     <div className="funnel-shell">
+      {/* Only a page reached through a live checkout represents a real sale. */}
+      {checkoutLive && <PurchaseTracker plan={plan} />}
+
       <header className="flex h-14 items-center justify-center">
         <Logo />
       </header>

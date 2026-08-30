@@ -17,6 +17,7 @@ import {
   type Plan,
 } from "@/lib/config";
 import { useFunnel } from "@/lib/store";
+import { track } from "@/lib/pixel";
 import type { Locale } from "@/lib/types";
 
 export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
@@ -47,6 +48,15 @@ export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
     // The funnel's coupon code is cosmetic — the discount is already in the
     // price — so it is deliberately not sent: an unknown coupon would make
     // the checkout open on an error.
+    const price = priceOf(PLANS.find((p) => p.id === selected)!, DISCOUNT);
+    track("InitiateCheckout", {
+      value: Number(price.total.toFixed(2)),
+      currency: CURRENCY,
+      content_ids: [selected],
+      content_name: dict.offer.planNames[selected],
+      content_type: "product",
+    });
+
     window.location.href = checkoutUrl(selected, locale, {
       email,
       sck: [locale, selected, variant].filter(Boolean).join("-"),

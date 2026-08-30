@@ -8,6 +8,7 @@ import { OptionCard } from "@/components/OptionCard";
 import { fill, type Dict } from "@/content";
 import { LEAD_WEBHOOK } from "@/lib/config";
 import { useFunnel } from "@/lib/store";
+import { track } from "@/lib/pixel";
 import type { Locale } from "@/lib/types";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -27,6 +28,7 @@ export function EmailCapture({ locale, dict }: { locale: Locale; dict: Dict }) {
       return;
     }
     patch({ email: value.trim() });
+    track("Lead", { content_name: "quiz-email", variant });
     setStage("optin");
   };
 
