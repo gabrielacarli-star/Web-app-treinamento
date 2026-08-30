@@ -204,6 +204,10 @@ Required environment variables:
   verifying one requires DNS access to a domain you own (a `.vercel.app`
   subdomain will not work for this). Until a domain is verified, Resend's
   shared `onboarding@resend.dev` sender works for low-volume testing only.
+- `RESEND_REPLY_TO` — optional, defaults to `eduardosnl1997@gmail.com` (the
+  same address the buyer access-guide PDF already uses). The `from` address
+  needs a verified-domain mailbox that usually is not a real inbox anyone
+  checks, so replies are routed here instead via Resend's `reply_to`.
 - `CRON_SECRET` — any random string. When set, the route only accepts
   requests carrying `Authorization: Bearer <CRON_SECRET>`. Vercel Cron adds
   this header automatically whenever a variable named exactly `CRON_SECRET`

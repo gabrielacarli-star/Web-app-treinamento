@@ -73,6 +73,9 @@ async function handle(request: Request) {
   let sent = 0;
   const fromAddress =
     process.env.RESEND_FROM_EMAIL || `${BRAND.name} <onboarding@resend.dev>`;
+  // The from address needs a domain verified in Resend for deliverability,
+  // which is rarely a real inbox anyone checks — replies go here instead.
+  const replyTo = process.env.RESEND_REPLY_TO || "eduardosnl1997@gmail.com";
 
   for (const lead of leads) {
     const email = lead.email!;
@@ -92,7 +95,13 @@ async function handle(request: Request) {
           Authorization: `Bearer ${resendKey}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ from: fromAddress, to: email, subject, html }),
+        body: JSON.stringify({
+          from: fromAddress,
+          to: email,
+          subject,
+          html,
+          reply_to: replyTo,
+        }),
       });
       if (!res.ok) {
         console.error("recover-leads: resend failed for", email, await res.text());
