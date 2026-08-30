@@ -20,7 +20,7 @@ import { useFunnel } from "@/lib/store";
 import type { Locale } from "@/lib/types";
 
 export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
-  const { answers, email, offerStartedAt, patch } = useFunnel();
+  const { answers, email, offerStartedAt, variant, patch } = useFunnel();
   const [selected, setSelected] = useState<Plan["id"]>("p4");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
@@ -40,10 +40,16 @@ export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
   }, [dog]);
 
   const buy = () => {
+    // Only parameters the checkout platform actually understands go on the
+    // URL. `email` prefills the form and is the key the webhook later joins
+    // the purchase to the login on; `sck` is the platform's own tracking
+    // slot, used here to attribute the sale to a plan and ad angle.
+    // The funnel's coupon code is cosmetic — the discount is already in the
+    // price — so it is deliberately not sent: an unknown coupon would make
+    // the checkout open on an error.
     window.location.href = checkoutUrl(selected, locale, {
       email,
-      coupon,
-      plan: selected,
+      sck: [locale, selected, variant].filter(Boolean).join("-"),
     });
   };
 
