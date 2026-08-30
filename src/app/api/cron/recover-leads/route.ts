@@ -50,6 +50,9 @@ async function handle(request: Request) {
     .not("email", "is", null)
     .is("recovery_email_sent_at", null)
     .lte("last_seen_at", cutoff)
+    // Oldest first, so a backlog past BATCH_SIZE drains the longest-waiting
+    // leads first instead of an arbitrary DB-order slice.
+    .order("last_seen_at", { ascending: true })
     .limit(BATCH_SIZE);
 
   if (error) {
