@@ -8,6 +8,7 @@ import { Art } from "@/components/Art";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { Logo } from "@/components/Logo";
 import { useFunnel } from "@/lib/store";
+import { trackProgress } from "@/lib/track";
 import type { Locale } from "@/lib/types";
 
 export function Landing({
@@ -30,7 +31,11 @@ export function Landing({
   useEffect(() => {
     reset();
     patch({ variant: variantId });
-  }, [reset, patch, variantId]);
+    trackProgress({ locale, variant: variantId, lastStep: "landing", stepCount: 0 });
+    // Runs once per landing hit; reset/patch are stable setters and do not
+    // need to be in the dependency list.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [variantId]);
 
   return (
     <div className="funnel-shell">

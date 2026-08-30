@@ -9,6 +9,7 @@ import { fill, type Dict } from "@/content";
 import { LEAD_WEBHOOK } from "@/lib/config";
 import { useFunnel } from "@/lib/store";
 import { track } from "@/lib/pixel";
+import { trackProgress } from "@/lib/track";
 import type { Locale } from "@/lib/types";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -29,6 +30,14 @@ export function EmailCapture({ locale, dict }: { locale: Locale; dict: Dict }) {
     }
     patch({ email: value.trim() });
     track("Lead", { content_name: "quiz-email", variant });
+    trackProgress({
+      locale,
+      variant,
+      lastStep: "email",
+      email: value.trim(),
+      dogName: (answers.dog_name as string) || undefined,
+      dogBreed: (answers.dog_breed as string) || undefined,
+    });
     setStage("optin");
   };
 

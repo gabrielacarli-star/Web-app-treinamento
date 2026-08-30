@@ -166,3 +166,15 @@ export const OPTION_EMOJI: Record<string, string> = {
 
 export const emojiFor = (stepId: string, optionId: string) =>
   OPTION_EMOJI[`${stepId}.${optionId}`];
+
+/**
+ * Breeds with a real, on-brand photo to back the social-proof claim on
+ * `proof_breed`. Deliberately narrow: hero-leash (Labrador) and hero-potty
+ * (Beagle) are the right breed but show the *problem* — a dog pulling, a
+ * guilty mess — which contradicts a headline claiming they are already
+ * trained. Only pair a breed with a photo that shows a calm, successful dog.
+ */
+export const BREED_MATCHED_ART: Record<string, string> = {
+  "Border Collie": "plan-ready",
+  "Golden Retriever": "quiz-heard_you",
+};

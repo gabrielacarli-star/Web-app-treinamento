@@ -35,6 +35,9 @@ export type StepCopy = {
   /** Interstitial-only. */
   headline?: string;
   body?: string;
+  /** proof_breed fallback when no breed-matched photo exists. */
+  headlineGeneric?: string;
+  bodyGeneric?: string;
   minLabel?: string;
   maxLabel?: string;
 };

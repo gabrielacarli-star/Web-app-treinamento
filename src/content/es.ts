@@ -58,6 +58,8 @@ export const es: Dict = {
     proof_breed: {
       headline: "Más de 150 mil perros de raza {breed} ya entrenaron con nosotros",
       body: "El plan de {dog} va a usar exactamente lo que funcionó con ellos.",
+      headlineGeneric: "Más de 150 mil dueños como tú ya entrenaron con nosotros",
+      bodyGeneric: "El plan de {dog} va a usar exactamente lo que funcionó con ellos.",
     },
     dog_health: {
       question: "¿{dog} tiene algún problema de salud en estas áreas?",

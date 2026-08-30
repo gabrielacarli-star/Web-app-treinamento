@@ -1,13 +1,15 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { Cta, CtaDock } from "@/components/Cta";
 import { OptionCard } from "@/components/OptionCard";
 import { Art } from "@/components/Art";
 import { fill, type Dict } from "@/content";
-import { emojiFor, visibleSteps } from "@/lib/quiz";
+import { track } from "@/lib/pixel";
+import { trackProgress } from "@/lib/track";
+import { BREED_MATCHED_ART, emojiFor, visibleSteps } from "@/lib/quiz";
 import { useFunnel } from "@/lib/store";
 import type { Locale, QuizStep } from "@/lib/types";
 
@@ -15,7 +17,7 @@ const NONE = "__none__";
 
 export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
   const router = useRouter();
-  const { answers, setAnswer } = useFunnel();
+  const { answers, setAnswer, variant } = useFunnel();
   const [index, setIndex] = useState(0);
   const [draft, setDraft] = useState("");
   const [breedQuery, setBreedQuery] = useState("");
@@ -50,6 +52,28 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
     setBreedQuery("");
     setIndex((current) => current - 1);
   };
+
+  useEffect(() => {
+    if (!step) return;
+    track("QuizStep", {
+      step: step.id,
+      step_number: index + 1,
+      step_total: steps.length,
+      variant,
+    });
+    trackProgress({
+      locale,
+      variant,
+      lastStep: step.id,
+      stepCount: index + 1,
+      dogName: (answers.dog_name as string) || undefined,
+      dogBreed: (answers.dog_breed as string) || undefined,
+      answers,
+    });
+    // Re-fires only when the step itself changes, not on every keystroke of
+    // a text field — draft answers are not worth a beacon each.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step?.id]);
 
   if (!step) return null;
 
@@ -87,17 +111,41 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
     >
       {step.type === "interstitial" ? (
         <div className="flex flex-1 flex-col">
-          <h2 className="headline mt-4 text-center">
-            {fill(copy.headline ?? "", vars)}
-          </h2>
-          {copy.body && (
-            <p className="mt-3 text-center text-[15px] leading-relaxed text-ink-soft">
-              {fill(copy.body, vars)}
-            </p>
-          )}
-          <div className="my-6">
-            <Art id={`quiz-${step.id}`} />
-          </div>
+          {(() => {
+            // proof_breed claims "N dogs of breed X already trained with
+            // us" — that only holds up when the photo actually shows breed
+            // X. Most of the 28 breeds have no matching photo, so those
+            // fall back to a claim about owners in general rather than
+            // showing three unrelated dogs next to a specific breed's name.
+            const breed = vars.breed;
+            const matchedArt =
+              step.id === "proof_breed" && breed
+                ? BREED_MATCHED_ART[breed]
+                : undefined;
+            const headline = matchedArt
+              ? copy.headline
+              : copy.headlineGeneric ?? copy.headline;
+            const body = matchedArt
+              ? copy.body
+              : copy.bodyGeneric ?? copy.body;
+            const artId = matchedArt ?? `quiz-${step.id}`;
+
+            return (
+              <>
+                <h2 className="headline mt-4 text-center">
+                  {fill(headline ?? "", vars)}
+                </h2>
+                {body && (
+                  <p className="mt-3 text-center text-[15px] leading-relaxed text-ink-soft">
+                    {fill(body, vars)}
+                  </p>
+                )}
+                <div className="my-6">
+                  <Art id={artId} />
+                </div>
+              </>
+            );
+          })()}
           <CtaDock>
             <Cta onClick={goNext}>{dict.common.continue}</Cta>
           </CtaDock>
