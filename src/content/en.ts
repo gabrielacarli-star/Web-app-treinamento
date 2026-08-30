@@ -460,6 +460,12 @@ export const en: Dict = {
       "Preview of the member area. Videos go into the reserved slots below.",
     stepPlaceholder:
       "The step-by-step for this lesson goes here, alongside the video below.",
+    allLessons: "All lessons",
+    clickerTitle: "Training clicker",
+    clickerBody:
+      "Tap to sound the clicker. Use it right after your dog does what you asked — the sound marks the exact moment they got it right.",
+    clickerButton: "Tap to click",
+    clickerHint: "Works with your device's sound turned on.",
   },
   videoPlaceholder: {
     label: "Reserved video slot",

@@ -132,6 +132,11 @@ export type Dict = {
     backToCourse: string;
     previewNote: string;
     stepPlaceholder: string;
+    allLessons: string;
+    clickerTitle: string;
+    clickerBody: string;
+    clickerButton: string;
+    clickerHint: string;
   };
   videoPlaceholder: { label: string; hint: string };
   imagePlaceholder: string;

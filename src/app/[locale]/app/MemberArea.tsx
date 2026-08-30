@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { VideoSlot } from "@/components/Slots";
 import type { Dict } from "@/content";
@@ -10,7 +10,9 @@ import { SignOutButton } from "./SignOutButton";
 type View =
   | { name: "courses" }
   | { name: "lessons"; course: number }
-  | { name: "lesson"; course: number; lesson: number };
+  | { name: "lesson"; course: number; lesson: number; from: "courses" | "training" }
+  | { name: "training" }
+  | { name: "clicker" };
 
 type Props = {
   dict: Dict;
@@ -20,25 +22,41 @@ type Props = {
   locale?: Locale;
 };
 
+/** Which bottom tab is "on" for a given view — a lesson counts toward
+ *  whichever tab the visitor drilled into it from. */
+function tabFor(view: View): "course" | "training" | "clicker" {
+  if (view.name === "clicker") return "clicker";
+  if (view.name === "training") return "training";
+  if (view.name === "lesson") return view.from === "training" ? "training" : "course";
+  return "course";
+}
+
 export function MemberArea({ dict, preview, account, locale }: Props) {
   const [view, setView] = useState<View>({ name: "courses" });
   const { courses } = dict.member;
+  const activeTab = tabFor(view);
+
+  const backTarget: View | null =
+    view.name === "lesson"
+      ? view.from === "training"
+        ? { name: "training" }
+        : { name: "lessons", course: view.course }
+      : view.name === "lessons"
+        ? { name: "courses" }
+        : null;
+
+  const openLesson = (course: number, lesson: number, from: "courses" | "training") =>
+    setView({ name: "lesson", course, lesson, from });
 
   return (
     <div className="funnel-shell">
       <header className="sticky top-0 z-30 border-b border-line bg-surface/95 px-5 py-3 backdrop-blur">
         <div className="flex items-center justify-between">
           <Logo />
-          {view.name !== "courses" && (
+          {backTarget && (
             <button
               type="button"
-              onClick={() =>
-                setView(
-                  view.name === "lesson"
-                    ? { name: "lessons", course: view.course }
-                    : { name: "courses" },
-                )
-              }
+              onClick={() => setView(backTarget)}
               className="text-[14px] font-medium text-violet-600"
             >
               ← {dict.member.backToCourse}
@@ -100,9 +118,7 @@ export function MemberArea({ dict, preview, account, locale }: Props) {
                 <li key={lesson.title}>
                   <button
                     type="button"
-                    onClick={() =>
-                      setView({ name: "lesson", course: view.course, lesson: index })
-                    }
+                    onClick={() => openLesson(view.course, index, "courses")}
                     className="w-full rounded-xl2 border border-line bg-surface px-4 py-3 text-left shadow-card transition hover:border-violet-300"
                   >
                     <span className="block text-[11px] font-semibold uppercase tracking-wide text-violet-600">
@@ -118,9 +134,46 @@ export function MemberArea({ dict, preview, account, locale }: Props) {
           </>
         )}
 
+        {view.name === "training" && (
+          <>
+            <h1 className="headline text-[22px]">{dict.member.allLessons}</h1>
+            <div className="mt-4 space-y-5">
+              {courses.map((course, ci) => (
+                <div key={course.title}>
+                  <p className="text-[12px] font-bold uppercase tracking-wide text-ink-faint">
+                    {course.title}
+                  </p>
+                  <ol className="mt-2 space-y-2">
+                    {course.lessons.map((lesson, li) => (
+                      <li key={lesson.title}>
+                        <button
+                          type="button"
+                          onClick={() => openLesson(ci, li, "training")}
+                          className="w-full rounded-xl2 border border-line bg-surface px-4 py-3 text-left shadow-card transition hover:border-violet-300"
+                        >
+                          <span className="block text-[15px] font-medium leading-snug text-ink">
+                            {lesson.title}
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {view.name === "clicker" && <Clicker dict={dict} />}
+
         {view.name === "lesson" && (
           <article>
-            <p className="text-[11px] font-semibold uppercase tracking-wide text-violet-600">
+            {/* Breadcrumb: which course this lesson belongs to, so drilling in
+                from "all lessons" doesn't leave the visitor guessing. */}
+            <p className="text-[12px] font-medium text-ink-faint">
+              {courses[view.course].title}
+            </p>
+            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wide text-violet-600">
               {dict.member.lessonLabel} {view.lesson + 1}
             </p>
             <h1 className="headline mt-1 text-[22px]">
@@ -160,21 +213,81 @@ export function MemberArea({ dict, preview, account, locale }: Props) {
       )}
 
       <nav className="sticky bottom-0 z-30 flex border-t border-line bg-surface">
-        {[dict.member.tabs.course, dict.member.tabs.training, dict.member.tabs.clicker].map(
-          (tab, index) => (
-            <button
-              key={tab}
-              type="button"
-              onClick={() => setView({ name: "courses" })}
-              className={`flex-1 py-3 text-[12px] font-medium ${
-                index === 0 ? "text-violet-600" : "text-ink-faint"
-              }`}
-            >
-              {tab}
-            </button>
-          ),
-        )}
+        {(
+          [
+            ["course", dict.member.tabs.course, { name: "courses" } as const],
+            ["training", dict.member.tabs.training, { name: "training" } as const],
+            ["clicker", dict.member.tabs.clicker, { name: "clicker" } as const],
+          ] as const
+        ).map(([key, label, target]) => (
+          <button
+            key={key}
+            type="button"
+            onClick={() => setView(target)}
+            aria-current={activeTab === key ? "page" : undefined}
+            className={`flex-1 py-3 text-[12px] font-medium transition ${
+              activeTab === key ? "text-violet-600" : "text-ink-faint"
+            }`}
+          >
+            {label}
+          </button>
+        ))}
       </nav>
+    </div>
+  );
+}
+
+/** A real clicker: a short percussive tone via Web Audio, no audio file to
+ *  ship. Matches the reference app's "whistle" tab instead of leaving it a
+ *  dead tap target. */
+function Clicker({ dict }: { dict: Dict }) {
+  const ctxRef = useRef<AudioContext | null>(null);
+  const [pressed, setPressed] = useState(false);
+
+  const click = () => {
+    try {
+      const AudioCtx =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext })
+          .webkitAudioContext;
+      const ctx = ctxRef.current ?? new AudioCtx();
+      ctxRef.current = ctx;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "square";
+      osc.frequency.setValueAtTime(2200, ctx.currentTime);
+      gain.gain.setValueAtTime(0.4, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.06);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.07);
+    } catch {
+      // No Web Audio support: the button still gives visual feedback below.
+    }
+
+    setPressed(true);
+    window.setTimeout(() => setPressed(false), 120);
+  };
+
+  return (
+    <div className="flex flex-col items-center pt-6 text-center">
+      <h1 className="headline text-[22px]">{dict.member.clickerTitle}</h1>
+      <p className="mt-2 max-w-xs text-[14px] leading-relaxed text-ink-soft">
+        {dict.member.clickerBody}
+      </p>
+
+      <button
+        type="button"
+        onClick={click}
+        className={`mt-10 flex h-40 w-40 items-center justify-center rounded-full bg-gradient-to-br from-action-400 to-action-600 text-[16px] font-bold text-white shadow-pop transition ${
+          pressed ? "scale-95" : "active:scale-95"
+        }`}
+      >
+        {dict.member.clickerButton}
+      </button>
+
+      <p className="mt-6 text-[12px] text-ink-faint">{dict.member.clickerHint}</p>
     </div>
   );
 }

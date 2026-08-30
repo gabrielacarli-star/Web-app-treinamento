@@ -461,6 +461,12 @@ export const es: Dict = {
       "Vista previa del área de miembros. Los vídeos van en los espacios reservados de abajo.",
     stepPlaceholder:
       "El paso a paso de esta clase va aquí, junto con el vídeo de abajo.",
+    allLessons: "Todas las clases",
+    clickerTitle: "Silbato de entrenamiento",
+    clickerBody:
+      "Toca para sonar el clicker. Úsalo justo después de que tu perro haga lo que le pediste — el sonido marca el momento exacto del acierto.",
+    clickerButton: "Toca para sonar",
+    clickerHint: "Funciona con el sonido del dispositivo activado.",
   },
   videoPlaceholder: {
     label: "Espacio reservado para el vídeo",
