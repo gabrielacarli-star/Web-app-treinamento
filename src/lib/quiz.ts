@@ -169,12 +169,64 @@ export const emojiFor = (stepId: string, optionId: string) =>
 
 /**
  * Breeds with a real, on-brand photo to back the social-proof claim on
- * `proof_breed`. Deliberately narrow: hero-leash (Labrador) and hero-potty
- * (Beagle) are the right breed but show the *problem* — a dog pulling, a
- * guilty mess — which contradicts a headline claiming they are already
- * trained. Only pair a breed with a photo that shows a calm, successful dog.
+ * `proof_breed`. Every entry shows a calm, well-posed dog — never the
+ * *problem* (pulling, a guilty mess), which would contradict a headline
+ * claiming they are already trained.
  */
 export const BREED_MATCHED_ART: Record<string, string> = {
   "Border Collie": "plan-ready",
   "Golden Retriever": "quiz-heard_you",
+
+  // Spanish (es)
+  Mestizo: "breed-mestizo",
+  "Labrador Retriever": "breed-labrador",
+  "Pit Bull": "breed-pitbull",
+  "Shih Tzu": "breed-shihtzu",
+  Caniche: "breed-caniche",
+  Yorkshire: "breed-yorkshire",
+  "Bulldog Francés": "breed-bulldogfrances",
+  "Pastor Alemán": "breed-pastoraleman",
+  Beagle: "breed-beagle",
+  Rottweiler: "breed-rottweiler",
+  "Teckel (Salchicha)": "breed-teckel",
+  Chihuahua: "breed-chihuahua",
+  Pinscher: "breed-pinscher",
+  "Husky Siberiano": "breed-husky",
+  "Lhasa Apso": "breed-lhasaapso",
+  "Bichón Maltés": "breed-bichonmalte",
+  Pomerania: "breed-pomerania",
+  Bóxer: "breed-boxer",
+  "Cocker Spaniel": "breed-cockerspaniel",
+  Schnauzer: "breed-schnauzer",
+  Akita: "breed-akita",
+  "Carlino (Pug)": "breed-pug",
+  "Basset Hound": "breed-bassethound",
+  Doberman: "breed-doberman",
+  "San Bernardo": "breed-sanbernardo",
+  Dálmata: "breed-dalmata",
+
+  // Portuguese (pt)
+  "Vira-lata (SRD)": "breed-mestizo",
+  Poodle: "breed-caniche",
+  "Bulldog Francês": "breed-bulldogfrances",
+  "Pastor Alemão": "breed-pastoraleman",
+  "Dachshund (Salsicha)": "breed-teckel",
+  Maltês: "breed-bichonmalte",
+  "Spitz Alemão (Lulu)": "breed-pomerania",
+  Boxer: "breed-boxer",
+  Pug: "breed-pug",
+  "São Bernardo": "breed-sanbernardo",
+
+  // English (en)
+  "Mixed breed": "breed-mestizo",
+  "Yorkshire Terrier": "breed-yorkshire",
+  "French Bulldog": "breed-bulldogfrances",
+  "German Shepherd": "breed-pastoraleman",
+  Dachshund: "breed-teckel",
+  "Miniature Pinscher": "breed-pinscher",
+  "Siberian Husky": "breed-husky",
+  Maltese: "breed-bichonmalte",
+  Pomeranian: "breed-pomerania",
+  "Saint Bernard": "breed-sanbernardo",
+  Dalmatian: "breed-dalmata",
 };
