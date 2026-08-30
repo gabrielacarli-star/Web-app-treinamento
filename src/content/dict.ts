@@ -114,6 +114,12 @@ export type Dict = {
     body: string;
     cta: string;
     placeholderNote: string;
+    /** Shown to a real buyer arriving from the checkout platform. */
+    paidHeadline: string;
+    paidBody: string;
+    paidSteps: string[];
+    paidCta: string;
+    paidHint: string;
   };
   member: {
     tabs: { course: string; training: string; clicker: string };

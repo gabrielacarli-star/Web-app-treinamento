@@ -368,6 +368,16 @@ export const en: Dict = {
     cta: "Explore the app",
     placeholderNote:
       "Checkout is not connected yet. Set the Hotmart or Kiwify URL in the environment variables to take real payments.",
+    paidHeadline: "Payment confirmed!",
+    paidBody: "Your dog's plan is active. One step left to get in.",
+    paidSteps: [
+      "Tap the button below",
+      "Enter the same e-mail you used at checkout",
+      "Open the link we send and start with the first lesson",
+    ],
+    paidCta: "Sign in to DogFlow",
+    paidHint:
+      "Use the same e-mail as the purchase. That is how we recognise your access.",
   },
   member: {
     tabs: { course: "My course", training: "Training", clicker: "Whistle" },
