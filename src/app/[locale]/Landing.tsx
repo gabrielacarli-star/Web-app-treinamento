@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import type { Dict } from "@/content";
 import { Cta } from "@/components/Cta";
-import { ImageSlot } from "@/components/Slots";
+import { Art } from "@/components/Art";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { Logo } from "@/components/Logo";
 import { useFunnel } from "@/lib/store";
@@ -45,11 +45,7 @@ export function Landing({
         </h1>
 
         <div className="my-6">
-          <ImageSlot
-            label={dict.imagePlaceholder}
-            ratio="1 / 1"
-            id={`hero-${variant.id}`}
-          />
+          <Art id={`hero-${variant.id}`} priority />
         </div>
 
         <div className="mt-auto">

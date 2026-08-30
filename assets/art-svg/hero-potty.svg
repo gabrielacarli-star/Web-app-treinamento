@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+<circle cx="540" cy="520" r="340" fill="#EFE9FD"/>
+
+<rect x="600" y="700" width="300" height="150" rx="18" fill="#DCE9F5" transform="rotate(-4 750 775)"/>
+<rect x="628" y="726" width="244" height="98" rx="10" fill="#EDF4FB" transform="rotate(-4 750 775)"/>
+<g transform="translate(470,500) scale(0.9) rotate(0)">
+<path d="M150 210 q80 20 96 96 q10 40 -28 48 q-30 6 -34 -28 q-6 -46 -50 -50 z" fill="#D5B184"/>
+<path d="M0 0 c105 0 150 90 150 190 c0 50 -14 74 -46 74 h-208 c-32 0 -46 -24 -46 -74 c0 -100 45 -190 150 -190 z" fill="#EFD3AE"/>
+<ellipse cx="0" cy="185" rx="60" ry="72" fill="#F8E6CE"/>
+<rect x="-74" y="152" width="52" height="112" rx="26" fill="#EFD3AE"/>
+<rect x="22" y="152" width="52" height="112" rx="26" fill="#EFD3AE"/>
+<ellipse cx="-48" cy="262" rx="32" ry="20" fill="#F8E6CE"/>
+<ellipse cx="48" cy="262" rx="32" ry="20" fill="#F8E6CE"/>
+<path d="M-126 -20 q-70 44 -56 128 q10 60 58 56 q18 -100 -2 -184 z" fill="#D5B184"/>
+<path d="M126 -20 q70 44 56 128 q-10 60 -58 56 q-18 -100 2 -184 z" fill="#D5B184"/>
+<ellipse cx="0" cy="-50" rx="146" ry="132" fill="#EFD3AE"/>
+<ellipse cx="0" cy="10" rx="86" ry="62" fill="#F8E6CE"/>
+<ellipse cx="0" cy="-24" rx="26" ry="19" fill="#2C2A44"/>
+<path d="M0 -5 v20" stroke="#2C2A44" stroke-width="7" stroke-linecap="round"/>
+<path d="M-26 22 q26 -10 52 0" stroke="#2C2A44" stroke-width="7" fill="none" stroke-linecap="round"/>
+<circle cx="-60" cy="-76" r="22" fill="#2C2A44"/>
+<circle cx="-52" cy="-85" r="9" fill="#FFFFFF"/>
+<circle cx="60" cy="-76" r="22" fill="#2C2A44"/>
+<circle cx="68" cy="-85" r="9" fill="#FFFFFF"/>
+<path d="M-86 -116 q26 -18 52 -6" stroke="#D5B184" stroke-width="10" fill="none" stroke-linecap="round"/>
+<path d="M34 -122 q26 -12 52 6" stroke="#D5B184" stroke-width="10" fill="none" stroke-linecap="round"/>
+</g>
+<ellipse cx="300" cy="800" rx="76" ry="26" fill="#CFE3F2"/>
+<circle cx="300" cy="800" r="44" fill="#F2724F"/><path d="M282 782 L318 818 M318 782 L282 818" stroke="#fff" stroke-width="12" stroke-linecap="round"/>
+<ellipse cx="470" cy="840" rx="230" ry="24" fill="#E9E4DB"/>
+
+</svg>

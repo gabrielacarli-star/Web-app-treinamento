@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Shell } from "@/components/Shell";
 import { Cta, CtaDock } from "@/components/Cta";
-import { ImageSlot } from "@/components/Slots";
+import { Art } from "@/components/Art";
 import { fill, type Dict } from "@/content";
 import { useFunnel } from "@/lib/store";
 import type { Locale } from "@/lib/types";
@@ -25,7 +25,7 @@ export function PlanReady({ locale, dict }: { locale: Locale; dict: Dict }) {
       </h2>
 
       <div className="mt-6">
-        <ImageSlot label={dict.imagePlaceholder} ratio="1 / 1" id="plan-ready" />
+        <Art id="plan-ready" />
       </div>
 
       <section className="mt-6 rounded-xl2 border border-line bg-surface p-4 shadow-card">

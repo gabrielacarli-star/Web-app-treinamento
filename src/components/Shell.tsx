@@ -48,11 +48,17 @@ export function Shell({
 
         {progress !== undefined && (
           <div className="px-5 pb-3">
-            {eyebrow && <p className="eyebrow mb-2">{eyebrow}</p>}
-            <div className="h-1 w-full overflow-hidden rounded-pill bg-line">
+            {eyebrow && (
+              <p className="mb-2 text-center">
+                <span className="inline-block rounded-pill bg-violet-100 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-violet-700">
+                  {eyebrow}
+                </span>
+              </p>
+            )}
+            <div className="h-2 w-full overflow-hidden rounded-pill bg-violet-100">
               <div
-                className="h-full rounded-pill bg-violet-400 transition-[width] duration-300"
-                style={{ width: `${Math.min(100, Math.max(4, progress * 100))}%` }}
+                className="h-full rounded-pill bg-gradient-to-r from-violet-500 via-violet-400 to-coral-500 transition-[width] duration-500 ease-out"
+                style={{ width: `${Math.min(100, Math.max(5, progress * 100))}%` }}
               />
             </div>
           </div>

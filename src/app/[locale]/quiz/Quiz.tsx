@@ -5,9 +5,9 @@ import { useMemo, useState } from "react";
 import { Shell } from "@/components/Shell";
 import { Cta, CtaDock } from "@/components/Cta";
 import { OptionCard } from "@/components/OptionCard";
-import { ImageSlot } from "@/components/Slots";
+import { Art } from "@/components/Art";
 import { fill, type Dict } from "@/content";
-import { visibleSteps } from "@/lib/quiz";
+import { emojiFor, visibleSteps } from "@/lib/quiz";
 import { useFunnel } from "@/lib/store";
 import type { Locale, QuizStep } from "@/lib/types";
 
@@ -96,11 +96,7 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
             </p>
           )}
           <div className="my-6">
-            <ImageSlot
-              label={dict.imagePlaceholder}
-              ratio="1 / 1"
-              id={`quiz-${step.id}`}
-            />
+            <Art id={`quiz-${step.id}`} />
           </div>
           <CtaDock>
             <Cta onClick={goNext}>{dict.common.continue}</Cta>
@@ -125,6 +121,7 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
               step.options?.map((optionId) => (
                 <OptionCard
                   key={optionId}
+                  emoji={emojiFor(step.id, optionId)}
                   label={fill(copy.options?.[optionId] ?? optionId, vars)}
                   selected={selected === optionId}
                   onClick={() => chooseSingle(optionId)}
@@ -137,6 +134,7 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
                   <OptionCard
                     key={optionId}
                     multi
+                    emoji={emojiFor(step.id, optionId)}
                     label={fill(copy.options?.[optionId] ?? optionId, vars)}
                     selected={selectedList.includes(optionId)}
                     onClick={() => toggleMulti(optionId)}
@@ -228,6 +226,7 @@ export function Quiz({ locale, dict }: { locale: Locale; dict: Dict }) {
                   className="w-full rounded-xl2 border border-line bg-surface px-4 py-4 text-[16px] text-ink outline-none transition focus:border-violet-400 focus:ring-1 focus:ring-violet-400"
                 />
                 <OptionCard
+                  emoji={emojiFor(step.id, "already")}
                   label={copy.options?.already ?? ""}
                   selected={selected === "already"}
                   onClick={() => {

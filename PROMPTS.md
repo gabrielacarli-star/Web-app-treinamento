@@ -32,6 +32,16 @@ Corrigir em uma frase funciona melhor que recomeçar.
 converter melhor em tráfego frio. **Ilustração** é o que a oferta de
 referência usa. Escolha uma e não misture.
 
+> **As imagens já estão prontas.** Desenhei as oito em SVG, nas cores exatas
+> da marca — estão em `public/art/` e já instaladas no app. `assets/build-art.py`
+> regenera todas, e `assets/art-svg/` tem os fontes editáveis.
+>
+> Os prompts abaixo continuam aqui caso você queira testar uma versão em foto
+> no lugar da ilustração. Para trocar, é só substituir o arquivo em
+> `public/art/` mantendo o mesmo nome.
+
+---
+
 ---
 
 # TRILHA A — FOTO (recomendada)

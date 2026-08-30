@@ -119,3 +119,50 @@ export const QUIZ_STEPS: QuizStep[] = [
 
 export const visibleSteps = (answers: Answers) =>
   QUIZ_STEPS.filter((step) => !step.showIf || step.showIf(answers));
+
+/**
+ * Emoji per option, keyed "stepId.optionId". Kept out of the locale files
+ * because an emoji reads the same in every language — and because scanning a
+ * list of options is much faster with a picture anchoring each line.
+ */
+export const OPTION_EMOJI: Record<string, string> = {
+  "dog_sex.female": "♀️", "dog_sex.male": "♂️",
+
+  "dog_age.m0_6": "🍼", "dog_age.m7_12": "🐶", "dog_age.y1_2": "🐕",
+  "dog_age.y2_7": "🦮", "dog_age.y7plus": "🧓",
+
+  "dog_health.healthy": "💚", "dog_health.vision": "👁️",
+  "dog_health.hearing": "👂", "dog_health.joints": "🦴",
+
+  "potty.no_routine": "🕐", "potty.night": "🌙", "potty.alone": "🏠",
+
+  "home_issues.crate": "📦", "home_issues.biting": "🦷",
+  "home_issues.barking": "🔊", "home_issues.chewing": "🛋️",
+
+  "walk_issues.not_outside": "🚪", "walk_issues.pulling": "🪢",
+  "walk_issues.eats_trash": "🗑️",
+
+  "activity.very": "⚡", "activity.moderate": "🙂", "activity.low": "😴",
+
+  "commands_known.name": "📛", "commands_known.heel": "🚶",
+  "commands_known.no": "✋", "commands_known.food_lure": "🍖",
+  "commands_known.touch": "👆", "commands_known.look": "👀",
+  "commands_known.stand": "🧍", "commands_known.place": "🎯",
+  "commands_known.down": "⬇️", "commands_known.drop": "🫳",
+
+  "reason.new_dog": "🏡", "reason.baby": "👶", "reason.moving": "📦",
+  "reason.wedding": "💍", "reason.work_schedule": "🕐",
+  "reason.travel": "✈️", "reason.guests": "🎉",
+  "reason.just_wellbehaved": "⭐",
+
+  "moving_date.already": "✅",
+
+  "trained_before.pro": "🎓", "trained_before.alone": "💪",
+  "trained_before.not_yet": "🌱",
+
+  "time_together.love": "❤️", "time_together.sometimes": "🙂",
+  "time_together.not_enough": "😕", "time_together.challenge": "😤",
+};
+
+export const emojiFor = (stepId: string, optionId: string) =>
+  OPTION_EMOJI[`${stepId}.${optionId}`];

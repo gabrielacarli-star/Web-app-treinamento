@@ -105,7 +105,15 @@ Every placeholder carries a `data-slot` id, shown on the placeholder itself:
 - `plan-ready` — plan-ready screen
 - `lesson-<course>-<lesson>` — member-area lesson videos
 
-`PROMPTS.md` holds a ready-to-paste generation prompt for each one.
+The illustrations are drawn, not generated: `assets/build-art.py` emits the
+SVG in `assets/art-svg/`, which renders to the PNGs in `public/art/`. They use
+the funnel's own palette and share one parameterised dog, so the set reads as
+one brand. Backgrounds are transparent, so the art sits on whatever surface the
+page uses.
+
+Only the lesson videos are still placeholders. `PROMPTS.md` holds a
+ready-to-paste generation prompt for those, plus photo alternatives for any
+illustration you want to A/B against.
 
 ## Buyer-facing files
 

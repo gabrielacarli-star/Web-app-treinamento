@@ -38,7 +38,12 @@ export function OptionCard({ label, selected, onClick, multi, emoji }: Props) {
         </span>
       )}
       {emoji && (
-        <span aria-hidden="true" className="text-lg leading-none">
+        <span
+          aria-hidden="true"
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-[19px] leading-none transition ${
+            selected ? "bg-violet-500/15" : "bg-cream"
+          }`}
+        >
           {emoji}
         </span>
       )}
