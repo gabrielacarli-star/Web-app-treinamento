@@ -44,9 +44,14 @@ export function LoginForm({ locale, dict }: { locale: Locale; dict: Dict }) {
       return;
     }
     setState("sending");
-    const supabase = createClient();
-    await supabase.auth.resetPasswordForEmail(email.trim(), {
-      redirectTo: `${window.location.origin}/auth/callback?next=/${locale}/reset-password`,
+    // Goes through our own Resend-backed route, not supabase-js's
+    // resetPasswordForEmail directly — that call uses Supabase's built-in
+    // e-mail sending, which has a strict rate limit meant for low-volume
+    // auth traffic rather than a user-facing "resend" button.
+    await fetch("/api/auth/forgot-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: email.trim(), locale }),
     });
     // Never reveal whether the address has an account — same "sent" screen
     // either way, same as the sign-up flow.
