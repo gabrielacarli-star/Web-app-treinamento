@@ -9,6 +9,9 @@ export type UpsellOffer = {
    * by the caller, since only it knows the buyer's name/email/locale.
    */
   quizUrl: string;
+  /** Matches OtherProduct.productId from getOtherProducts — how the member
+   *  area tells "already owns this" apart from "should be offered this". */
+  hotmartProductId: string;
   /** Shown as-is, not translated: a product name is a name in every locale. */
   productName: string;
   /** e.g. "US$ 9,90" — kept as a single display string since each product prices differently. */
@@ -39,6 +42,7 @@ export const UPSELL_OFFERS: UpsellOffer[] = [
   {
     id: "sos-pet",
     quizUrl: SOS_PET_QUIZ_URL,
+    hotmartProductId: "8190678",
     productName: "SOS Pet",
     priceLabel: "R$ 57,00",
     copy: {

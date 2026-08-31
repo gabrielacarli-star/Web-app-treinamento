@@ -412,7 +412,7 @@ export const es: Dict = {
       clicker: "Silbato",
       products: "Otros",
     },
-    otherProductsHeadline: "Tus otros productos",
+    otherProductsHeadline: "Otros productos de Dr. Eduardo",
     otherProductsEmpty: "Aún no tienes otros productos de Dr. Eduardo.",
     otherProductsCta: "Abrir",
     coursesHeadline: "Cursos",

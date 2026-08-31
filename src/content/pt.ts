@@ -415,7 +415,7 @@ export const pt: Dict = {
       clicker: "Apito",
       products: "Outros",
     },
-    otherProductsHeadline: "Seus outros produtos",
+    otherProductsHeadline: "Outros produtos do Dr. Eduardo",
     otherProductsEmpty: "Você ainda não tem outros produtos do Dr. Eduardo.",
     otherProductsCta: "Abrir",
     coursesHeadline: "Cursos",

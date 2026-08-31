@@ -5,6 +5,9 @@ import { Logo } from "@/components/Logo";
 import { VideoSlot } from "@/components/Slots";
 import type { Dict } from "@/content";
 import type { OtherProduct } from "@/lib/crossApp";
+import { PET_SAUDAVEL_APP_URL } from "@/lib/crossApp";
+import { UPSELL_OFFERS } from "@/lib/upsell";
+import { DEFAULT_LOCALE } from "@/lib/config";
 import type { Locale } from "@/lib/types";
 import { SignOutButton } from "./SignOutButton";
 
@@ -178,40 +181,62 @@ export function MemberArea({ dict, preview, account, locale, otherProducts = [] 
             <h1 className="headline text-[22px]">
               {dict.member.otherProductsHeadline}
             </h1>
-            {otherProducts.length === 0 ? (
+            {UPSELL_OFFERS.length === 0 ? (
               <p className="mt-4 rounded-xl2 bg-cream px-4 py-3 text-[14px] leading-relaxed text-ink-soft">
                 {dict.member.otherProductsEmpty}
               </p>
             ) : (
               <div className="mt-4 space-y-3">
-                {otherProducts.map((product) => (
-                  <div
-                    key={product.productId}
-                    className="flex items-center gap-3 overflow-hidden rounded-xl2 border border-line bg-surface p-3 shadow-card"
-                  >
-                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-[22px]">
-                      🩺
-                    </span>
-                    <span className="min-w-0 flex-1">
-                      <span className="block text-[15px] font-bold text-ink">
-                        {product.title}
-                      </span>
-                      {product.description && (
-                        <span className="mt-0.5 block truncate text-[12px] text-ink-soft">
-                          {product.description}
-                        </span>
-                      )}
-                    </span>
-                    <a
-                      href="https://app.medveteduardosebastiao.com"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="shrink-0 rounded-pill bg-violet-600 px-3.5 py-2 text-[12px] font-bold text-white"
+                {UPSELL_OFFERS.map((offer) => {
+                  const activeLocale = locale ?? DEFAULT_LOCALE;
+                  const owned = otherProducts.some(
+                    (p) => p.productId === offer.hotmartProductId,
+                  );
+                  const copy = offer.copy[activeLocale] ?? offer.copy.es;
+                  const buyUrl = new URL(`/${activeLocale}`, offer.quizUrl);
+                  if (account?.email) buyUrl.searchParams.set("email", account.email);
+
+                  return (
+                    <div
+                      key={offer.id}
+                      className="flex items-center gap-3 overflow-hidden rounded-xl2 border border-line bg-surface p-3 shadow-card"
                     >
-                      {dict.member.otherProductsCta}
-                    </a>
-                  </div>
-                ))}
+                      <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-[22px]">
+                        🩺
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-[15px] font-bold text-ink">
+                          {offer.productName}
+                        </span>
+                        <span className="mt-0.5 block truncate text-[12px] text-ink-soft">
+                          {copy.tagline}
+                        </span>
+                        {!owned && (
+                          <span className="mt-0.5 block text-[12px] font-semibold text-action-600">
+                            {offer.priceLabel}
+                          </span>
+                        )}
+                      </span>
+                      {owned ? (
+                        <a
+                          href={PET_SAUDAVEL_APP_URL}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="shrink-0 rounded-pill bg-violet-600 px-3.5 py-2 text-[12px] font-bold text-white"
+                        >
+                          {dict.member.otherProductsCta}
+                        </a>
+                      ) : (
+                        <a
+                          href={buyUrl.toString()}
+                          className="shrink-0 rounded-pill bg-action-500 px-3.5 py-2 text-[12px] font-bold text-white"
+                        >
+                          {copy.cta}
+                        </a>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             )}
           </>

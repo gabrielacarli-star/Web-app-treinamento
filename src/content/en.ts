@@ -411,7 +411,7 @@ export const en: Dict = {
       clicker: "Whistle",
       products: "More",
     },
-    otherProductsHeadline: "Your other products",
+    otherProductsHeadline: "Other Dr. Eduardo products",
     otherProductsEmpty: "You don't have any other Dr. Eduardo products yet.",
     otherProductsCta: "Open",
     coursesHeadline: "Courses",
