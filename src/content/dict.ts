@@ -98,6 +98,8 @@ export type Dict = {
     subhead: string;
     label: string;
     placeholder: string;
+    passwordLabel: string;
+    passwordPlaceholder: string;
     cta: string;
     sending: string;
     sentHeadline: string;
@@ -108,7 +110,24 @@ export type Dict = {
     noAccessCta: string;
     signedInAs: string;
     signOut: string;
-    failed: string;
+    /** Wrong e-mail/password combination on sign-in itself. */
+    wrongCredentials: string;
+    forgotPassword: string;
+  };
+  resetPassword: {
+    headline: string;
+    subhead: string;
+    label: string;
+    confirmLabel: string;
+    placeholder: string;
+    cta: string;
+    saving: string;
+    mismatch: string;
+    tooShort: string;
+    error: string;
+    expiredHeadline: string;
+    expiredBody: string;
+    expiredCta: string;
   };
   success: {
     headline: string;

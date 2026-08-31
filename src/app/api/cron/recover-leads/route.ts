@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { buildRecoveryEmail } from "@/lib/email/recovery";
+import { sendEmail } from "@/lib/email/send";
 import { isLocale } from "@/lib/config";
-import { BRAND } from "@/lib/config";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -74,11 +74,6 @@ async function handle(request: Request) {
   const boughtSet = new Set((buyers ?? []).map((b) => b.email.toLowerCase()));
 
   let sent = 0;
-  const fromAddress =
-    process.env.RESEND_FROM_EMAIL || `${BRAND.name} <onboarding@resend.dev>`;
-  // The from address needs a domain verified in Resend for deliverability,
-  // which is rarely a real inbox anyone checks — replies go here instead.
-  const replyTo = process.env.RESEND_REPLY_TO || "eduardosnl1997@gmail.com";
 
   for (const lead of leads) {
     const email = lead.email!;
@@ -91,27 +86,9 @@ async function handle(request: Request) {
       dogName: lead.dog_name,
     });
 
-    try {
-      const res = await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: fromAddress,
-          to: email,
-          subject,
-          html,
-          reply_to: replyTo,
-        }),
-      });
-      if (!res.ok) {
-        console.error("recover-leads: resend failed for", email, await res.text());
-        continue;
-      }
-    } catch (err) {
-      console.error("recover-leads: send threw for", email, err);
+    const result = await sendEmail({ to: email, subject, html });
+    if (!result.ok) {
+      console.error("recover-leads: send failed for", email, result.error ?? result.skipped);
       continue;
     }
 

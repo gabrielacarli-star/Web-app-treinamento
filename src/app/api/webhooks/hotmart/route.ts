@@ -1,7 +1,69 @@
 import { NextResponse } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { OFFER_TO_PLAN } from "@/lib/config";
+import { OFFER_TO_PLAN, isLocale } from "@/lib/config";
+import { buildSetPasswordEmail } from "@/lib/email/setPassword";
+import { sendEmail } from "@/lib/email/send";
+import type { Locale } from "@/lib/types";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://web-app-treinamento.vercel.app";
+
+/**
+ * A fresh buyer has no Supabase Auth account yet — this creates one (or, on
+ * a repurchase, reuses the existing one) and e-mails a link to set the
+ * password they'll sign in with from then on. Best-effort: a failure here
+ * never fails the webhook, since the purchase itself is already recorded.
+ */
+async function provisionPasswordSetup(
+  supabase: ReturnType<typeof createAdminClient>,
+  email: string,
+) {
+  const { data: lead } = await supabase
+    .from("quiz_leads")
+    .select("locale")
+    .eq("email", email.toLowerCase())
+    .order("last_seen_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  const locale: Locale = isLocale(lead?.locale ?? "") ? (lead!.locale as Locale) : "es";
+
+  const redirectTo = `${SITE_URL}/auth/callback?next=/${locale}/reset-password`;
+
+  let { data: link, error: linkError } = await supabase.auth.admin.generateLink({
+    type: "invite",
+    email,
+    options: { redirectTo },
+  });
+  if (linkError) {
+    // Already registered from an earlier purchase — send a recovery link instead.
+    ({ data: link, error: linkError } = await supabase.auth.admin.generateLink({
+      type: "recovery",
+      email,
+      options: { redirectTo },
+    }));
+  }
+  if (linkError || !link?.properties?.action_link) {
+    console.error(
+      "hotmart webhook: could not generate password-setup link for",
+      email,
+      linkError?.message,
+    );
+    return;
+  }
+
+  const { subject, html } = buildSetPasswordEmail({
+    locale,
+    actionLink: link.properties.action_link,
+  });
+  const result = await sendEmail({ to: email, subject, html });
+  if (!result.ok) {
+    console.error(
+      "hotmart webhook: could not send set-password email to",
+      email,
+      result.error ?? result.skipped,
+    );
+  }
+}
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -152,6 +214,8 @@ export async function POST(request: Request) {
       await finish(false, error.message);
       return NextResponse.json({ error: "could not record purchase" }, { status: 500 });
     }
+
+    await provisionPasswordSetup(supabase, email);
 
     await finish(true);
     return NextResponse.json({ ok: true, granted: email });

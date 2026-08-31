@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { Cta, CtaDock } from "@/components/Cta";
@@ -10,7 +11,9 @@ import type { Locale } from "@/lib/types";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export function LoginForm({ locale, dict }: { locale: Locale; dict: Dict }) {
+  const router = useRouter();
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const [invalid, setInvalid] = useState(false);
 
@@ -23,13 +26,31 @@ export function LoginForm({ locale, dict }: { locale: Locale; dict: Dict }) {
 
     setState("sending");
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithOtp({
+    const { error } = await supabase.auth.signInWithPassword({
       email: email.trim(),
-      options: {
-        emailRedirectTo: `${window.location.origin}/auth/callback?next=/${locale}/app`,
-      },
+      password,
     });
-    setState(error ? "error" : "sent");
+    if (error) {
+      setState("error");
+      return;
+    }
+    router.push(`/${locale}/app`);
+    router.refresh();
+  };
+
+  const forgotPassword = async () => {
+    if (!EMAIL_RE.test(email.trim())) {
+      setInvalid(true);
+      return;
+    }
+    setState("sending");
+    const supabase = createClient();
+    await supabase.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: `${window.location.origin}/auth/callback?next=/${locale}/reset-password`,
+    });
+    // Never reveal whether the address has an account — same "sent" screen
+    // either way, same as the sign-up flow.
+    setState("sent");
   };
 
   return (
@@ -89,9 +110,36 @@ export function LoginForm({ locale, dict }: { locale: Locale; dict: Dict }) {
             {invalid && (
               <p className="mt-2 text-[13px] text-coral-600">{dict.login.invalid}</p>
             )}
+
+            <label
+              htmlFor="login-password"
+              className="mb-1.5 mt-4 block text-[13px] font-medium text-ink-soft"
+            >
+              {dict.login.passwordLabel}
+            </label>
+            <input
+              id="login-password"
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (state === "error") setState("idle");
+              }}
+              placeholder={dict.login.passwordPlaceholder}
+              className="w-full rounded-xl2 border border-line bg-surface px-4 py-4 text-[16px] text-ink outline-none transition focus:border-violet-400 focus:ring-1 focus:ring-violet-400"
+            />
             {state === "error" && (
-              <p className="mt-2 text-[13px] text-coral-600">{dict.login.failed}</p>
+              <p className="mt-2 text-[13px] text-coral-600">{dict.login.wrongCredentials}</p>
             )}
+
+            <button
+              type="button"
+              onClick={forgotPassword}
+              className="mt-3 self-start text-[13px] font-medium text-violet-600 underline"
+            >
+              {dict.login.forgotPassword}
+            </button>
 
             <CtaDock>
               <Cta type="submit" disabled={state === "sending"}>
