@@ -44,7 +44,7 @@ export const UPSELL_OFFERS: UpsellOffer[] = [
     quizUrl: SOS_PET_QUIZ_URL,
     hotmartProductId: "8190678",
     productName: "SOS Pet",
-    priceLabel: "R$ 57,00",
+    priceLabel: "US$ 14,90",
     copy: {
       es: {
         tagline:
