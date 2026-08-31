@@ -4,6 +4,7 @@ import { getDict } from "@/content";
 import { LOCALES, isLocale } from "@/lib/config";
 import { FunnelProvider } from "@/lib/store";
 import { MetaPixel } from "@/components/MetaPixel";
+import { UtmifyPixel } from "@/components/UtmifyPixel";
 
 export const generateStaticParams = () =>
   LOCALES.map((locale) => ({ locale }));
@@ -33,6 +34,7 @@ export default async function LocaleLayout({
     <html lang={getDict(locale).htmlLang}>
       <body>
         <MetaPixel />
+        <UtmifyPixel />
         <FunnelProvider>{children}</FunnelProvider>
       </body>
     </html>

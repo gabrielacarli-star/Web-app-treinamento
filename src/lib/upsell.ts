@@ -12,29 +12,41 @@ export type UpsellOffer = {
 };
 
 /**
- * Cross-sell to other products from the same seller, offered once on the
- * success page right after a DogFlow purchase. Each is its own Hotmart
- * checkout — no combined payment, no revenue split to build.
+ * Cross-sell to other products from the same seller (Dr. Eduardo Sebastião's
+ * separate "Pet Saudável" app — its own Vite/React/Supabase project, hosted
+ * on Hostinger, not part of this codebase), offered once on the success page
+ * right after a DogFlow purchase. Each is its own Hotmart checkout — no
+ * combined payment, no revenue split to build; a buyer's access to that
+ * app's content is already handled entirely by its own Hotmart webhook,
+ * matched on hotmart_product_id.
  *
- * PLACEHOLDER: swap in the real checkout URL, price and tagline once known.
+ * SOS Pet (R$57, Hotmart id 8190678) is the flagship product — "Kit Farmácia
+ * em Casa" and "Sinais Silenciosos" are order bumps (R$19.90 each) attached
+ * to *its* checkout, not independently marketed products with their own
+ * standalone checkout page, so SOS Pet is what belongs here.
+ *
+ * PLACEHOLDER: checkoutUrl needs the real pay.hotmart.com link for SOS Pet.
  */
 export const UPSELL_OFFERS: UpsellOffer[] = [
   {
-    id: "kit-farmacia-em-casa",
-    checkoutUrl: "https://pay.hotmart.com/REPLACE_ME",
-    productName: "Kit Farmácia em Casa",
-    priceLabel: "US$ 0,00",
+    id: "sos-pet",
+    checkoutUrl: "https://pay.hotmart.com/REPLACE_ME_SOS_PET",
+    productName: "SOS Pet",
+    priceLabel: "R$ 57,00",
     copy: {
       es: {
-        tagline: "El mismo cuidado, ahora también para tu botiquín en casa.",
+        tagline:
+          "Guía de primeros auxilios para perros y gatos: qué hacer en las 8 emergencias más comunes, siempre a mano en tu celular.",
         cta: "Quiero verlo",
       },
       pt: {
-        tagline: "O mesmo cuidado, agora também para sua farmácia em casa.",
+        tagline:
+          "Guia de primeiros socorros para cães e gatos: o que fazer nas 8 emergências mais comuns, sempre à mão no seu celular.",
         cta: "Quero ver",
       },
       en: {
-        tagline: "The same care, now for your home medicine kit too.",
+        tagline:
+          "A first-aid guide for dogs and cats: what to do in the 8 most common emergencies, always on your phone.",
         cta: "Show me",
       },
     },
