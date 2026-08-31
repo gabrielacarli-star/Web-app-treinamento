@@ -26,7 +26,10 @@ export async function POST(request: Request) {
   if (!email) return NextResponse.json({ ok: true });
 
   const supabase = createAdminClient();
-  const redirectTo = `${SITE_URL}/auth/callback?next=/${locale}/reset-password`;
+  // See the matching comment in the webhook: an admin-generated link
+  // carries its session in the URL fragment, which only client-side JS on
+  // the target page can pick up — so it points straight at the page.
+  const redirectTo = `${SITE_URL}/${locale}/reset-password`;
 
   const { data: link, error: linkError } = await supabase.auth.admin.generateLink({
     type: "recovery",

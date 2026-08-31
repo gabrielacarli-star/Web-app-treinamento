@@ -27,7 +27,13 @@ async function provisionPasswordSetup(
     .maybeSingle();
   const locale: Locale = isLocale(lead?.locale ?? "") ? (lead!.locale as Locale) : "es";
 
-  const redirectTo = `${SITE_URL}/auth/callback?next=/${locale}/reset-password`;
+  // Straight to the page itself, not through a server route: an
+  // admin-generated link redirects with the session in the URL fragment
+  // (implicit flow — it can't participate in PKCE, since it wasn't
+  // requested by the browser that opens it), which only client-side JS on
+  // the target page can read. supabase-js picks it up automatically on
+  // load via detectSessionInUrl.
+  const redirectTo = `${SITE_URL}/${locale}/reset-password`;
 
   let { data: link, error: linkError } = await supabase.auth.admin.generateLink({
     type: "invite",
