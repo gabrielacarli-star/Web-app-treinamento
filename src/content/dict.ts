@@ -113,6 +113,8 @@ export type Dict = {
     /** Wrong e-mail/password combination on sign-in itself. */
     wrongCredentials: string;
     forgotPassword: string;
+    firstAccessCta: string;
+    or: string;
   };
   resetPassword: {
     headline: string;

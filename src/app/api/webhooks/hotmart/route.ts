@@ -27,12 +27,6 @@ async function provisionPasswordSetup(
     .maybeSingle();
   const locale: Locale = isLocale(lead?.locale ?? "") ? (lead!.locale as Locale) : "es";
 
-  // Straight to the page itself, not through a server route: an
-  // admin-generated link redirects with the session in the URL fragment
-  // (implicit flow — it can't participate in PKCE, since it wasn't
-  // requested by the browser that opens it), which only client-side JS on
-  // the target page can read. supabase-js picks it up automatically on
-  // load via detectSessionInUrl.
   const redirectTo = `${SITE_URL}/${locale}/reset-password`;
 
   let { data: link, error: linkError } = await supabase.auth.admin.generateLink({
@@ -48,7 +42,7 @@ async function provisionPasswordSetup(
       options: { redirectTo },
     }));
   }
-  if (linkError || !link?.properties?.action_link) {
+  if (linkError || !link?.properties?.hashed_token) {
     console.error(
       "hotmart webhook: could not generate password-setup link for",
       email,
@@ -57,9 +51,16 @@ async function provisionPasswordSetup(
     return;
   }
 
+  // Built around token_hash/type rather than the link's own action_link: see
+  // the comment on /auth/confirm for why.
+  const confirmUrl = new URL("/auth/confirm", SITE_URL);
+  confirmUrl.searchParams.set("token_hash", link.properties.hashed_token);
+  confirmUrl.searchParams.set("type", link.properties.verification_type);
+  confirmUrl.searchParams.set("next", `/${locale}/reset-password`);
+
   const { subject, html } = buildSetPasswordEmail({
     locale,
-    actionLink: link.properties.action_link,
+    actionLink: confirmUrl.toString(),
   });
   const result = await sendEmail({ to: email, subject, html });
   if (!result.ok) {

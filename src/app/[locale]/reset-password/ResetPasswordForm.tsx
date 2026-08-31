@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { Cta, CtaDock } from "@/components/Cta";
 import { createClient } from "@/lib/supabase/client";
@@ -10,38 +10,10 @@ import type { Locale } from "@/lib/types";
 
 export function ResetPasswordForm({ locale, dict }: { locale: Locale; dict: Dict }) {
   const router = useRouter();
-  const [session, setSession] = useState<"checking" | "ready" | "expired">("checking");
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [state, setState] = useState<"idle" | "saving" | "error">("idle");
   const [fieldError, setFieldError] = useState("");
-
-  useEffect(() => {
-    const supabase = createClient();
-
-    // The invite/recovery link redirects here with its session in the URL's
-    // hash fragment (#access_token=...), which supabase-js parses
-    // automatically on load (detectSessionInUrl) — that's async, so both an
-    // immediate check and the auth-state event below can be the one that
-    // actually finds it.
-    supabase.auth.getSession().then(({ data }) => {
-      if (data.session) setSession("ready");
-    });
-    const { data: subscription } = supabase.auth.onAuthStateChange((_event, current) => {
-      if (current) setSession("ready");
-    });
-
-    // A stale/reused link never fires an auth event — give detection a
-    // moment before concluding there is nothing to find.
-    const timeout = window.setTimeout(() => {
-      setSession((current) => (current === "checking" ? "expired" : current));
-    }, 2500);
-
-    return () => {
-      subscription.subscription.unsubscribe();
-      window.clearTimeout(timeout);
-    };
-  }, []);
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -65,36 +37,6 @@ export function ResetPasswordForm({ locale, dict }: { locale: Locale; dict: Dict
     router.push(`/${locale}/app`);
     router.refresh();
   };
-
-  if (session !== "ready") {
-    return (
-      <div className="funnel-shell">
-        <header className="flex h-14 items-center justify-center">
-          <Logo />
-        </header>
-        {session === "expired" && (
-          <main className="flex flex-1 flex-col px-5 pb-10">
-            <div className="mt-14 flex flex-col items-center text-center">
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-coral-100 text-[28px]">
-                ⏱️
-              </span>
-              <h1 className="headline mt-5 text-[22px]">
-                {dict.resetPassword.expiredHeadline}
-              </h1>
-              <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
-                {dict.resetPassword.expiredBody}
-              </p>
-            </div>
-            <div className="mt-auto pt-10">
-              <a href={`/${locale}/login`} className="cta">
-                {dict.resetPassword.expiredCta}
-              </a>
-            </div>
-          </main>
-        )}
-      </div>
-    );
-  }
 
   return (
     <div className="funnel-shell">

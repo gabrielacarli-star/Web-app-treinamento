@@ -26,9 +26,6 @@ export async function POST(request: Request) {
   if (!email) return NextResponse.json({ ok: true });
 
   const supabase = createAdminClient();
-  // See the matching comment in the webhook: an admin-generated link
-  // carries its session in the URL fragment, which only client-side JS on
-  // the target page can pick up — so it points straight at the page.
   const redirectTo = `${SITE_URL}/${locale}/reset-password`;
 
   const { data: link, error: linkError } = await supabase.auth.admin.generateLink({
@@ -37,16 +34,23 @@ export async function POST(request: Request) {
     options: { redirectTo },
   });
 
-  if (linkError || !link?.properties?.action_link) {
+  if (linkError || !link?.properties?.hashed_token) {
     if (linkError && linkError.message !== "User not found") {
       console.error("forgot-password: could not generate link for", email, linkError.message);
     }
     return NextResponse.json({ ok: true });
   }
 
+  // Built around token_hash/type rather than the link's own action_link —
+  // see the comment on /auth/confirm for why.
+  const confirmUrl = new URL("/auth/confirm", SITE_URL);
+  confirmUrl.searchParams.set("token_hash", link.properties.hashed_token);
+  confirmUrl.searchParams.set("type", link.properties.verification_type);
+  confirmUrl.searchParams.set("next", `/${locale}/reset-password`);
+
   const { subject, html } = buildSetPasswordEmail({
     locale,
-    actionLink: link.properties.action_link,
+    actionLink: confirmUrl.toString(),
   });
   const result = await sendEmail({ to: email, subject, html });
   if (!result.ok) {

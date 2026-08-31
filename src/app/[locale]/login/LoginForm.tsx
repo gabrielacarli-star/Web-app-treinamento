@@ -116,6 +116,20 @@ export function LoginForm({ locale, dict }: { locale: Locale; dict: Dict }) {
               <p className="mt-2 text-[13px] text-coral-600">{dict.login.invalid}</p>
             )}
 
+            <button
+              type="button"
+              onClick={forgotPassword}
+              className="mt-3 w-full rounded-pill border-2 border-violet-500 px-4 py-3 text-center text-[14px] font-bold text-violet-600"
+            >
+              {dict.login.firstAccessCta}
+            </button>
+
+            <div className="my-4 flex items-center gap-3 text-[12px] text-ink-faint">
+              <span className="h-px flex-1 bg-line" />
+              {dict.login.or}
+              <span className="h-px flex-1 bg-line" />
+            </div>
+
             <label
               htmlFor="login-password"
               className="mb-1.5 mt-4 block text-[13px] font-medium text-ink-soft"

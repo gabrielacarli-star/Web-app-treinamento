@@ -367,6 +367,8 @@ export const en: Dict = {
     signOut: "Sign out",
     wrongCredentials: "Wrong e-mail or password.",
     forgotPassword: "Forgot my password",
+    firstAccessCta: "First time here? Create my password",
+    or: "or",
   },
   resetPassword: {
     headline: "Create your password",
