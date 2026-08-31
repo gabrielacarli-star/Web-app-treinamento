@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { UPSELL_OFFERS } from "@/lib/upsell";
 import { track } from "@/lib/pixel";
+import { useFunnel } from "@/lib/store";
 import type { Locale } from "@/lib/types";
 
 /**
- * Cross-sell shown once, right after a real DogFlow purchase. Each offer is
- * its own separate Hotmart checkout — clicking through starts a brand new,
- * independent sale, not a combined charge. Purely additive: it never blocks
- * the buyer's own purchase confirmation above it, so "skip" just dismisses
- * this block rather than gating navigation.
+ * Cross-sell shown once, right after a real DogFlow purchase. Each offer
+ * sends the buyer through *that* product's own quiz funnel rather than
+ * straight to its checkout — with the dog's name and e-mail already
+ * collected here carried over by query param, so that funnel never asks
+ * for them again. Purely additive: it never blocks the buyer's own
+ * purchase confirmation above it, so "skip" just dismisses this block
+ * rather than gating navigation.
  */
 export function Upsell({
   locale,
@@ -22,6 +25,8 @@ export function Upsell({
   skipLabel: string;
 }) {
   const [dismissed, setDismissed] = useState(false);
+  const { answers, email } = useFunnel();
+  const dogName = (answers.dog_name as string) || "";
   if (!UPSELL_OFFERS.length || dismissed) return null;
 
   return (
@@ -32,6 +37,9 @@ export function Upsell({
       <div className="mt-4 space-y-4">
         {UPSELL_OFFERS.map((offer) => {
           const copy = offer.copy[locale] ?? offer.copy.es;
+          const url = new URL(`/${locale}`, offer.quizUrl);
+          if (dogName) url.searchParams.set("pet", dogName);
+          if (email) url.searchParams.set("email", email);
           return (
             <div
               key={offer.id}
@@ -49,9 +57,9 @@ export function Upsell({
                 </p>
               </div>
               <a
-                href={offer.checkoutUrl}
+                href={url.toString()}
                 onClick={() =>
-                  track("InitiateCheckout", {
+                  track("ViewContent", {
                     content_ids: [offer.id],
                     content_name: offer.productName,
                     content_type: "product",

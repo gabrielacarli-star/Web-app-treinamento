@@ -2,8 +2,13 @@ import type { Locale } from "./types";
 
 export type UpsellOffer = {
   id: string;
-  /** Separate Hotmart checkout for this product — its own sale, its own webhook delivery. */
-  checkoutUrl: string;
+  /**
+   * The other product's own quiz-funnel site (not its Hotmart checkout
+   * directly) — sends the buyer through that funnel's story before its own
+   * paywall, same as this one does. Locale and prefill params are appended
+   * by the caller, since only it knows the buyer's name/email/locale.
+   */
+  quizUrl: string;
   /** Shown as-is, not translated: a product name is a name in every locale. */
   productName: string;
   /** e.g. "US$ 9,90" — kept as a single display string since each product prices differently. */
@@ -26,10 +31,18 @@ export type UpsellOffer = {
  * standalone checkout page, so SOS Pet is what belongs here.
  *
  */
+/**
+ * PLACEHOLDER until the real Vercel URL for the sos-pet-quiz project is
+ * known — override with NEXT_PUBLIC_SOS_PET_QUIZ_URL once it is.
+ */
+const SOS_PET_QUIZ_URL =
+  process.env.NEXT_PUBLIC_SOS_PET_QUIZ_URL ||
+  "https://sos-pet-quiz.vercel.app";
+
 export const UPSELL_OFFERS: UpsellOffer[] = [
   {
     id: "sos-pet",
-    checkoutUrl: "https://pay.hotmart.com/L106879279A",
+    quizUrl: SOS_PET_QUIZ_URL,
     productName: "SOS Pet",
     priceLabel: "R$ 57,00",
     copy: {
