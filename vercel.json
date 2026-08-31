@@ -1,8 +1,1 @@
-{
-  "crons": [
-    {
-      "path": "/api/cron/recover-leads",
-      "schedule": "0 * * * *"
-    }
-  ]
-}
+{"crons": [{"path": "/api/cron/recover-leads", "schedule": "0 3 * * *"}]}
