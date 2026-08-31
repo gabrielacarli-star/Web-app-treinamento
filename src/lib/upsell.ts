@@ -31,13 +31,9 @@ export type UpsellOffer = {
  * standalone checkout page, so SOS Pet is what belongs here.
  *
  */
-/**
- * PLACEHOLDER until the real Vercel URL for the sos-pet-quiz project is
- * known — override with NEXT_PUBLIC_SOS_PET_QUIZ_URL once it is.
- */
 const SOS_PET_QUIZ_URL =
   process.env.NEXT_PUBLIC_SOS_PET_QUIZ_URL ||
-  "https://sos-pet-quiz.vercel.app";
+  "https://sos-pet-quiz-9are.vercel.app";
 
 export const UPSELL_OFFERS: UpsellOffer[] = [
   {
