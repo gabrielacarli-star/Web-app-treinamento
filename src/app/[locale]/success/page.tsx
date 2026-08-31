@@ -5,6 +5,7 @@ import { CHECKOUT_CONFIGURED, isLocale } from "@/lib/config";
 import { authConfigured } from "@/lib/access";
 import { Logo } from "@/components/Logo";
 import { PurchaseTracker } from "./PurchaseTracker";
+import { Upsell } from "./Upsell";
 
 /**
  * Two audiences reach this page.
@@ -77,6 +78,14 @@ export default async function SuccessPage({
           <p className="mt-8 rounded-xl2 border border-dashed border-coral-300 bg-coral-100 px-4 py-3 text-center text-[12px] leading-relaxed text-ink-soft">
             {t.success.placeholderNote}
           </p>
+        )}
+
+        {checkoutLive && (
+          <Upsell
+            locale={locale}
+            heading={t.success.upsellHeading}
+            skipLabel={t.success.upsellSkip}
+          />
         )}
 
         <div className="mt-auto pt-10">

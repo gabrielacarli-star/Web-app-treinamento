@@ -382,6 +382,8 @@ export const es: Dict = {
     paidCta: "Entrar en DogFlow",
     paidHint:
       "Usa el mismo correo de la compra. Es con él que reconocemos tu acceso.",
+    upsellHeading: "Antes de irte",
+    upsellSkip: "No, gracias, continuar",
   },
   member: {
     tabs: { course: "Mi curso", training: "Entrenamiento", clicker: "Silbato" },

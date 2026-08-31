@@ -121,6 +121,8 @@ export type Dict = {
     paidSteps: string[];
     paidCta: string;
     paidHint: string;
+    upsellHeading: string;
+    upsellSkip: string;
   };
   member: {
     tabs: { course: string; training: string; clicker: string };
