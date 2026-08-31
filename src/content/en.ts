@@ -385,7 +385,15 @@ export const en: Dict = {
     upsellSkip: "No thanks, continue",
   },
   member: {
-    tabs: { course: "My course", training: "Training", clicker: "Whistle" },
+    tabs: {
+      course: "My course",
+      training: "Training",
+      clicker: "Whistle",
+      products: "More",
+    },
+    otherProductsHeadline: "Your other products",
+    otherProductsEmpty: "You don't have any other Dr. Eduardo products yet.",
+    otherProductsCta: "Open",
     coursesHeadline: "Courses",
     inProgress: "In progress",
     courses: [

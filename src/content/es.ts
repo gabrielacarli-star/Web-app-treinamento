@@ -386,7 +386,15 @@ export const es: Dict = {
     upsellSkip: "No, gracias, continuar",
   },
   member: {
-    tabs: { course: "Mi curso", training: "Entrenamiento", clicker: "Silbato" },
+    tabs: {
+      course: "Mi curso",
+      training: "Entrenamiento",
+      clicker: "Silbato",
+      products: "Otros",
+    },
+    otherProductsHeadline: "Tus otros productos",
+    otherProductsEmpty: "Aún no tienes otros productos de Dr. Eduardo.",
+    otherProductsCta: "Abrir",
     coursesHeadline: "Cursos",
     inProgress: "En curso",
     courses: [

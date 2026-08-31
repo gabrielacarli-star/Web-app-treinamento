@@ -3,6 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { getDict } from "@/content";
 import { isLocale } from "@/lib/config";
 import { authConfigured, getAccess } from "@/lib/access";
+import { getOtherProducts } from "@/lib/crossApp";
 import { Logo } from "@/components/Logo";
 import { MemberArea } from "./MemberArea";
 import { SignOutButton } from "./SignOutButton";
@@ -57,11 +58,14 @@ export default async function MemberPage({
     );
   }
 
+  const otherProducts = await getOtherProducts(access.email!);
+
   return (
     <MemberArea
       dict={t}
       account={{ email: access.email!, signOut: t.login.signOut }}
       locale={locale}
+      otherProducts={otherProducts}
     />
   );
 }

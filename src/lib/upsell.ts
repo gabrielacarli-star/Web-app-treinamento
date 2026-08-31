@@ -25,12 +25,11 @@ export type UpsellOffer = {
  * to *its* checkout, not independently marketed products with their own
  * standalone checkout page, so SOS Pet is what belongs here.
  *
- * PLACEHOLDER: checkoutUrl needs the real pay.hotmart.com link for SOS Pet.
  */
 export const UPSELL_OFFERS: UpsellOffer[] = [
   {
     id: "sos-pet",
-    checkoutUrl: "https://pay.hotmart.com/REPLACE_ME_SOS_PET",
+    checkoutUrl: "https://pay.hotmart.com/L106879279A",
     productName: "SOS Pet",
     priceLabel: "R$ 57,00",
     copy: {

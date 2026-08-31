@@ -125,7 +125,10 @@ export type Dict = {
     upsellSkip: string;
   };
   member: {
-    tabs: { course: string; training: string; clicker: string };
+    tabs: { course: string; training: string; clicker: string; products: string };
+    otherProductsHeadline: string;
+    otherProductsEmpty: string;
+    otherProductsCta: string;
     coursesHeadline: string;
     inProgress: string;
     courses: Course[];

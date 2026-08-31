@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { Logo } from "@/components/Logo";
 import { VideoSlot } from "@/components/Slots";
 import type { Dict } from "@/content";
+import type { OtherProduct } from "@/lib/crossApp";
 import type { Locale } from "@/lib/types";
 import { SignOutButton } from "./SignOutButton";
 
@@ -12,7 +13,8 @@ type View =
   | { name: "lessons"; course: number }
   | { name: "lesson"; course: number; lesson: number; from: "courses" | "training" }
   | { name: "training" }
-  | { name: "clicker" };
+  | { name: "clicker" }
+  | { name: "products" };
 
 type Props = {
   dict: Dict;
@@ -20,18 +22,23 @@ type Props = {
   preview?: boolean;
   account?: { email: string; signOut: string };
   locale?: Locale;
+  /** Other Dr. Eduardo products this buyer's email has an active purchase
+   *  for, per Pet Saudável's own database — empty means none, never "we
+   *  couldn't check", so this always fails closed. */
+  otherProducts?: OtherProduct[];
 };
 
 /** Which bottom tab is "on" for a given view — a lesson counts toward
  *  whichever tab the visitor drilled into it from. */
-function tabFor(view: View): "course" | "training" | "clicker" {
+function tabFor(view: View): "course" | "training" | "clicker" | "products" {
   if (view.name === "clicker") return "clicker";
+  if (view.name === "products") return "products";
   if (view.name === "training") return "training";
   if (view.name === "lesson") return view.from === "training" ? "training" : "course";
   return "course";
 }
 
-export function MemberArea({ dict, preview, account, locale }: Props) {
+export function MemberArea({ dict, preview, account, locale, otherProducts = [] }: Props) {
   const [view, setView] = useState<View>({ name: "courses" });
   const { courses } = dict.member;
   const activeTab = tabFor(view);
@@ -166,6 +173,50 @@ export function MemberArea({ dict, preview, account, locale }: Props) {
 
         {view.name === "clicker" && <Clicker dict={dict} />}
 
+        {view.name === "products" && (
+          <>
+            <h1 className="headline text-[22px]">
+              {dict.member.otherProductsHeadline}
+            </h1>
+            {otherProducts.length === 0 ? (
+              <p className="mt-4 rounded-xl2 bg-cream px-4 py-3 text-[14px] leading-relaxed text-ink-soft">
+                {dict.member.otherProductsEmpty}
+              </p>
+            ) : (
+              <div className="mt-4 space-y-3">
+                {otherProducts.map((product) => (
+                  <div
+                    key={product.productId}
+                    className="flex items-center gap-3 overflow-hidden rounded-xl2 border border-line bg-surface p-3 shadow-card"
+                  >
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-teal-100 text-[22px]">
+                      🩺
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[15px] font-bold text-ink">
+                        {product.title}
+                      </span>
+                      {product.description && (
+                        <span className="mt-0.5 block truncate text-[12px] text-ink-soft">
+                          {product.description}
+                        </span>
+                      )}
+                    </span>
+                    <a
+                      href="https://app.medveteduardosebastiao.com"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="shrink-0 rounded-pill bg-violet-600 px-3.5 py-2 text-[12px] font-bold text-white"
+                    >
+                      {dict.member.otherProductsCta}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
         {view.name === "lesson" && (
           <article>
             {/* Breadcrumb: which course this lesson belongs to, so drilling in
@@ -218,6 +269,7 @@ export function MemberArea({ dict, preview, account, locale }: Props) {
             ["course", dict.member.tabs.course, { name: "courses" } as const],
             ["training", dict.member.tabs.training, { name: "training" } as const],
             ["clicker", dict.member.tabs.clicker, { name: "clicker" } as const],
+            ["products", dict.member.tabs.products, { name: "products" } as const],
           ] as const
         ).map(([key, label, target]) => (
           <button
