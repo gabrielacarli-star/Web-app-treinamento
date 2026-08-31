@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UPSELL_OFFERS } from "@/lib/upsell";
+import { UPSELL_OFFERS, offerUrl } from "@/lib/upsell";
 import { track } from "@/lib/pixel";
 import { useFunnel } from "@/lib/store";
 import type { Locale } from "@/lib/types";
@@ -37,9 +37,7 @@ export function Upsell({
       <div className="mt-4 space-y-4">
         {UPSELL_OFFERS.map((offer) => {
           const copy = offer.copy[locale] ?? offer.copy.es;
-          const url = new URL(`/${locale}`, offer.quizUrl);
-          if (dogName) url.searchParams.set("pet", dogName);
-          if (email) url.searchParams.set("email", email);
+          const url = offerUrl(offer, locale, { email, petName: dogName });
           return (
             <div
               key={offer.id}
@@ -57,7 +55,7 @@ export function Upsell({
                 </p>
               </div>
               <a
-                href={url.toString()}
+                href={url}
                 onClick={() =>
                   track("ViewContent", {
                     content_ids: [offer.id],

@@ -6,7 +6,7 @@ import { VideoSlot } from "@/components/Slots";
 import type { Dict } from "@/content";
 import type { OtherProduct } from "@/lib/crossApp";
 import { PET_SAUDAVEL_APP_URL } from "@/lib/crossApp";
-import { UPSELL_OFFERS } from "@/lib/upsell";
+import { UPSELL_OFFERS, offerUrl } from "@/lib/upsell";
 import { DEFAULT_LOCALE } from "@/lib/config";
 import type { Locale } from "@/lib/types";
 import { SignOutButton } from "./SignOutButton";
@@ -193,8 +193,7 @@ export function MemberArea({ dict, preview, account, locale, otherProducts = [] 
                     (p) => p.productId === offer.hotmartProductId,
                   );
                   const copy = offer.copy[activeLocale] ?? offer.copy.es;
-                  const buyUrl = new URL(`/${activeLocale}`, offer.quizUrl);
-                  if (account?.email) buyUrl.searchParams.set("email", account.email);
+                  const buyUrl = offerUrl(offer, activeLocale, { email: account?.email });
 
                   return (
                     <div
@@ -228,7 +227,7 @@ export function MemberArea({ dict, preview, account, locale, otherProducts = [] 
                         </a>
                       ) : (
                         <a
-                          href={buyUrl.toString()}
+                          href={buyUrl}
                           className="shrink-0 rounded-pill bg-action-500 px-3.5 py-2 text-[12px] font-bold text-white"
                         >
                           {copy.cta}
