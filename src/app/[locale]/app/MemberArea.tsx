@@ -9,6 +9,7 @@ import { PET_SAUDAVEL_APP_URL } from "@/lib/crossApp";
 import { UPSELL_OFFERS, offerUrl } from "@/lib/upsell";
 import { DEFAULT_LOCALE } from "@/lib/config";
 import type { Locale } from "@/lib/types";
+import { InviteFriends } from "./InviteFriends";
 import { SignOutButton } from "./SignOutButton";
 
 type View =
@@ -282,6 +283,7 @@ export function MemberArea({ dict, preview, account, locale, otherProducts = [] 
 
       {account && locale && (
         <div className="border-t border-line bg-cream px-5 py-3 text-center">
+          <InviteFriends locale={locale} dict={dict} />
           <p className="text-[12px] text-ink-faint">{account.email}</p>
           <SignOutButton label={account.signOut} locale={locale} />
         </div>

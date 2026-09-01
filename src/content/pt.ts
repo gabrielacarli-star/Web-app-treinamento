@@ -420,6 +420,9 @@ export const pt: Dict = {
     otherProductsHeadline: "Outros produtos do Dr. Eduardo",
     otherProductsEmpty: "Você ainda não tem outros produtos do Dr. Eduardo.",
     otherProductsCta: "Abrir",
+    inviteCta: "Convidar amigos",
+    inviteMessage: "Comecei a treinar meu cachorro com o DogFlow e tá funcionando muito bem. Dá uma olhada: {url}",
+    inviteCopied: "Link copiado!",
     coursesHeadline: "Cursos",
     inProgress: "Em andamento",
     courses: [

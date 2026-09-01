@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { OFFER_TO_PLAN, isLocale } from "@/lib/config";
+import { OFFER_TO_PLAN, SITE_URL, isLocale } from "@/lib/config";
 import { buildSetPasswordEmail } from "@/lib/email/setPassword";
 import { sendEmail } from "@/lib/email/send";
 import type { Locale } from "@/lib/types";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://web-app-treinamento.vercel.app";
 
 /**
  * A fresh buyer has no Supabase Auth account yet — this creates one (or, on

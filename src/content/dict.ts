@@ -154,6 +154,10 @@ export type Dict = {
     otherProductsHeadline: string;
     otherProductsEmpty: string;
     otherProductsCta: string;
+    inviteCta: string;
+    /** {url} placeholder for the share link. */
+    inviteMessage: string;
+    inviteCopied: string;
     coursesHeadline: string;
     inProgress: string;
     courses: Course[];

@@ -12,6 +12,11 @@ export const BRAND = {
   supportEmail: "oi@dogflow.app",
 };
 
+/** The real, live domain — used to build absolute links from server code
+ *  (e-mails, redirects) and from client code (share links) alike. */
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL || "https://web-app-treinamento.vercel.app";
+
 /** Welcome discount handed out by the scratch-card step. */
 export const DISCOUNT = 0.6;
 

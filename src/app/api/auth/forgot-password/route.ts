@@ -2,11 +2,9 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { buildSetPasswordEmail } from "@/lib/email/setPassword";
 import { sendEmail } from "@/lib/email/send";
-import { isLocale, DEFAULT_LOCALE } from "@/lib/config";
+import { isLocale, DEFAULT_LOCALE, SITE_URL } from "@/lib/config";
 
 export const runtime = "nodejs";
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://web-app-treinamento.vercel.app";
 
 /**
  * "Forgot password" goes through Resend, same as the webhook's initial
