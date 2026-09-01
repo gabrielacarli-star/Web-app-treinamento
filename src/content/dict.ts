@@ -78,6 +78,10 @@ export type Dict = {
     weekly: string;
     total: string;
     billed: string;
+    /** e.g. "≈ {amount}" — wraps the local-currency estimate next to the USD price. */
+    approx: string;
+    /** Disclaimer under the CTA: real charge is USD, the local figure is only an estimate. */
+    approxNote: string;
     cta: string;
     stat: string;
     whyHeadline: string;

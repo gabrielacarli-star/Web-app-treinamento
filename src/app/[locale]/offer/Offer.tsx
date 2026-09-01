@@ -18,14 +18,28 @@ import {
 } from "@/lib/config";
 import { useFunnel } from "@/lib/store";
 import { track } from "@/lib/pixel";
+import { estimateLocalPrice } from "@/lib/fx";
 import type { Locale } from "@/lib/types";
 
-export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
+export function Offer({
+  locale,
+  dict,
+  country,
+}: {
+  locale: Locale;
+  dict: Dict;
+  /** ISO country code from Vercel's edge geolocation, or null off-Vercel. */
+  country?: string | null;
+}) {
   const { answers, email, offerStartedAt, variant, patch } = useFunnel();
   const [selected, setSelected] = useState<Plan["id"]>("p4");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   const { expired, label } = useCountdown(offerStartedAt, OFFER_MINUTES);
+
+  // Only shown when a local-currency estimate actually renders below —
+  // no point disclaiming a conversion nobody sees.
+  const showsLocalEstimate = Boolean(estimateLocalPrice(1, country));
 
   const dog = (answers.dog_name as string) || dict.common.yourDog;
 
@@ -171,6 +185,10 @@ export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
                     {fill(dict.offer.billed, {
                       amount: `${CURRENCY} ${money(price.total)}`,
                     })}
+                    {(() => {
+                      const local = estimateLocalPrice(price.total, country);
+                      return local ? ` (${fill(dict.offer.approx, { amount: local })})` : "";
+                    })()}
                   </span>
                 </span>
 
@@ -195,6 +213,11 @@ export function Offer({ locale, dict }: { locale: Locale; dict: Dict }) {
           <p className="mt-3 text-center text-[12px] leading-relaxed text-ink-faint">
             {dict.offer.stat}
           </p>
+          {showsLocalEstimate && (
+            <p className="mt-1 text-center text-[11px] leading-relaxed text-ink-faint">
+              {dict.offer.approxNote}
+            </p>
+          )}
         </div>
 
         {/* Why it works */}

@@ -292,6 +292,8 @@ export const es: Dict = {
     weekly: "por semana",
     total: "en total",
     billed: "Hoy pagas {amount}",
+    approx: "≈ {amount}",
+    approxNote: "El cobro real es en dólares (USD); el valor en tu moneda es una estimación aproximada.",
     cta: "Quiero mi plan",
     stat: "El 98% de nuestros usuarios nota cambios positivos en el comportamiento de su perro ya en la primera semana.",
     whyHeadline: "Por qué funciona DogFlow",
