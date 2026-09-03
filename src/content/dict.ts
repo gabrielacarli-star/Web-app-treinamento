@@ -96,6 +96,7 @@ export type Dict = {
     contact: string;
     expired: string;
     restart: string;
+    checkoutError: string;
   };
   login: {
     headline: string;

@@ -2,6 +2,7 @@ import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { getDict } from "@/content";
 import { isLocale } from "@/lib/config";
+import { STRIPE_CHECKOUT_CONFIGURED } from "@/lib/stripe/server";
 import { Offer } from "./Offer";
 
 export default async function OfferPage({
@@ -17,5 +18,12 @@ export default async function OfferPage({
   // hosts), which just means no local-currency estimate renders.
   const country = (await headers()).get("x-vercel-ip-country");
 
-  return <Offer locale={locale} dict={getDict(locale)} country={country} />;
+  return (
+    <Offer
+      locale={locale}
+      dict={getDict(locale)}
+      country={country}
+      stripeConfigured={STRIPE_CHECKOUT_CONFIGURED}
+    />
+  );
 }

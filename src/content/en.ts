@@ -349,6 +349,7 @@ export const en: Dict = {
     contact: "Still have a question? Write to",
     expired: "Your offer has expired.",
     restart: "Reopen my offer",
+    checkoutError: "We couldn't open checkout. Please try again in a moment or reach out to us.",
   },
   login: {
     headline: "Sign in to DogFlow",

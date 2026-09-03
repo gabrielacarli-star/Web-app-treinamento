@@ -352,6 +352,7 @@ export const pt: Dict = {
     contact: "Ficou com dúvida? Escreva para",
     expired: "Sua oferta expirou.",
     restart: "Reabrir a minha oferta",
+    checkoutError: "Não conseguimos abrir o pagamento. Tente de novo em instantes ou fale com a gente.",
   },
   login: {
     headline: "Entrar no DogFlow",

@@ -1,74 +1,8 @@
 import { NextResponse } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { OFFER_TO_PLAN, SITE_URL, isLocale } from "@/lib/config";
-import { buildSetPasswordEmail } from "@/lib/email/setPassword";
-import { sendEmail } from "@/lib/email/send";
-import type { Locale } from "@/lib/types";
-
-/**
- * A fresh buyer has no Supabase Auth account yet — this creates one (or, on
- * a repurchase, reuses the existing one) and e-mails a link to set the
- * password they'll sign in with from then on. Best-effort: a failure here
- * never fails the webhook, since the purchase itself is already recorded.
- */
-async function provisionPasswordSetup(
-  supabase: ReturnType<typeof createAdminClient>,
-  email: string,
-) {
-  const { data: lead } = await supabase
-    .from("quiz_leads")
-    .select("locale")
-    .eq("email", email.toLowerCase())
-    .order("last_seen_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  const locale: Locale = isLocale(lead?.locale ?? "") ? (lead!.locale as Locale) : "es";
-
-  const redirectTo = `${SITE_URL}/${locale}/reset-password`;
-
-  let { data: link, error: linkError } = await supabase.auth.admin.generateLink({
-    type: "invite",
-    email,
-    options: { redirectTo },
-  });
-  if (linkError) {
-    // Already registered from an earlier purchase — send a recovery link instead.
-    ({ data: link, error: linkError } = await supabase.auth.admin.generateLink({
-      type: "recovery",
-      email,
-      options: { redirectTo },
-    }));
-  }
-  if (linkError || !link?.properties?.hashed_token) {
-    console.error(
-      "hotmart webhook: could not generate password-setup link for",
-      email,
-      linkError?.message,
-    );
-    return;
-  }
-
-  // Built around token_hash/type rather than the link's own action_link: see
-  // the comment on /auth/confirm for why.
-  const confirmUrl = new URL("/auth/confirm", SITE_URL);
-  confirmUrl.searchParams.set("token_hash", link.properties.hashed_token);
-  confirmUrl.searchParams.set("type", link.properties.verification_type);
-  confirmUrl.searchParams.set("next", `/${locale}/reset-password`);
-
-  const { subject, html } = buildSetPasswordEmail({
-    locale,
-    actionLink: confirmUrl.toString(),
-  });
-  const result = await sendEmail({ to: email, subject, html });
-  if (!result.ok) {
-    console.error(
-      "hotmart webhook: could not send set-password email to",
-      email,
-      result.error ?? result.skipped,
-    );
-  }
-}
+import { OFFER_TO_PLAN, TERM_DAYS, type Plan } from "@/lib/config";
+import { provisionPasswordSetup } from "@/lib/auth/provisionPasswordSetup";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -84,9 +18,6 @@ const REVOKES: Record<string, string> = {
   SUBSCRIPTION_CANCELLATION: "cancelled",
   SWITCH_PLAN: "cancelled",
 };
-
-/** How long each plan grants access for. */
-const TERM_DAYS: Record<string, number> = { p7: 7, p4: 28, p12: 84 };
 
 const safeEqual = (a: string, b: string) => {
   const left = Buffer.from(a);
@@ -194,9 +125,10 @@ export async function POST(request: Request) {
   }
 
   const plan = (offer && OFFER_TO_PLAN[offer]) ?? offer ?? null;
+  const planId = plan && plan in TERM_DAYS ? (plan as Plan["id"]) : null;
 
   if (GRANTS.has(event)) {
-    const days = plan ? TERM_DAYS[plan] : undefined;
+    const days = planId ? TERM_DAYS[planId] : undefined;
     const expiresAt = days
       ? new Date(Date.now() + days * 86_400_000).toISOString()
       : null;
@@ -220,7 +152,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "could not record purchase" }, { status: 500 });
     }
 
-    await provisionPasswordSetup(supabase, email);
+    await provisionPasswordSetup(supabase, email, "hotmart webhook");
 
     await finish(true);
     return NextResponse.json({ ok: true, granted: email });

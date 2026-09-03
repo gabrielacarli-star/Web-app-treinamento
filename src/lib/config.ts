@@ -37,6 +37,9 @@ export const PLANS: Plan[] = [
   { id: "p12", weeks: 12, basePerWeek: 2.9 },
 ];
 
+/** How long each plan grants access for — shared by every checkout provider's webhook. */
+export const TERM_DAYS: Record<Plan["id"], number> = { p7: 7, p4: 28, p12: 84 };
+
 export const CURRENCY = process.env.NEXT_PUBLIC_CURRENCY ?? "USD";
 
 export const priceOf = (plan: Plan, discount = DISCOUNT) => {

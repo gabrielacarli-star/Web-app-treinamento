@@ -19,21 +19,28 @@ import {
 import { useFunnel } from "@/lib/store";
 import { track } from "@/lib/pixel";
 import { estimateLocalPrice } from "@/lib/fx";
+import { StripeCheckoutModal } from "@/components/StripeCheckoutModal";
 import type { Locale } from "@/lib/types";
 
 export function Offer({
   locale,
   dict,
   country,
+  stripeConfigured,
 }: {
   locale: Locale;
   dict: Dict;
   /** ISO country code from Vercel's edge geolocation, or null off-Vercel. */
   country?: string | null;
+  /** True once every plan has a real Stripe Price wired up server-side —
+   *  until then, the buy button falls back to the existing Hotmart
+   *  checkout rather than risk a broken native flow. */
+  stripeConfigured?: boolean;
 }) {
   const { answers, email, offerStartedAt, variant, patch } = useFunnel();
   const [selected, setSelected] = useState<Plan["id"]>("p4");
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const { expired, label } = useCountdown(offerStartedAt, OFFER_MINUTES);
 
@@ -70,6 +77,11 @@ export function Offer({
       content_name: dict.offer.planNames[selected],
       content_type: "product",
     });
+
+    if (stripeConfigured) {
+      setCheckoutOpen(true);
+      return;
+    }
 
     window.location.href = checkoutUrl(selected, locale, {
       email,
@@ -321,6 +333,16 @@ export function Offer({
           <p className="mt-2">{BRAND.legal}</p>
         </footer>
       </main>
+
+      {checkoutOpen && (
+        <StripeCheckoutModal
+          planId={selected}
+          locale={locale}
+          email={email}
+          errorMessage={dict.offer.checkoutError}
+          onClose={() => setCheckoutOpen(false)}
+        />
+      )}
     </div>
   );
 }
