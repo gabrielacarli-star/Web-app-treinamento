@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import { getStripe } from "@/lib/stripe/server";
+import { getStripe, PRICE_TO_PLAN } from "@/lib/stripe/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { TERM_DAYS, type Plan } from "@/lib/config";
 import { provisionPasswordSetup } from "@/lib/auth/provisionPasswordSetup";
@@ -9,10 +9,13 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Grants access the moment a Stripe embedded Checkout finishes — this is
- * the only thing that actually unlocks the app; the browser-side
- * `return_url` redirect is just where the buyer lands, not a trusted signal
- * (a webhook call is server-to-server and signed, a redirect can be faked).
+ * Every plan is a recurring subscription (weekly/monthly/quarterly), same as
+ * the existing Hotmart plans — so access is granted and extended off of
+ * `invoice.payment_succeeded`, which fires once for the first charge and
+ * again on every renewal, rather than off of `checkout.session.completed`
+ * (which only ever fires once, at the very first payment). Cancellation
+ * comes from `customer.subscription.deleted`; refunds still come from
+ * `charge.refunded`, matched the same way as a one-time purchase would be.
  */
 export async function POST(request: Request) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -55,34 +58,40 @@ export async function POST(request: Request) {
     }
   };
 
-  if (event.type === "checkout.session.completed") {
-    const session = event.data.object as Stripe.Checkout.Session;
-    const email = session.customer_details?.email ?? session.customer_email;
-    const planId = session.metadata?.plan as Plan["id"] | undefined;
+  if (event.type === "invoice.payment_succeeded") {
+    const invoice = event.data.object as Stripe.Invoice;
+    const email = invoice.customer_email;
+    const priceDetails = invoice.lines.data[0]?.pricing?.price_details;
+    const priceId = typeof priceDetails?.price === "string" ? priceDetails.price : priceDetails?.price?.id;
+    const planId = priceId ? PRICE_TO_PLAN[priceId] : undefined;
 
     if (!email) {
-      await finish(false, "no buyer e-mail on session");
+      await finish(false, "no buyer e-mail on invoice");
       return NextResponse.json({ error: "missing buyer email" }, { status: 400 });
     }
     if (!planId || !(planId in TERM_DAYS)) {
-      await finish(false, `unknown plan in metadata: ${session.metadata?.plan}`);
+      await finish(false, `unknown plan for price: ${priceId}`);
       return NextResponse.json({ error: "missing/unknown plan" }, { status: 400 });
     }
 
     const expiresAt = new Date(Date.now() + TERM_DAYS[planId] * 86_400_000).toISOString();
+    // Best-effort: the default InvoicePayment carries the PaymentIntent that
+    // actually charged the card, used later to match a `charge.refunded`
+    // event back to this purchase row.
+    const payment = invoice.payments?.data[0]?.payment;
     const paymentIntentId =
-      typeof session.payment_intent === "string"
-        ? session.payment_intent
-        : session.payment_intent?.id;
+      typeof payment?.payment_intent === "string" ? payment.payment_intent : payment?.payment_intent?.id;
 
-    // onConflict on transaction makes retries idempotent, same as the
-    // Hotmart webhook — Stripe can and does redeliver events.
+    // One row per billing cycle (invoice.id is unique per charge, same as a
+    // Hotmart renewal gets its own transaction id) — onConflict on
+    // transaction makes retries idempotent, since Stripe can and does
+    // redeliver events.
     const { error } = await supabase.from("purchases").upsert(
       {
         email,
         plan: planId,
         status: "active",
-        transaction: session.id,
+        transaction: invoice.id,
         payment_intent: paymentIntentId,
         product_id: "stripe",
         expires_at: expiresAt,
@@ -100,6 +109,39 @@ export async function POST(request: Request) {
 
     await finish(true);
     return NextResponse.json({ ok: true, granted: email });
+  }
+
+  // A subscription that ends (buyer cancelled, or Stripe gave up retrying a
+  // failed renewal) — revoke whatever Stripe-sourced purchase is still
+  // active for that buyer, mirroring Hotmart's SUBSCRIPTION_CANCELLATION.
+  if (event.type === "customer.subscription.deleted") {
+    const subscription = event.data.object as Stripe.Subscription;
+    const customerId =
+      typeof subscription.customer === "string" ? subscription.customer : subscription.customer.id;
+
+    const stripe = getStripe();
+    const customer = await stripe.customers.retrieve(customerId);
+    const email = "deleted" in customer ? null : customer.email;
+
+    if (!email) {
+      await finish(false, "no e-mail on Stripe customer");
+      return NextResponse.json({ error: "missing customer email" }, { status: 400 });
+    }
+
+    const { error } = await supabase
+      .from("purchases")
+      .update({ status: "cancelled" })
+      .eq("email", email.toLowerCase())
+      .eq("product_id", "stripe")
+      .eq("status", "active");
+
+    if (error) {
+      await finish(false, error.message);
+      return NextResponse.json({ error: "could not revoke" }, { status: 500 });
+    }
+
+    await finish(true);
+    return NextResponse.json({ ok: true, revoked: email });
   }
 
   // Refunds show up as a charge.refunded event, which only carries the

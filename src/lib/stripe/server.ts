@@ -27,3 +27,11 @@ export const STRIPE_PRICE_IDS: Record<Plan["id"], string | undefined> = {
 
 /** True once every plan has a Stripe Price wired up. */
 export const STRIPE_CHECKOUT_CONFIGURED = Object.values(STRIPE_PRICE_IDS).every(Boolean);
+
+/** The reverse of STRIPE_PRICE_IDS — recovers which plan a renewal invoice
+ *  belongs to, since invoice line items carry the Price id, not our own. */
+export const PRICE_TO_PLAN: Record<string, Plan["id"]> = Object.fromEntries(
+  (Object.entries(STRIPE_PRICE_IDS) as [Plan["id"], string | undefined][])
+    .filter((entry): entry is [Plan["id"], string] => Boolean(entry[1]))
+    .map(([planId, priceId]) => [priceId, planId]),
+);

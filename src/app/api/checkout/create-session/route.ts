@@ -34,7 +34,10 @@ export async function POST(request: Request) {
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
       ui_mode: "embedded",
-      mode: "payment",
+      // Every plan renews automatically (weekly/monthly/quarterly), same as
+      // the existing Hotmart subscriptions — a one-time `mode: "payment"`
+      // would only ever charge the buyer once.
+      mode: "subscription",
       line_items: [{ price: priceId, quantity: 1 }],
       // Prefills and locks the buyer's e-mail when we already have it from
       // the funnel, so the webhook can match the purchase without asking
