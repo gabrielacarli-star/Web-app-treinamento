@@ -47,9 +47,21 @@ export async function POST(request: Request) {
       return_url: `${SITE_URL}/${locale}/success?stripe_session_id={CHECKOUT_SESSION_ID}`,
     });
 
+    console.log(
+      "checkout/create-session: created",
+      session.id,
+      "mode=" + session.mode,
+      "has clientSecret=" + Boolean(session.client_secret),
+    );
     return NextResponse.json({ clientSecret: session.client_secret });
   } catch (err) {
-    console.error("checkout/create-session: failed to create session", err);
+    const stripeErr = err as { type?: string; code?: string; message?: string };
+    console.error(
+      "checkout/create-session: failed to create session",
+      stripeErr.type,
+      stripeErr.code,
+      stripeErr.message,
+    );
     return NextResponse.json({ error: "could not start checkout" }, { status: 500 });
   }
 }
