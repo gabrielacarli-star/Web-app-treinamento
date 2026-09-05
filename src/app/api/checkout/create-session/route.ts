@@ -33,7 +33,7 @@ export async function POST(request: Request) {
   try {
     const stripe = getStripe();
     const session = await stripe.checkout.sessions.create({
-      ui_mode: "embedded",
+      ui_mode: "embedded_page",
       // Every plan renews automatically (weekly/monthly/quarterly), same as
       // the existing Hotmart subscriptions — a one-time `mode: "payment"`
       // would only ever charge the buyer once.
