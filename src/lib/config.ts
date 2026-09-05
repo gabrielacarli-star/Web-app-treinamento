@@ -9,7 +9,7 @@ export const isLocale = (value: string): value is Locale =>
 export const BRAND = {
   name: "DogFlow",
   legal: "DogFlow Digital Ltda.",
-  supportEmail: "oi@dogflow.app",
+  supportEmail: "gabrielacarli@gmail.com",
 };
 
 /** The real, live domain — used to build absolute links from server code
