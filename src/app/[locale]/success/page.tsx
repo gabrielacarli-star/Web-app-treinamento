@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDict } from "@/content";
 import { CHECKOUT_CONFIGURED, isLocale } from "@/lib/config";
+import { STRIPE_CHECKOUT_CONFIGURED } from "@/lib/stripe/server";
 import { authConfigured } from "@/lib/access";
 import { Logo } from "@/components/Logo";
 import { PurchaseTracker } from "./PurchaseTracker";
@@ -16,7 +17,7 @@ import { Upsell } from "./Upsell";
  * Us, walking the funnel before any checkout URL is configured: the buy
  * button falls back here, and the page says so.
  */
-const checkoutLive = CHECKOUT_CONFIGURED;
+const checkoutLive = CHECKOUT_CONFIGURED || STRIPE_CHECKOUT_CONFIGURED;
 
 export default async function SuccessPage({
   params,

@@ -44,7 +44,10 @@ export async function POST(request: Request) {
       // them to retype it.
       ...(email ? { customer_email: email } : {}),
       metadata: { plan: plan.id, locale },
-      return_url: `${SITE_URL}/${locale}/success?stripe_session_id={CHECKOUT_SESSION_ID}`,
+      // `plan` is what the success page's pixel/UTM tracking reads to report
+      // the right value — Hotmart's own thank-you redirect already carries
+      // it the same way, so this keeps both providers consistent.
+      return_url: `${SITE_URL}/${locale}/success?plan=${plan.id}&stripe_session_id={CHECKOUT_SESSION_ID}`,
     });
 
     console.log(
