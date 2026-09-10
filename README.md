@@ -222,3 +222,55 @@ if that is the current plan, either upgrade to Pro for the hourly schedule in
 
 To fill a slot, replace the `<ImageSlot>` or `<VideoSlot>` element with the real
 asset. The slots keep a fixed aspect ratio, so nothing below them shifts.
+
+## Ad spend × revenue × ROAS
+
+The funnel already captured UTMs into `quiz_leads` and recorded every sale in
+`purchases`, but neither knew about the other, and neither knew what the ad
+actually cost — so there was no way to tell whether a campaign was profitable.
+This adds only that missing link; nothing about the existing quiz tracking,
+webhooks, or checkout flow changes.
+
+```
+ad (Meta) ──URL with utm_campaign/utm_content──► landing (captures + stores locally)
+                                                        │
+                                         quiz ──[/api/track]──► quiz_leads (utm_* columns)
+                                                        │
+                                     offer ──buy──► checkout URL, ad UTMs packed into `src`
+                                                        │
+                                   Hotmart/Stripe ──[webhook]──► purchases (amount_cents, campaign_id)
+                                                                       │ falls back to quiz_leads
+                                                                       │ by e-mail when the gateway
+                                                                       │ payload carries no tracking
+GET /api/cron/sync-meta ──► Meta Marketing API ──► ad_insights ────────┴──► /api/metrics/summary ──► /admin/trafego
+```
+
+### Configurar
+
+1. Rode a migration nova: `supabase/migrations/0003_ad_attribution.sql`
+   (via `supabase db push`, ou cole no SQL editor do dashboard). Só adiciona
+   colunas e uma tabela nova — não altera nada existente.
+2. **Parâmetros de URL do anúncio** — pra o gasto casar com a venda por
+   campanha, o campo "Parâmetros de URL" do anúncio na Meta precisa incluir
+   os ids, não só o nome:
+   ```
+   utm_campaign={{campaign.name}}|{{campaign.id}}&utm_content={{ad.name}}|{{ad.id}}
+   ```
+   Sem isso, a venda ainda aparece como tráfego "meta" (via `fbclid`), mas
+   cai em "Sem atribuição" por falta do id da campanha.
+3. **Meta Marketing API** — gere um token de sistema com permissão
+   `ads_read` e preencha `META_ACCESS_TOKEN`/`META_AD_ACCOUNT_ID` (sem o
+   prefixo `act_`).
+4. **Segredos** — reaproveita o `CRON_SECRET` que já protege
+   `/api/cron/recover-leads`; `ADMIN_SECRET` é novo, é a senha de acesso ao
+   painel em `/admin/trafego`.
+5. `vercel.json` já agenda `sync-meta` a cada 6h. **O plano Hobby da Vercel
+   limita cron a 2 jobs e a 1x/dia** — com os dois crons existentes, esse é
+   o terceiro; se o deploy recusar por causa do limite, aponte um cron
+   externo (ex. [cron-job.org](https://cron-job.org)) para
+   `GET /api/cron/sync-meta?days=3` com o header
+   `Authorization: Bearer <CRON_SECRET>`.
+
+Vendas registradas antes desta migration não têm `amount_cents`/`campaign_id`
+(ficam de fora do cálculo de receita, não geram erro) — o painel só passa a
+refletir vendas completas a partir de quando isso foi ligado.

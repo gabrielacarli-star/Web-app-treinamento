@@ -18,6 +18,7 @@ import {
 } from "@/lib/config";
 import { useFunnel } from "@/lib/store";
 import { track } from "@/lib/pixel";
+import { getAttribution } from "@/lib/attributionClient";
 import { estimateLocalPrice } from "@/lib/fx";
 import { StripeCheckoutModal } from "@/components/StripeCheckoutModal";
 import type { Locale } from "@/lib/types";
@@ -83,9 +84,19 @@ export function Offer({
       return;
     }
 
+    // The checkout platform only round-trips `sck` (already spoken for,
+    // above) and `src` back on the webhook, not arbitrary custom params —
+    // so the ad's UTMs/click-ids are packed as a querystring blob into
+    // `src`, which the webhook unpacks (see src/lib/attribution.ts).
+    const attribution = getAttribution();
+    const attributionQs = new URLSearchParams(
+      Object.entries(attribution).filter((entry): entry is [string, string] => !!entry[1]),
+    ).toString();
+
     window.location.href = checkoutUrl(selected, locale, {
       email,
       sck: [locale, selected, variant].filter(Boolean).join("-"),
+      ...(attributionQs ? { src: attributionQs } : {}),
     });
   };
 

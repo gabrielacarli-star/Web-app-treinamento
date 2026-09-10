@@ -9,6 +9,7 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { Logo } from "@/components/Logo";
 import { useFunnel } from "@/lib/store";
 import { trackProgress } from "@/lib/track";
+import { captureAttribution } from "@/lib/attributionClient";
 import type { Locale } from "@/lib/types";
 
 export function Landing({
@@ -31,7 +32,8 @@ export function Landing({
   useEffect(() => {
     reset();
     patch({ variant: variantId });
-    trackProgress({ locale, variant: variantId, lastStep: "landing", stepCount: 0 });
+    const attribution = captureAttribution(window.location.search);
+    trackProgress({ locale, variant: variantId, lastStep: "landing", stepCount: 0, ...attribution });
     // Runs once per landing hit; reset/patch are stable setters and do not
     // need to be in the dependency list.
     // eslint-disable-next-line react-hooks/exhaustive-deps

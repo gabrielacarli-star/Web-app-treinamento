@@ -3,6 +3,7 @@ import { timingSafeEqual } from "node:crypto";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { OFFER_TO_PLAN, TERM_DAYS, type Plan } from "@/lib/config";
 import { provisionPasswordSetup } from "@/lib/auth/provisionPasswordSetup";
+import { campaignRef, parseAttributionBlob, resolveAttribution } from "@/lib/attribution";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -41,6 +42,13 @@ const pick = (source: unknown, paths: string[][]): string | null => {
     if (typeof node === "number") return String(node);
   }
   return null;
+};
+
+/** Hotmart sends price.value as a number, but be defensive about strings too. */
+const toCents = (value: string | null): number | null => {
+  if (value == null) return null;
+  const n = Number(value.replace(",", "."));
+  return Number.isFinite(n) ? Math.round(n * 100) : null;
 };
 
 export async function POST(request: Request) {
@@ -98,6 +106,23 @@ export async function POST(request: Request) {
     ["data", "offer", "code"],
     ["offer", "code"],
   ]);
+  const amountCents = toCents(
+    pick(payload, [
+      ["data", "purchase", "price", "value"],
+      ["data", "purchase", "full_price", "value"],
+    ]),
+  );
+  const currency = pick(payload, [
+    ["data", "purchase", "price", "currency_value"],
+    ["data", "purchase", "price", "currency_code"],
+  ]);
+  // Hotmart only round-trips `src`/`sck` on the webhook, not arbitrary
+  // custom params -- Offer.tsx packs the buyer's ad UTMs/click-ids as a
+  // querystring blob into `src` for exactly this reason.
+  const trackingSrc = pick(payload, [
+    ["data", "purchase", "tracking", "source"],
+    ["data", "tracking", "source"],
+  ]);
 
   const { data: logged } = await supabase
     .from("webhook_events")
@@ -133,6 +158,13 @@ export async function POST(request: Request) {
       ? new Date(Date.now() + days * 86_400_000).toISOString()
       : null;
 
+    const attribution = await resolveAttribution(
+      supabase,
+      email,
+      parseAttributionBlob(trackingSrc),
+    );
+    const { campaignId, adId } = campaignRef(attribution);
+
     // onConflict on transaction makes retries idempotent.
     const { error } = await supabase.from("purchases").upsert(
       {
@@ -142,6 +174,14 @@ export async function POST(request: Request) {
         transaction,
         product_id: productId,
         expires_at: expiresAt,
+        amount_cents: amountCents,
+        currency,
+        utm_source: attribution.utm_source ?? null,
+        utm_campaign: attribution.utm_campaign ?? null,
+        utm_content: attribution.utm_content ?? null,
+        fbclid: attribution.fbclid ?? null,
+        campaign_id: campaignId,
+        ad_id: adId,
         raw: payload,
       },
       { onConflict: "transaction", ignoreDuplicates: false },

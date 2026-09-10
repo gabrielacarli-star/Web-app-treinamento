@@ -4,6 +4,7 @@ import { getStripe, PRICE_TO_PLAN } from "@/lib/stripe/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { TERM_DAYS, type Plan } from "@/lib/config";
 import { provisionPasswordSetup } from "@/lib/auth/provisionPasswordSetup";
+import { campaignRef, lookupAttributionByEmail } from "@/lib/attribution";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -82,6 +83,12 @@ export async function POST(request: Request) {
     const paymentIntentId =
       typeof payment?.payment_intent === "string" ? payment.payment_intent : payment?.payment_intent?.id;
 
+    // The Checkout Session never carries the buyer's ad UTMs, so the only
+    // way to attribute a Stripe sale is the quiz_leads row for this e-mail
+    // (see src/lib/attribution.ts) — best-effort, same as Hotmart's fallback.
+    const attribution = await lookupAttributionByEmail(supabase, email);
+    const { campaignId, adId } = campaignRef(attribution);
+
     // One row per billing cycle (invoice.id is unique per charge, same as a
     // Hotmart renewal gets its own transaction id) — onConflict on
     // transaction makes retries idempotent, since Stripe can and does
@@ -95,6 +102,14 @@ export async function POST(request: Request) {
         payment_intent: paymentIntentId,
         product_id: "stripe",
         expires_at: expiresAt,
+        amount_cents: invoice.amount_paid,
+        currency: invoice.currency,
+        utm_source: attribution.utm_source ?? null,
+        utm_campaign: attribution.utm_campaign ?? null,
+        utm_content: attribution.utm_content ?? null,
+        fbclid: attribution.fbclid ?? null,
+        campaign_id: campaignId,
+        ad_id: adId,
         raw: event as unknown as Record<string, unknown>,
       },
       { onConflict: "transaction", ignoreDuplicates: false },

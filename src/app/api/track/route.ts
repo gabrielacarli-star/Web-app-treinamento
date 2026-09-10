@@ -14,7 +14,24 @@ type Body = {
   dogName?: string;
   dogBreed?: string;
   answers?: Record<string, unknown>;
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+  fbclid?: string;
+  gclid?: string;
 };
+
+const UTM_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_content",
+  "utm_term",
+  "fbclid",
+  "gclid",
+] as const;
 
 /**
  * Upserts one row of funnel progress per visitor session. Called on every
@@ -55,6 +72,9 @@ export async function POST(request: Request) {
   if (body.dogName) row.dog_name = body.dogName;
   if (body.dogBreed) row.dog_breed = body.dogBreed;
   if (body.answers) row.answers = body.answers;
+  for (const key of UTM_KEYS) {
+    if (body[key]) row[key] = body[key];
+  }
 
   const { error } = await supabase
     .from("quiz_leads")
