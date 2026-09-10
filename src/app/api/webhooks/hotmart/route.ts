@@ -4,6 +4,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { OFFER_TO_PLAN, TERM_DAYS, type Plan } from "@/lib/config";
 import { provisionPasswordSetup } from "@/lib/auth/provisionPasswordSetup";
 import { campaignRef, parseAttributionBlob, resolveAttribution } from "@/lib/attribution";
+import { extractHotmartAmount, pick } from "@/lib/hotmartPayload";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -24,31 +25,6 @@ const safeEqual = (a: string, b: string) => {
   const left = Buffer.from(a);
   const right = Buffer.from(b);
   return left.length === right.length && timingSafeEqual(left, right);
-};
-
-/** Reads the first path that resolves to a non-empty string. */
-const pick = (source: unknown, paths: string[][]): string | null => {
-  for (const path of paths) {
-    let node: unknown = source;
-    for (const key of path) {
-      if (node && typeof node === "object" && key in (node as object)) {
-        node = (node as Record<string, unknown>)[key];
-      } else {
-        node = undefined;
-        break;
-      }
-    }
-    if (typeof node === "string" && node.trim()) return node.trim();
-    if (typeof node === "number") return String(node);
-  }
-  return null;
-};
-
-/** Hotmart sends price.value as a number, but be defensive about strings too. */
-const toCents = (value: string | null): number | null => {
-  if (value == null) return null;
-  const n = Number(value.replace(",", "."));
-  return Number.isFinite(n) ? Math.round(n * 100) : null;
 };
 
 export async function POST(request: Request) {
@@ -106,23 +82,10 @@ export async function POST(request: Request) {
     ["data", "offer", "code"],
     ["offer", "code"],
   ]);
-  const amountCents = toCents(
-    pick(payload, [
-      ["data", "purchase", "price", "value"],
-      ["data", "purchase", "full_price", "value"],
-    ]),
-  );
-  const currency = pick(payload, [
-    ["data", "purchase", "price", "currency_value"],
-    ["data", "purchase", "price", "currency_code"],
-  ]);
   // Hotmart only round-trips `src`/`sck` on the webhook, not arbitrary
   // custom params -- Offer.tsx packs the buyer's ad UTMs/click-ids as a
   // querystring blob into `src` for exactly this reason.
-  const trackingSrc = pick(payload, [
-    ["data", "purchase", "tracking", "source"],
-    ["data", "tracking", "source"],
-  ]);
+  const { amountCents, currency, trackingSrc } = extractHotmartAmount(payload);
 
   const { data: logged } = await supabase
     .from("webhook_events")

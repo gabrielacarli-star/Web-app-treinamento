@@ -272,5 +272,39 @@ GET /api/cron/sync-meta ──► Meta Marketing API ──► ad_insights ─�
    `Authorization: Bearer <CRON_SECRET>`.
 
 Vendas registradas antes desta migration não têm `amount_cents`/`campaign_id`
-(ficam de fora do cálculo de receita, não geram erro) — o painel só passa a
-refletir vendas completas a partir de quando isso foi ligado.
+até o backfill abaixo rodar.
+
+### Trazer o histórico (vendas e gasto de antes de hoje)
+
+**Vendas antigas** — não precisa de nenhuma credencial nova: toda compra já
+tem o payload bruto do webhook salvo em `raw` (Hotmart) ou o Event do Stripe
+(Stripe). `/api/admin/backfill-purchases` relê esse `raw` de cada venda com
+`amount_cents` vazio e preenche valor + atribuição, do mesmo jeito que o
+webhook ao vivo já faz daqui pra frente. Idempotente — chame quantas vezes
+precisar, cada chamada processa até 500 linhas:
+
+```
+GET /api/admin/backfill-purchases
+    header: x-admin-secret: <ADMIN_SECRET>
+```
+
+`"done": true` na resposta quer dizer que não sobrou nenhuma venda sem
+valor preenchido.
+
+**Gasto antigo do Meta** — `/api/cron/sync-meta` aceita `since`/`until`
+explícitos pra sincronizar qualquer período, em fatias de até 31 dias por
+chamada:
+
+```
+GET /api/cron/sync-meta?since=2020-01-01&until=2026-09-10
+    header: Authorization: Bearer <CRON_SECRET>
+```
+
+Repita com `since=<nextSince>` (do JSON de resposta) até `"done": true`.
+
+Um detalhe sobre atribuição retroativa: pra vendas Hotmart, o valor e a
+campanha vêm direto do `raw` salvo (preciso). Pra vendas Stripe, o Checkout
+nunca carregou UTM nenhum — a campanha, quando existe, vem de um cruzamento
+por e-mail com `quiz_leads` (o mesmo fallback que o webhook ao vivo usa), o
+que só funciona se o comprador deixou o e-mail no quiz. Sem isso, a venda
+entra certa em valor mas cai em "Sem atribuição".

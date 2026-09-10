@@ -6,10 +6,18 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 /**
- * Syncs Meta Ads spend for the last N days (default 3, to catch late
- * attribution adjustments). Same auth pattern as recover-leads: Vercel Cron
+ * Syncs Meta Ads spend.
+ *
+ * Cron mode (default): `?days=3` syncs the last N days, to catch late
+ * attribution adjustments. Same auth pattern as recover-leads: Vercel Cron
  * sends `Authorization: Bearer <CRON_SECRET>` automatically once a variable
  * named exactly CRON_SECRET exists.
+ *
+ * Backfill mode: `?since=2020-01-01&until=2026-09-10` syncs a specific
+ * historical window, to pull spend back to the start of the account.
+ * Processes at most 31 days per call (function-timeout safety); the
+ * response carries `nextSince` when there's more left -- call again with
+ * `since=<nextSince>` (same `until`) until `done: true`.
  */
 async function handle(request: Request) {
   const expected = process.env.CRON_SECRET;
@@ -34,13 +42,40 @@ async function handle(request: Request) {
   }
 
   const url = new URL(request.url);
-  const days = Math.max(1, Math.min(90, Number(url.searchParams.get("days")) || 3));
-  const until = new Date().toISOString().slice(0, 10);
-  const since = new Date(Date.now() - days * 86_400_000).toISOString().slice(0, 10);
+  const explicitSince = url.searchParams.get("since");
+  const explicitUntil = url.searchParams.get("until");
+
+  let since: string;
+  let until: string;
+  let nextSince: string | null = null;
+
+  if (explicitSince) {
+    since = explicitSince;
+    const requestedUntil = explicitUntil || new Date().toISOString().slice(0, 10);
+    const sliceEnd = new Date(Date.parse(`${since}T00:00:00Z`) + 30 * 86_400_000);
+    const requestedUntilDate = new Date(`${requestedUntil}T00:00:00Z`);
+    if (sliceEnd < requestedUntilDate) {
+      until = sliceEnd.toISOString().slice(0, 10);
+      nextSince = new Date(sliceEnd.getTime() + 86_400_000).toISOString().slice(0, 10);
+    } else {
+      until = requestedUntil;
+    }
+  } else {
+    const days = Math.max(1, Math.min(90, Number(url.searchParams.get("days")) || 3));
+    until = new Date().toISOString().slice(0, 10);
+    since = new Date(Date.now() - days * 86_400_000).toISOString().slice(0, 10);
+  }
 
   try {
     const result = await syncMetaInsights(supabase, { accountId, accessToken, since, until });
-    return NextResponse.json({ ok: true, since, until, ...result });
+    return NextResponse.json({
+      ok: true,
+      since,
+      until,
+      done: nextSince == null,
+      ...(nextSince ? { nextSince } : {}),
+      ...result,
+    });
   } catch (error) {
     console.error("sync-meta: failed", error);
     return NextResponse.json(
